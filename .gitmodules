@@ -1,0 +1,3 @@
+[submodule "exercicios/lista_exercicios_01"]
+	path = exercicios/lista_exercicios_01
+	url = https://github.com/wwagner33/questoes-javascript.git
