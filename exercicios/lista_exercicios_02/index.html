@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz abordando Tipos de Dados em JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <section id="introducao">
+        <!--INICIO DO TEXTO INICIAL DO QUIZ-->
+        <h1>Quiz Avançado: Tipos de Dados em JavaScript</h1>
+        <p>
+          Este quiz aprofundado testa seu conhecimento sobre as nuances do
+          sistema de tipos do JavaScript, com foco em números, caracteres e
+          conceitos fundamentais.
+        </p>
+        <p>
+          Os tópicos abordam desde os limites e a precisão dos tipos numéricos,
+          o uso de valores especiais como <code>NaN</code> e
+          <code>Infinity</code>, até questões sobre codificação de caracteres
+          (Unicode) e as vantagens e desvantagens da tipagem dinâmica da
+          linguagem.
+        </p>
+        <p>
+          Todos os trechos de código fornecidos são autônomos e podem ser
+          executados diretamente no <strong>console de desenvolvedor</strong> do
+          seu navegador, como <strong>Google Chrome</strong> ou
+          <strong>Mozilla Firefox</strong>.
+        </p>
+        <p>
+          O uso do <strong>console</strong> é uma habilidade essencial para
+          qualquer desenvolvedor JavaScript, pois ele fornece um ambiente
+          interativo para testar, depurar e experimentar o código em tempo real.
+        </p>
+        <p>
+          Para abrir o console, você pode usar o atalho de teclado
+          <strong>Ctrl+Shift+J</strong> (no Windows/Linux) ou
+          <strong>Cmd+Option+J</strong> (no Mac) na maioria dos navegadores.
+        </p>
+
+        <p>
+          Uma vez aberto, basta copiar o código de uma questão, colá-lo no
+          console e pressionar a tecla <strong>[Enter]</strong> para ver o
+          resultado. Este ambiente funciona como um
+          <strong>REPL (Read-Eval-Print Loop)</strong>, permitindo não apenas
+          verificar as respostas, mas também modificar variáveis e testar
+          variações do código para solidificar sua compreensão. Para consulta de
+          sintaxe e aprofundamento, a
+          <strong
+            ><a href="https://developer.mozilla.org/pt-BR/"
+              >Mozilla Developer Network (MDN)</a
+            ></strong
+          >
+          é a referência recomendada.
+        </p>
+
+        <div class="referencias-container">
+          <h2>📚 Referências para Estudo de JavaScript</h2>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h3>Documentação Oficial e Guias Gerais</h3>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript" target="_blank">MDN Web Docs - JavaScript</a>
+                <div class="descricao">
+                  Documentação completa e atualizada sobre JavaScript, incluindo
+                  guias, tutoriais e referência da linguagem.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference" target="_blank">MDN - Referência JavaScript</a>
+                <div class="descricao">
+                  Referência completa de todos os objetos, funções e conceitos do
+                  JavaScript.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://eloquentjavascript.net/" target="_blank">Eloquent JavaScript</a>
+                <div class="descricao">
+                  Livro gratuito online que cobre JavaScript de forma profunda e
+                  acessível (disponível em português no repositório da BrazilJS).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h3>Números e Precisão Numérica <span class="dificuldade intermediario">Intermediário</span></h3>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER" target="_blank">MDN - Number.MAX_SAFE_INTEGER</a>
+                <div class="descricao">
+                  Explicação sobre o maior número inteiro seguro em JavaScript e
+                  problemas de precisão.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt" target="_blank">MDN - BigInt</a>
+                <div class="descricao">
+                  Documentação sobre BigInt para trabalhar com números inteiros
+                  arbitrariamente grandes.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/EPSILON" target="_blank">MDN - Number.EPSILON</a>
+                <div class="descricao">
+                  Explicação sobre comparação de pontos flutuantes e como usar
+                  EPSILON para comparações seguras.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h3>Tipos de Dados e Valores Especiais <span class="dificuldade intermediario">Intermediário</span></h3>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank">MDN - undefined</a>
+                <div class="descricao">
+                  Documentação oficial sobre o valor `undefined` e seu comportamento.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/null" target="_blank">MDN - null</a>
+                <div class="descricao">
+                  Documentação oficial sobre o valor `null` e diferenças em relação ao `undefined`.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://stackoverflow.com/questions/37980559/is-it-better-to-return-undefined-or-null-from-a-javascript-function" target="_blank">Stack Overflow - undefined vs null</a>
+                <div class="descricao">
+                  Discussão detalhada sobre quando usar `undefined` ou `null` em funções JavaScript.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN" target="_blank">MDN - NaN</a>
+                <div class="descricao">
+                  Documentação sobre NaN (Not-a-Number) e como verificar valores de forma confiável.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h3>Strings e Unicode <span class="dificuldade intermediario">Intermediário</span></h3>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">MDN - String</a>
+                <div class="descricao">
+                  Referência completa dos métodos e propriedades de strings em JavaScript.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt" target="_blank">MDN - codePointAt()</a>
+                <div class="descricao">
+                  Documentação sobre codePointAt() para trabalhar com caracteres Unicode e emojis.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt" target="_blank">MDN - charCodeAt()</a>
+                <div class="descricao">
+                  Documentação sobre charCodeAt() para obter valores de unidades de código UTF-16.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h3>Performance e Otimização <span class="dificuldade avancado">Avançado</span></h3>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://web.dev/learn/javascript/functions?hl=pt-br" target="_blank">Web.dev - Funções JavaScript</a>
+                <div class="descricao">
+                  Guia moderno sobre funções JavaScript e boas práticas de performance.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://v8.dev/" target="_blank">V8 JavaScript Engine</a>
+                <div class="descricao">
+                  Documentação e artigos sobre o motor V8 que explica otimizações internas.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h2>Funções e Escopo <span class="dificuldade intermediario">Intermediário</span></h2>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions" target="_blank">MDN - Funções</a>
+                <div class="descricao">
+                  Guia completo sobre funções em JavaScript, incluindo diferentes formas de declaração.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Functions" target="_blank">MDN - Guia de Funções</a>
+                <div class="descricao">
+                  Guia detalhado sobre escopo de funções, recursão e boas práticas.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h2>Tópicos Avançados <span class="dificuldade avancado">Avançado</span></h2>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://gist.github.com/vinicius73/60027329a3855345e15b2eeaa3fd588d" target="_blank">Guia de Referências para JavaScript</a>
+                <div class="descricao">
+                  Lista curada de tópicos importantes para dominar JavaScript, desde conceitos básicos até avançados.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://github.com/braziljs/eloquente-javascript" target="_blank">Eloquent JavaScript (Tradução BrazilJS)</a>
+                <div class="descricao">
+                  Versão em português do livro "Eloquent JavaScript" mantida pela BrazilJS.
+                </div>
+              </div>
+
+              <div class="referencia">
+                <a href="https://roadmap.sh/javascript" target="_blank">JavaScript Roadmap</a>
+                <div class="descricao">
+                  Roteiro de aprendizado estruturado para se tornar proficiente em JavaScript.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--FIM DO TEXTO INICIAL DO QUIZ-->
+
+        <div class="botoes-acao">
+          <button id="btn-iniciar" class="btn btn-success">
+            Iniciar Novo Quiz
+          </button>
+          <button id="btn-continuar" class="btn btn-primary escondido">
+            Continuar de Onde Parei
+          </button>
+        </div>
+      </section>
+
+      <section id="quiz-container" class="escondido">
+        <button id="btn-voltar-inicio">← Voltar ao Início</button>
+
+        <div class="quiz-header">
+          <div id="contador-questao"></div>
+          <div id="barra-progresso">
+            <div id="progresso-atual"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 id="pergunta"></h2>
+          <pre id="codigo" class="escondido"><code></code></pre>
+
+          <div id="opcoes-container"></div>
+
+          <div id="feedback-container">
+            <div id="resposta-correta"></div>
+            <div id="justificativa"></div>
+          </div>
+
+          <div id="botoes-navegacao">
+            <button id="btn-anterior" class="btn-nav" disabled>
+              <span>←</span> Anterior
+            </button>
+            <button id="btn-proximo" class="btn-nav">
+              Próxima <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="resumo-container" class="escondido">
+          <h3>Resumo do seu desempenho</h3>
+          <div class="estatisticas">
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="total-acertos">0</span>
+              <span class="estatistica-label">Acertos</span>
+            </div>
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="total-erros">0</span>
+              <span class="estatistica-label">Erros</span>
+            </div>
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="percentual-acerto">0%</span>
+              <span class="estatistica-label">Taxa de Acerto</span>
+            </div>
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="progresso-total">0%</span>
+              <span class="estatistica-label">Progresso Total</span>
+            </div>
+          </div>
+          <div id="resumo-questoes"></div>
+          <div class="botoes-acao">
+            <button id="btn-reiniciar" class="btn btn-success">
+              Reiniciar Quiz
+            </button>
+            <button id="btn-baixar-relatorio" class="btn btn-outline">
+              Baixar Relatório
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="questoes.js"></script>
+    <script src="quiz.js"></script>
+    <script src="accordion.js"></script>
+  </body>
+</html>
