@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tópicos Complementares</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            transition: var(--transition);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-title {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .link-list {
+            list-style: none;
+        }
+        
+        .link-item {
+            margin-bottom: 15px;
+        }
+        
+        .link-item a {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: var(--light-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .link-item a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .link-item a i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .exercises .link-item a {
+            border-left-color: var(--accent-color);
+        }
+        
+        .exercises .link-item a:hover {
+            background-color: var(--accent-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tópicos Complementares</h1>
+            <p class="subtitle">Recursos para aprofundar seus conhecimentos em programação</p>
+        </header>
+        
+        <div class="content">
+            <section class="section lessons">
+                <h2 class="section-title">Aulas</h2>
+                <ul class="link-list">
+                    <li class="link-item">
+                        <a href="aula-tipos-de-dados-e-codificacoes.html">
+                            <i>📊</i> Tipos de Dados Primitivos e Codificações
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="aula-git-github.html">
+                            <i>📚</i> Git e GitHub
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="aula-javascript-async.html">
+                            <i>⚡</i> Programação Assíncrona em JavaScript
+                        </a>
+                    </li>
+                </ul>
+            </section>
+            
+            <section class="section exercises">
+                <h2 class="section-title">Exercícios</h2>
+                <ul class="link-list">
+                    <li class="link-item">
+                        <a href="./exercicios/lista_exercicios_01">
+                            <i>🧩</i> Fundamentos do JavaScript
+                        </a>
+                    </li>
+                    <li class="link-item">
+                        <a href="./exercicios/lista_exercicios_02">
+                            <i>🔢</i> Tipos de Dados em JavaScript
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Desenvolvido para estudos complementares em programação</p>
+        </footer>
+    </div>
+</body>
+</html>
