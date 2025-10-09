@@ -116,7 +116,7 @@
         code {
             background-color: #e9ecef;
             color: #c7254e;
-            padding: 4px 8px;
+            padding: 10px;
             border-radius: 4px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 0.9rem;
@@ -384,47 +384,134 @@
         </div>
         
         <div class="slide">
-            <h2>Aplicação Prática: Código dos Cards</h2>
+            <h2>Aplicação Prática: Visão Geral</h2>
+            <div class="content" style="flex-direction: column; align-items: center; text-align: center;">
+                <p style="max-width: 800px;">
+                    Vamos construir um exemplo interativo usando <strong>apenas HTML e CSS</strong>.
+                    Criaremos um conjunto de "cards" com dois efeitos principais:
+                </p>
+                <ul style="text-align: left; margin-top: 20px; max-width: 600px;">
+                    <li><strong>Efeito Hover:</strong> Ao passar o mouse sobre um card, ele se moverá sutilmente e sua sombra mudará, criando a ilusão de um botão sendo pressionado.</li>
+                    <li><strong>Efeito Toggle:</strong> Teremos um botão que, ao ser clicado, fará um dos cards desaparecer ou reaparecer. A parte mais interessante é que faremos isso sem uma única linha de JavaScript!</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Aplicação Prática: O Código HTML</h2>
+            <div style="width: 80%;">
+                 <p style="text-align:center; margin-bottom: 20px;">Esta é a estrutura. Note o <code>input</code> (nosso controle secreto) e a classe <code>.disappear</code> no card que será afetado.</p>
+                 <code>&lt;!-- O "botão" visível que controla o checkbox --&gt;
+&lt;label for="card-toggle" class="toggle-button"&gt;
+  Fazer Card 2 Sumir/Aparecer
+&lt;/label&gt;
+
+&lt;!-- O checkbox invisível que guarda o estado (marcado/desmarcado) --&gt;
+&lt;input type="checkbox" id="card-toggle"&gt;
+
+&lt;!-- O container que agrupa nossos cards --&gt;
+&lt;div class="card-container"&gt;
+    &lt;div class="card"&gt;
+        &lt;h3&gt;Card 1&lt;/h3&gt;
+        &lt;p&gt;Este é o primeiro card.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="card disappear"&gt;
+        &lt;h3&gt;Card 2&lt;/h3&gt;
+        &lt;p&gt;Eu sou o card que some.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="card"&gt;
+        &lt;h3&gt;Card 3&lt;/h3&gt;
+        &lt;p&gt;Este é o terceiro card.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Aplicação Prática: O Código CSS</h2>
+            <div style="width: 80%;">
+                <p style="text-align:center; margin-bottom: 20px;">O CSS define a aparência e, mais importante, a interatividade através de pseudo-classes como <code>:hover</code> e <code>:checked</code>.</p>
+                <code>/* Estilização geral dos cards */
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s ease; /* Animação suave */
+}
+
+/* Efeito de "botão pressionado" ao passar o mouse */
+.card:hover {
+    transform: translateY(2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Esconde o checkbox real */
+#card-toggle {
+    display: none;
+}
+
+/* A "MÁGICA" DO CSS: */
+/* Quando o #card-toggle estiver MARCADO (:checked), */
+/* encontre o .card-container que é um irmão adjacente (+) */
+/* e, dentro dele, encontre o .card.disappear */
+#card-toggle:checked + .card-container .card.disappear {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none; /* Impede interação com o card invisível */
+}</code>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Entendendo as Tags HTML Usadas</h2>
             <div class="content">
                 <div class="column">
-                    <h3>Estrutura HTML</h3>
-                    <p>Criamos um `checkbox` invisível para controlar o estado (visível/invisível) e o `label` funciona como nosso botão. O card a ser afetado tem a classe `.disappear`.</p>
-                    <code>&lt;!-- O botão que controla --&gt;
-&lt;input type="checkbox" id="card-toggle" style="display: none;"&gt;
-&lt;label for="card-toggle"&gt;Fazer Card 2 Sumir/Aparecer&lt;/label&gt;
-
-&lt;!-- O container dos cards --&gt;
-&lt;div class="card-container"&gt;
-  &lt;div class="card"&gt;Card 1&lt;/div&gt;
-  &lt;div class="card disappear"&gt;Card 2&lt;/div&gt;
-  &lt;div class="card"&gt;Card 3&lt;/div&gt;
-&lt;/div&gt;</code>
+                    <h3><code>&lt;div&gt;</code></h3>
+                    <p>A tag <strong>Division</strong> é um container genérico. A usamos para agrupar elementos e aplicar estilos a eles. No nosso exemplo, criamos o <code>.card-container</code> para organizar os cards e cada <code>.card</code> para conter seu próprio título e parágrafo.</p>
                 </div>
                 <div class="column">
-                    <h3>Estilização e Lógica CSS</h3>
-                    <p>A "mágica" acontece com o seletor `+` (adjacente) e a pseudo-classe `:checked`. Quando o checkbox é marcado, a regra de CSS afeta o card com a classe `.disappear`.</p>
-                    <code>/* Estilo base do card */
-.card {
-  width: 250px;
-  padding: 20px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-}
+                    <h3><code>&lt;input type="checkbox"&gt;</code> e <code>&lt;label&gt;</code></h3>
+                    <p>Esta dupla é a chave do nosso truque. O <code>&lt;input&gt;</code> é um elemento de formulário que guarda um estado (marcado ou não). O <code>&lt;label&gt;</code> cria um texto clicável associado a esse input. Ao esconder o checkbox e estilizar o label como um botão, criamos um controle que funciona sem JavaScript.</p>
+                </div>
+            </div>
+        </div>
 
-/* Efeito ao passar o mouse */
-.card:hover {
-  transform: translateY(2px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
+        <div class="slide">
+            <h2>Entendendo os Comandos CSS</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>Estilos e Animações</h3>
+                    <ul>
+                        <li><strong>box-shadow:</strong> Cria a sombra em volta do card, dando a ele profundidade.</li>
+                        <li><strong>transform:</strong> Move, rotaciona ou escala um elemento. Usamos <code>translateY(2px)</code> para mover o card um pouco para baixo no hover.</li>
+                        <li><strong>transition:</strong> Faz com que as mudanças de propriedades (como <code>transform</code> e <code>box-shadow</code>) aconteçam de forma suave ao longo de um tempo definido, em vez de instantaneamente.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Seletores "Mágicos"</h3>
+                    <ul>
+                        <li><strong>:hover</strong><br>Uma pseudo-classe que aplica estilos apenas quando o ponteiro do mouse está sobre o elemento.</li>
+                        <li><strong>:checked</strong><br>Uma pseudo-classe que se aplica a inputs (como checkboxes) quando estão marcados. Este é nosso "gatilho".</li>
+                        <li><strong>+ (Combinador de Irmão Adjacente)</strong><br>Este é o segredo! O seletor <code>A + B</code> seleciona o elemento <code>B</code> apenas se ele vier imediatamente depois do elemento <code>A</code>. Usamos isso para que o estado <code>:checked</code> do nosso input afete o container de cards que vem logo depois dele no HTML.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-/* A REGRA PRINCIPAL: */
-/* Quando o #card-toggle estiver MARCADO (:checked), */
-/* o .card.disappear que vem DEPOIS dele (+) */
-/* ficará com opacidade 0. */
-#card-toggle:checked + .card-container .card.disappear {
-  opacity: 0;
-  transform: scale(0.8);
-}</code>
+        <div class="slide">
+            <h2>Aplicação Prática: Resultado Final</h2>
+            <div class="content" style="align-items: center;">
+                 <div class="column">
+                    <h3>Como Funciona:</h3>
+                    <ol>
+                        <li><strong>Hover:</strong> Ao passar o mouse em qualquer card, ele desce levemente e sua sombra diminui, simulando um clique.</li>
+                        <li><strong>Toggle:</strong> Ao clicar no texto "Fazer Card 2 Sumir/Aparecer", o checkbox invisível é marcado. A regra CSS <code>:checked + ...</code> é ativada, aplicando <code>opacity: 0</code> ao Card 2, que some suavemente. Clicar de novo desmarca o checkbox, e o card reaparece.</li>
+                    </ol>
+                </div>
+                <div class="column" style="text-align: center;">
+                    <p><strong>Visualização do Resultado:</strong></p>
+                    <img src="https://i.imgur.com/gY5zP0G.png" alt="Exemplo de três cards lado a lado" style="max-width: 100%; border-radius: 8px;">
                 </div>
             </div>
         </div>
