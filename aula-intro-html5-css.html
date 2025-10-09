@@ -123,6 +123,16 @@
             display: block;
             text-align: left;
             white-space: pre-wrap; /* Quebra de linha no código */
+            margin-top: 10px;
+        }
+        
+        a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
 
         /* Slide de Título */
@@ -153,59 +163,6 @@
 
         #prev { left: 20px; }
         #next { right: 20px; }
-
-        /* Estilos para a Aplicação Prática */
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            width: 100%;
-            padding: 20px;
-        }
-        .card {
-            width: 250px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-        }
-        .card h3 {
-            margin-top: 0;
-            color: #1a73e8;
-        }
-        .card p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        /* Efeito de botão pressionado e sombra */
-        .card:hover {
-            transform: translateY(2px) translateX(2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 2px 2px 5px rgba(0,0,0,0.1);
-        }
-
-        /* Efeito de aparecer/desaparecer */
-        .toggle-container label {
-            background-color: #1a73e8;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-        #card-toggle {
-            display: none;
-        }
-        /* O card some quando o checkbox está marcado */
-        #card-toggle:checked + .card-container .card.disappear {
-            opacity: 0;
-            transform: scale(0.8);
-            pointer-events: none; /* Desativa interação com o card "sumido" */
-        }
     </style>
 </head>
 <body>
@@ -425,32 +382,63 @@
                 </div>
             </div>
         </div>
+        
+        <div class="slide">
+            <h2>Aplicação Prática: Código dos Cards</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>Estrutura HTML</h3>
+                    <p>Criamos um `checkbox` invisível para controlar o estado (visível/invisível) e o `label` funciona como nosso botão. O card a ser afetado tem a classe `.disappear`.</p>
+                    <code>&lt;!-- O botão que controla --&gt;
+&lt;input type="checkbox" id="card-toggle" style="display: none;"&gt;
+&lt;label for="card-toggle"&gt;Fazer Card 2 Sumir/Aparecer&lt;/label&gt;
+
+&lt;!-- O container dos cards --&gt;
+&lt;div class="card-container"&gt;
+  &lt;div class="card"&gt;Card 1&lt;/div&gt;
+  &lt;div class="card disappear"&gt;Card 2&lt;/div&gt;
+  &lt;div class="card"&gt;Card 3&lt;/div&gt;
+&lt;/div&gt;</code>
+                </div>
+                <div class="column">
+                    <h3>Estilização e Lógica CSS</h3>
+                    <p>A "mágica" acontece com o seletor `+` (adjacente) e a pseudo-classe `:checked`. Quando o checkbox é marcado, a regra de CSS afeta o card com a classe `.disappear`.</p>
+                    <code>/* Estilo base do card */
+.card {
+  width: 250px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.card:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* A REGRA PRINCIPAL: */
+/* Quando o #card-toggle estiver MARCADO (:checked), */
+/* o .card.disappear que vem DEPOIS dele (+) */
+/* ficará com opacidade 0. */
+#card-toggle:checked + .card-container .card.disappear {
+  opacity: 0;
+  transform: scale(0.8);
+}</code>
+                </div>
+            </div>
+        </div>
 
         <div class="slide">
-            <h2>Aplicação Prática (Puro CSS)</h2>
-            <p style="max-width: 800px; margin-bottom: 20px;">
-                Abaixo, temos cards interativos. Passe o mouse sobre eles para ver o efeito de "botão pressionado".
-                Clique no botão para fazer o card do meio desaparecer e reaparecer.
-            </p>
-            
-            <div class="toggle-container">
-                <input type="checkbox" id="card-toggle">
-                <label for="card-toggle">Fazer Card 2 Sumir/Aparecer</label>
-            </div>
-
-            <div class="card-container">
-                <div class="card">
-                    <h3>Card 1</h3>
-                    <p>Este card tem um efeito de sombra e parece ser pressionado quando o mouse passa por cima.</p>
-                </div>
-                <div class="card disappear">
-                    <h3>Card 2</h3>
-                    <p>Eu sou o card que some e aparece. Clique no botão acima para me ver em ação!</p>
-                </div>
-                <div class="card">
-                    <h3>Card 3</h3>
-                    <p>O efeito é criado puramente com CSS, usando `box-shadow`, `transform` e a pseudo-classe `:hover`.</p>
-                </div>
+            <h2>Referências e Próximos Passos</h2>
+            <div class="content" style="flex-direction: column; align-items: center; text-align:center;">
+                <p>Explore estes recursos para aprofundar seus conhecimentos em desenvolvimento web.</p>
+                <ul style="text-align: left; margin-top: 20px; font-size: 1.1rem;">
+                    <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank"><strong>MDN Web Docs (HTML):</strong></a> A referência mais completa e confiável para HTML, mantida pela Mozilla.</li>
+                    <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank"><strong>MDN Web Docs (CSS):</strong></a> O guia definitivo para todas as propriedades e conceitos de CSS.</li>
+                    <li><a href="https://www.w3schools.com/html/" target="_blank"><strong>W3Schools:</strong></a> Ótimo para iniciantes, com tutoriais interativos e exemplos práticos fáceis de testar.</li>
+                    <li><a href="https://css-tricks.com/" target="_blank"><strong>CSS-Tricks:</strong></a> Um site fantástico com artigos, guias e truques para todos os níveis de conhecimento em CSS.</li>
+                </ul>
             </div>
         </div>
 
