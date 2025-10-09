@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada pela Web: HTML, CSS & HTTP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Container do Slider */
+        .slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo do Slide */
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            padding: 40px;
+            box-sizing: border-box;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            transform: translateX(100%);
+            opacity: 0;
+            overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+        }
+
+        .slide.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* Títulos e Conteúdo */
+        .slide h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0056b3;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .slide h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #1a73e8;
+            font-size: 2rem;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            text-align: left;
+            gap: 20px; /* Espaçamento entre colunas */
+        }
+
+        .column {
+            width: 48%;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #1a73e8;
+        }
+
+        .column h3 {
+            color: #0056b3;
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #0056b3;
+        }
+
+        code {
+            background-color: #e9ecef;
+            color: #c7254e;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            display: block;
+            text-align: left;
+            white-space: pre-wrap; /* Quebra de linha no código */
+        }
+
+        /* Slide de Título */
+        .title-slide {
+            background: linear-gradient(45deg, #0056b3, #1a73e8);
+            color: white;
+        }
+
+        .title-slide h1 { color: white; font-size: 3.5rem; }
+        .title-slide p { font-size: 1.5rem; }
+
+        /* Navegação */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 86, 179, 0.7);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            z-index: 100;
+            user-select: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        #prev { left: 20px; }
+        #next { right: 20px; }
+
+        /* Estilos para a Aplicação Prática */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            padding: 20px;
+        }
+        .card {
+            width: 250px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #1a73e8;
+        }
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        /* Efeito de botão pressionado e sombra */
+        .card:hover {
+            transform: translateY(2px) translateX(2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Efeito de aparecer/desaparecer */
+        .toggle-container label {
+            background-color: #1a73e8;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        #card-toggle {
+            display: none;
+        }
+        /* O card some quando o checkbox está marcado */
+        #card-toggle:checked + .card-container .card.disappear {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none; /* Desativa interação com o card "sumido" */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+
+        <div class="slide title-slide active">
+            <h1>Jornada pela Web</h1>
+            <p>Uma introdução ao HTML, CSS e HTTP</p>
+            <p style="margin-top: 50px; font-size: 1rem;">Use as setas do teclado para navegar</p>
+        </div>
+
+        <div class="slide">
+            <h2>A História do HTML</h2>
+            <div class="content">
+                <div class="column">
+                    <ul>
+                        <li><strong>1991:</strong> Tim Berners-Lee, no CERN, cria o HTML (HyperText Markup Language) para compartilhar documentos.</li>
+                        <li><strong>1995:</strong> HTML 2.0 é a primeira especificação padrão.</li>
+                        <li><strong>1997:</strong> HTML 3.2 introduz tabelas, applets e texto flutuante.</li>
+                        <li><strong>1999:</strong> HTML 4.01 se torna um padrão, focando na separação de conteúdo e apresentação (com CSS).</li>
+                         <li><strong>2014:</strong> HTML5 é finalizado, trazendo uma revolução com suporte nativo a vídeo, áudio, semântica e muito mais.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Protocolo HTTP</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>O que é?</h3>
+                    <p><strong>HTTP</strong> (HyperText Transfer Protocol) é o protocolo de comunicação que permite a transferência de dados na World Wide Web. É a base da comunicação entre o seu navegador (cliente) e o servidor onde um site está hospedado.</p>
+                </div>
+                <div class="column">
+                    <h3>Como funciona?</h3>
+                    <ol>
+                        <li>O <strong>cliente</strong> (navegador) envia uma <strong>requisição</strong> (request) HTTP para o servidor.</li>
+                        <li>O <strong>servidor</strong> processa a requisição.</li>
+                        <li>O servidor envia de volta uma <strong>resposta</strong> (response) HTTP com os dados (ex: o código HTML).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>Principais Métodos HTTP</h2>
+            <div class="content" style="width: 80%;">
+                 <ul>
+                    <li><strong>GET:</strong> Solicita a representação de um recurso. Usado para buscar dados (ex: carregar uma página).</li>
+                    <li><strong>POST:</strong> Envia dados para o servidor para criar um novo recurso (ex: enviar um formulário de cadastro).</li>
+                    <li><strong>PUT:</strong> Envia dados para o servidor para substituir um recurso existente.</li>
+                    <li><strong>DELETE:</strong> Remove um recurso específico do servidor.</li>
+                    <li><strong>PATCH:</strong> Aplica modificações parciais a um recurso.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Códigos de Status HTTP</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>Sucesso e Redirecionamento</h3>
+                    <ul>
+                        <li><strong>2xx (Sucesso):</strong> A requisição foi bem-sucedida. Ex: <code>200 OK</code>.</li>
+                        <li><strong>3xx (Redirecionamento):</strong> Ações adicionais são necessárias. Ex: <code>301 Moved Permanently</code>.</li>
+                    </ul>
+                </div>
+                 <div class="column">
+                    <h3>Erros do Cliente e Servidor</h3>
+                    <ul>
+                        <li><strong>4xx (Erro do Cliente):</strong> A requisição contém sintaxe inválida ou não pode ser atendida. Ex: <code>404 Not Found</code>.</li>
+                        <li><strong>5xx (Erro do Servidor):</strong> O servidor falhou em atender uma requisição válida. Ex: <code>500 Internal Server Error</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Engines de Renderização</h2>
+            <p style="max-width: 800px; margin-bottom: 30px;">São os "motores" dentro dos navegadores que interpretam o código HTML e CSS e o transformam na página visual que interagimos.</p>
+            <div class="content">
+                <div class="column">
+                    <h3>Principais Engines</h3>
+                    <ul>
+                        <li><strong>Blink:</strong> Usada no Google Chrome, Microsoft Edge, Opera e outros.</li>
+                        <li><strong>Gecko:</strong> Usada no Mozilla Firefox.</li>
+                        <li><strong>WebKit:</strong> Usada no Apple Safari.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Documento Básico HTML5</h2>
+            <div style="width: 80%;">
+            <code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Título da Página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Olá, Mundo!&lt;/h1&gt;
+  &lt;p&gt;Este é um parágrafo.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>O que o HTML5 trouxe de novo?</h2>
+            <div class="content">
+                 <div class="column">
+                    <h3>Multimídia e Gráficos</h3>
+                    <ul>
+                        <li>Tags <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> para incorporar mídias sem plugins.</li>
+                        <li><code>&lt;canvas&gt;</code> para desenhos e animações via JavaScript.</li>
+                        <li><code>&lt;svg&gt;</code> para gráficos vetoriais escaláveis.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Semântica e Estrutura</h3>
+                    <ul>
+                        <li>Novas tags que descrevem o conteúdo: <code>&lt;header&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>.</li>
+                        <li>Melhora a acessibilidade e o SEO (Otimização para Mecanismos de Busca).</li>
+                        <li>Formulários com novos tipos de input (email, date, etc.).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Principais Tags Semânticas do HTML5</h2>
+            <div class="content" style="flex-direction: column; align-items: center; text-align:center;">
+                <p>Estruturam a página de forma lógica e significativa.</p>
+                <ul>
+                    <li><code>&lt;header&gt;</code>: Cabeçalho da página ou de uma seção.</li>
+                    <li><code>&lt;nav&gt;</code>: Agrupa os links de navegação.</li>
+                    <li><code>&lt;main&gt;</code>: Define o conteúdo principal do documento.</li>
+                    <li><code>&lt;article&gt;</code>: Conteúdo independente e autossuficiente (ex: post de blog).</li>
+                    <li><code>&lt;section&gt;</code>: Uma seção genérica de um documento.</li>
+                    <li><code>&lt;aside&gt;</code>: Conteúdo lateral, relacionado ao conteúdo principal (ex: sidebar).</li>
+                    <li><code>&lt;footer&gt;</code>: Rodapé da página ou de uma seção.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>CSS: O Estilista da Web</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>Por que foi criado?</h3>
+                    <p>O HTML original misturava estrutura e aparência (ex: <code>&lt;font color="red"&gt;</code>). Isso tornava a manutenção difícil. O <strong>CSS (Cascading Style Sheets)</strong> foi criado para separar a <strong>apresentação</strong> da <strong>estrutura</strong> do documento.</p>
+                </div>
+                 <div class="column">
+                    <h3>Qual sua utilidade?</h3>
+                    <p>Com CSS, você controla cores, fontes, espaçamentos, layout, animações e a responsividade (adaptação a diferentes telas) de um site, mantendo o HTML limpo e focado apenas no conteúdo e em sua estrutura semântica.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <h2>3 Formas de Incluir CSS</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>1. Inline (Atributo `style`)</h3>
+                    <p>Aplica o estilo diretamente na tag HTML. Use com moderação.</p>
+                    <code>&lt;p style="color: blue;"&gt;Texto azul.&lt;/p&gt;</code>
+                </div>
+                <div class="column">
+                    <h3>2. Interno (Tag `&lt;style&gt;`)</h3>
+                    <p>Dentro do <code>&lt;head&gt;</code> do documento, para estilos daquela página.</p>
+                    <code>&lt;style&gt; p { color: blue; } &lt;/style&gt;</code>
+                </div>
+                 <div class="column">
+                    <h3>3. Externo (Arquivo .css)</h3>
+                    <p>A forma mais recomendada. Um arquivo <code>.css</code> linkado no <code>&lt;head&gt;</code>.</p>
+                    <code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Anatomia de uma Regra CSS</h2>
+            <div class="content" style="flex-direction: column; align-items: center; text-align: center;">
+                <img src="https://i.imgur.com/bEaBg1c.png" alt="Anatomia de uma regra CSS" style="max-width: 80%; border-radius: 8px;">
+                <ul style="text-align: left; margin-top: 20px;">
+                    <li><strong>Seletor (Selector):</strong> O elemento HTML que você quer estilizar (ex: <code>p</code>, <code>.minha-classe</code>, <code>#meu-id</code>).</li>
+                    <li><strong>Propriedade (Property):</strong> O aspecto visual que você quer mudar (ex: <code>color</code>, <code>font-size</code>).</li>
+                    <li><strong>Valor (Value):</strong> A configuração que você quer aplicar à propriedade (ex: <code>blue</code>, <code>16px</code>).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Tipografia com Google Fonts</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>Passo a Passo</h3>
+                    <ol>
+                        <li>Acesse <a href="https://fonts.google.com" target="_blank">fonts.google.com</a>.</li>
+                        <li>Escolha uma fonte (ex: Roboto) e selecione os pesos desejados.</li>
+                        <li>Copie o código <code>&lt;link&gt;</code> fornecido pelo Google e cole no <code>&lt;head&gt;</code> do seu HTML.</li>
+                        <li>No seu CSS, use a propriedade <code>font-family</code> com o nome da fonte.</li>
+                    </ol>
+                </div>
+                <div class="column">
+                    <h3>Exemplo Prático</h3>
+                    <p><strong>1. No HTML (dentro do `head`):</strong></p>
+                    <code>&lt;link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"&gt;</code>
+                    <p><strong>2. No CSS:</strong></p>
+                    <code>body {
+  font-family: 'Roboto', sans-serif;
+}</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>Aplicação Prática (Puro CSS)</h2>
+            <p style="max-width: 800px; margin-bottom: 20px;">
+                Abaixo, temos cards interativos. Passe o mouse sobre eles para ver o efeito de "botão pressionado".
+                Clique no botão para fazer o card do meio desaparecer e reaparecer.
+            </p>
+            
+            <div class="toggle-container">
+                <input type="checkbox" id="card-toggle">
+                <label for="card-toggle">Fazer Card 2 Sumir/Aparecer</label>
+            </div>
+
+            <div class="card-container">
+                <div class="card">
+                    <h3>Card 1</h3>
+                    <p>Este card tem um efeito de sombra e parece ser pressionado quando o mouse passa por cima.</p>
+                </div>
+                <div class="card disappear">
+                    <h3>Card 2</h3>
+                    <p>Eu sou o card que some e aparece. Clique no botão acima para me ver em ação!</p>
+                </div>
+                <div class="card">
+                    <h3>Card 3</h3>
+                    <p>O efeito é criado puramente com CSS, usando `box-shadow`, `transform` e a pseudo-classe `:hover`.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button id="prev" class="nav-arrow">◄</button>
+    <button id="next" class="nav-arrow">►</button>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const next = document.getElementById('next');
+        const prev = document.getElementById('prev');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i === index) {
+                    slide.classList.add('active');
+                } else if (i < index) {
+                   slide.classList.add('prev');
+                }
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let nextIndex = currentSlide + 1;
+            if (nextIndex >= slides.length) {
+                nextIndex = 0; // Volta para o primeiro
+            }
+            showSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            let prevIndex = currentSlide - 1;
+            if (prevIndex < 0) {
+                prevIndex = slides.length - 1; // Vai para o último
+            }
+            showSlide(prevIndex);
+        }
+
+        next.addEventListener('click', nextSlide);
+        prev.addEventListener('click', prevSlide);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Inicia no primeiro slide
+        showSlide(0);
+    </script>
+</body>
+</html>
