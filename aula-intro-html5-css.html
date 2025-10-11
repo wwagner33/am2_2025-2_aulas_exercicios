@@ -108,18 +108,22 @@
             margin-top: 0;
         }
 
-        ul {
-            list-style: none;
-            padding: 0;
+        ul, ol {
+            padding-left: 20px;
         }
-
+        
         li {
             margin-bottom: 15px;
             line-height: 1.6;
         }
+
+        .no-bullets {
+            list-style: none;
+            padding: 0;
+        }
         
         .index-list li {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             background-color: #f8f9fa;
             padding: 10px;
             border-radius: 5px;
@@ -142,6 +146,13 @@
             white-space: pre-wrap;
             margin-top: 10px;
             word-break: break-all;
+        }
+
+        .slide img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         a {
@@ -200,189 +211,331 @@
             <h1>Jornada pela Web</h1>
             <p>HTML, CSS & JavaScript para a Web Moderna</p>
             <p style="margin-top: 50px; font-size: 1rem;">Use as setas do teclado para navegar</p>
-            <div class="slide-footer">1 / 14</div>
+            <div class="slide-footer">1 / 21</div>
         </div>
 
         <div class="slide">
             <h2>O que vamos ver?</h2>
-            <div class="content" style="width: 60%; justify-content: center;">
+            <div class="content no-bullets" style="width: 80%; justify-content: center;">
                  <ul class="index-list">
-                    <li><strong>HTML:</strong> A Estrutura da Web</li>
-                    <li><strong>HTML5:</strong> Tags, Semântica e Multimídia</li>
-                    <li><strong>SVG:</strong> Gráficos Vetoriais para a Web</li>
-                    <li><strong>CSS:</strong> O Estilo da Página</li>
-                    <li><strong>JavaScript & DOM:</strong> A Interatividade</li>
-                    <li><strong>Exemplos Práticos:</strong> Construindo Interfaces</li>
+                    <li>O que é HTML e por que não é uma linguagem de programação.</li>
+                    <li>Estrutura, Listas, Imagens e Semântica com HTML5.</li>
+                    <li>A evolução do estilo: Do HTML antigo ao CSS moderno.</li>
+                    <li>CSS: Box Model, Pseudo-classes e Variáveis.</li>
+                    <li>HTML5 Multimídia: Áudio e Vídeo.</li>
+                    <li>JavaScript e a manipulação do DOM.</li>
+                    <li>Exemplos Práticos: Construindo interfaces web.</li>
                 </ul>
             </div>
-            <div class="slide-footer">2 / 14</div>
+            <div class="slide-footer">2 / 21</div>
         </div>
 
         <div class="slide">
-            <h2>HTML: A Estrutura da Web</h2>
-            <div class="content">
-                <div class="column">
-                    <h3>O que é?</h3>
-                    <p><strong>HTML</strong> (HyperText Markup Language) é a linguagem de marcação padrão para criar e estruturar o conteúdo de páginas web.</p>
-                    <ul>
-                        <li><strong>Inventor:</strong> Criado por Tim Berners-Lee no CERN.</li>
-                        <li><strong>Conceito Chave:</strong> O Hyperlink, que permite a navegação entre documentos.</li>
-                        <li><strong>Natureza Estática:</strong> O conteúdo de um arquivo HTML, por si só, não muda dinamicamente.</li>
-                    </ul>
-                </div>
-                <div class="column">
-                    <h3>Estrutura Básica</h3>
-                     <code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Título&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    Conteúdo visível...
-  &lt;/body&gt;
-&lt;/html&gt;</code>
-                </div>
+            <h2>O que é HTML?</h2>
+            <div class="column-full" style="text-align: center;">
+                <p style="font-size: 1.2rem;"><strong>HTML</strong> (HyperText Markup Language) é a <strong>linguagem de marcação</strong> que usamos para criar e organizar o conteúdo em uma página da web.</p>
+                <p>Pense nele como o <strong>esqueleto</strong> de um site. Ele define os diferentes blocos de conteúdo, como títulos, parágrafos, imagens e links, dando uma estrutura lógica ao documento.</p>
             </div>
-            <div class="slide-footer">3 / 14</div>
+            <div class="slide-footer">3 / 21</div>
         </div>
 
         <div class="slide">
-            <h2>HTML5: Tags e Semântica</h2>
-            <p style="max-width: 800px; margin-bottom: 30px;">O HTML5 introduziu elementos semânticos que descrevem claramente seu propósito tanto para o navegador quanto para o desenvolvedor, melhorando a acessibilidade e o SEO.</p>
+            <h2>HTML não é uma Linguagem de Programação</h2>
             <div class="content">
                 <div class="column">
-                    <h3>Estrutura da Página</h3>
+                    <h3>HTML (Marcação)</h3>
+                    <p>O HTML é uma linguagem <strong>declarativa</strong>. Você "marca" o conteúdo para dizer ao navegador <strong>o que ele é</strong> (um título, uma lista, uma imagem), mas não como ele deve se comportar.</p>
                     <ul>
-                        <li><code>&lt;header&gt;</code>: Define o cabeçalho da página ou de uma seção.</li>
-                        <li><code>&lt;nav&gt;</code>: Agrupa os links de navegação.</li>
-                        <li><code>&lt;main&gt;</code>: Especifica o conteúdo principal e único do documento.</li>
-                        <li><code>&lt;footer&gt;</code>: Define o rodapé da página ou de uma seção.</li>
+                        <li>✔️ Define a estrutura e o significado.</li>
+                        <li>❌ Não possui lógica condicional (if/else).</li>
+                        <li>❌ Não possui laços de repetição (loops).</li>
+                        <li>❌ Não pode executar cálculos ou manipular dados.</li>
                     </ul>
                 </div>
                 <div class="column">
-                    <h3>Agrupamento de Conteúdo</h3>
+                    <h3>Linguagem de Programação</h3>
+                    <p>Uma linguagem de programação, como JavaScript, é usada para criar <strong>lógica e comportamento</strong>. Ela diz ao computador <strong>como fazer</strong> as coisas.</p>
                     <ul>
-                        <li><code>&lt;article&gt;</code>: Para conteúdo independente e autossuficiente (ex: post de blog, notícia).</li>
-                        <li><code>&lt;section&gt;</code>: Uma seção genérica de um documento, geralmente com um título.</li>
-                        <li><code>&lt;aside&gt;</code>: Conteúdo lateral, relacionado ao conteúdo principal (ex: sidebar).</li>
-                        <li><code>&lt;figure&gt;</code> e <code>&lt;figcaption&gt;</code>: Para agrupar uma mídia (imagem, vídeo) com sua legenda.</li>
+                        <li>✔️ Executa algoritmos e tarefas.</li>
+                        <li>✔️ Usa lógica, loops e funções.</li>
+                        <li>✔️ Responde a eventos do usuário.</li>
+                        <li>✔️ Manipula dados e se comunica com servidores.</li>
                     </ul>
                 </div>
             </div>
-            <div class="slide-footer">4 / 14</div>
+            <div class="slide-footer">4 / 21</div>
         </div>
         
         <div class="slide">
-            <h2>HTML5: Multimídia e Gráficos</h2>
-             <p style="max-width: 800px; margin-bottom: 30px;">Uma das maiores evoluções do HTML5 foi o suporte nativo a elementos de mídia e gráficos, eliminando a dependência de plugins como o Flash.</p>
-            <div class="content">
-                <div class="column">
-                    <h3>Áudio e Vídeo</h3>
-                    <p>Incorporar mídias se tornou trivial:</p>
-                    <code>&lt;video controls&gt;
-  &lt;source src="filme.mp4" type="video/mp4"&gt;
-&lt;/video&gt;</code>
-                    <code>&lt;audio controls&gt;
-  &lt;source src="musica.ogg" type="audio/ogg"&gt;
-&lt;/audio&gt;</code>
-                </div>
-                <div class="column">
-                    <h3>Canvas</h3>
-                    <p>A tag <code>&lt;canvas&gt;</code> é uma "tela em branco" que permite desenhar gráficos, animações e processar imagens em tempo real usando JavaScript. É a base para jogos e visualizações de dados interativas na web.</p>
-                </div>
+            <h2>Estrutura Básica de um Arquivo HTML5</h2>
+            <div class="column-full">
+                <code>&lt;!DOCTYPE html&gt;</code>
+                <p style="text-align:left; font-size:0.9rem; margin: -5px 0 10px 10px;">Informa ao navegador que o documento é HTML5.</p>
+                <code>&lt;html lang="pt-BR"&gt;</code>
+                <p style="text-align:left; font-size:0.9rem; margin: -5px 0 10px 10px;">Elemento raiz. O atributo `lang` define o idioma da página.</p>
+                <code>  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Título da Página&lt;/title&gt;
+  &lt;/head&gt;</code>
+                <p style="text-align:left; font-size:0.9rem; margin: -5px 0 10px 10px;">Contém metadados: `charset` para codificação de caracteres, `viewport` para responsividade e `title` para o título da aba.</p>
+                <code>  &lt;body&gt;
+    &lt;!-- Todo o conteúdo visível da página vai aqui --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code>
+                 <p style="text-align:left; font-size:0.9rem; margin: -5px 0 10px 10px;">Corpo do documento, onde todo o conteúdo visual é inserido.</p>
             </div>
-            <div class="slide-footer">5 / 14</div>
+            <div class="slide-footer">5 / 21</div>
         </div>
 
         <div class="slide">
-            <h2>SVG: Gráficos Vetoriais para a Web</h2>
+            <h2>Organizando Conteúdo: Listas</h2>
             <div class="content">
                 <div class="column">
-                    <h3>O que é SVG?</h3>
-                    <p><strong>SVG (Scalable Vector Graphics)</strong> é um formato de imagem vetorial baseado em XML. Diferente de imagens raster (JPG, PNG), que são baseadas em pixels, os SVGs são definidos por formas matemáticas.</p>
-                    <h3>Vantagens</h3>
-                    <ul>
-                        <li><strong>Escalabilidade Perfeita:</strong> Amplie ou reduza sem perder qualidade.</li>
-                        <li><strong>Leveza:</strong> Arquivos geralmente menores que os de formatos raster.</li>
-                        <li><strong>Editável e Animável:</strong> Pode ser modificado com CSS e JavaScript.</li>
-                    </ul>
+                    <h3>Listas Não Ordenadas `&lt;ul&gt;`</h3>
+                    <p>Usadas quando a ordem dos itens não importa. Geralmente renderizadas com marcadores (bolinhas).</p>
+                    <code>&lt;ul&gt;
+  &lt;li&gt;Café&lt;/li&gt;
+  &lt;li&gt;Leite&lt;/li&gt;
+  &lt;li&gt;Pão&lt;/li&gt;
+&lt;/ul&gt;</code>
                 </div>
                 <div class="column">
-                    <h3>Exemplo de Uso</h3>
-                    <p>Este código desenha um círculo amarelo com uma borda verde:</p>
-                    <code>&lt;svg width="100" height="100"&gt;
-  &lt;circle cx="50" cy="50" r="40"
-  stroke="green" stroke-width="4" fill="yellow" /&gt;
-&lt;/svg&gt;</code>
-                    <div style="text-align: center; margin-top: 15px;">
-                        <svg width="100" height="100">
-                          <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-                        </svg>
+                    <h3>Listas Ordenadas `&lt;ol&gt;`</h3>
+                    <p>Usadas quando a sequência dos itens é importante. Renderizadas com números ou letras.</p>
+                    <code>&lt;ol&gt;
+  &lt;li&gt;Primeiro, misture os ingredientes.&lt;/li&gt;
+  &lt;li&gt;Segundo, asse por 30 minutos.&lt;/li&gt;
+  &lt;li&gt;Terceiro, sirva quente.&lt;/li&gt;
+&lt;/ol&gt;</code>
+                </div>
+            </div>
+            <div class="slide-footer">6 / 21</div>
+        </div>
+
+        <div class="slide">
+            <h2>Inserindo Imagens `&lt;img&gt;`</h2>
+            <div class="column-full">
+                <p>A tag `&lt;img&gt;` é usada para incorporar imagens em uma página. Ela é uma tag "vazia", ou seja, não possui fechamento.</p>
+                <code>&lt;img src="caminho/para/imagem.jpg" alt="Descrição da imagem"&gt;</code>
+                <div class="content" style="margin-top:20px;">
+                    <div class="column">
+                        <h3>Atributo `src` (Source)</h3>
+                        <p>É <strong>obrigatório</strong> e especifica o caminho (URL) para o arquivo de imagem que será exibido.</p>
+                    </div>
+                    <div class="column">
+                        <h3>Atributo `alt` (Alternative Text)</h3>
+                        <p>Fornece um texto alternativo para a imagem. É <strong>crucial para a acessibilidade</strong>, pois é lido por leitores de tela para usuários com deficiência visual e exibido se a imagem não carregar.</p>
                     </div>
                 </div>
             </div>
-            <div class="slide-footer">6 / 14</div>
+            <div class="slide-footer">7 / 21</div>
+        </div>
+        
+        <div class="slide">
+            <h2>Semântica para Imagens: `&lt;figure&gt;` e `&lt;figcaption&gt;`</h2>
+            <div class="content">
+                <div class="column">
+                    <p>Para associar semanticamente uma imagem a uma legenda, o HTML5 oferece as tags `&lt;figure&gt;` e `&lt;figcaption&gt;`.</p>
+                    <ul>
+                        <li><code>&lt;figure&gt;</code>: "Embrulha" a mídia (imagem, diagrama, etc.) que faz parte do fluxo principal, mas poderia ser movida para outro lugar (como um apêndice) sem afetar o sentido do texto.</li>
+                        <li><code>&lt;figcaption&gt;</code>: Fornece a legenda para o conteúdo dentro do `&lt;figure&gt;`.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Exemplo Prático</h3>
+                    <code>&lt;figure&gt;
+  &lt;img src="por-do-sol.jpg" alt="Pôr do sol na praia de Ipanema"&gt;
+  &lt;figcaption&gt;Fig.1 - Pôr do sol visto do Arpoador, Rio de Janeiro.&lt;/figcaption&gt;
+&lt;/figure&gt;</code>
+                </div>
+            </div>
+            <div class="slide-footer">8 / 21</div>
+        </div>
+
+        <div class="slide">
+            <h2>Antes do CSS: A Era do Caos</h2>
+            <div class="column-full">
+                <p>Nos primórdios da web, não havia separação entre estrutura e estilo. A aparência era definida diretamente no HTML, usando tags e atributos que hoje são obsoletos.</p>
+                <h3>Como era feito:</h3>
+                <code>&lt;body bgcolor="#FFFFFF"&gt;
+  &lt;center&gt;
+    &lt;font color="blue" size="5"&gt;
+      Este é um título azul!
+    &lt;/font&gt;
+  &lt;/center&gt;
+  &lt;p&gt;Um parágrafo simples.&lt;/p&gt;
+&lt;/body&gt;</code>
+                <p style="margin-top:20px;"><strong>Problemas:</strong> Manutenção difícil, código poluído e nenhuma consistência visual entre páginas. Mudar a cor de todos os títulos significava editar cada arquivo HTML individualmente.</p>
+            </div>
+            <div class="slide-footer">9 / 21</div>
         </div>
 
         <div class="slide">
             <h2>CSS: O Estilo da Página</h2>
+            <div class="column-full" style="text-align:center;">
+                <p style="font-size: 1.2rem;"><strong>CSS (Cascading Style Sheets)</strong> é a linguagem que usamos para estilizar documentos HTML. Pense nele como o <strong>maquiador e designer de interiores</strong> de um site.</p>
+                <p>Ele foi criado para resolver o problema da estilização no HTML, permitindo separar completamente a <strong>apresentação (cores, fontes, layout)</strong> da <strong>estrutura (conteúdo)</strong>.</p>
+            </div>
+            <div class="slide-footer">10 / 21</div>
+        </div>
+        
+        <div class="slide">
+            <h2>CSS também não é uma Linguagem de Programação</h2>
+            <div class="column-full">
+                <p>Assim como o HTML, o CSS é uma linguagem <strong>declarativa</strong>, não de programação. Você declara "regras" de estilo que o navegador deve aplicar aos elementos.</p>
+                <ul>
+                    <li>✔️ Descreve a aparência dos elementos.</li>
+                    <li>✔️ Pode ter "variáveis" (Custom Properties) e cálculos simples (<code>calc()</code>).</li>
+                    <li>❌ Não possui a lógica computacional completa de uma linguagem de programação (loops, condicionais complexas, funções para manipular dados).</li>
+                </ul>
+                <p style="margin-top: 20px;">O CSS determina <strong>como algo deve parecer</strong>, enquanto uma linguagem de programação determina <strong>como algo deve funcionar</strong>.</p>
+            </div>
+            <div class="slide-footer">11 / 21</div>
+        </div>
+
+        <div class="slide">
+            <h2>3 Formas de Incluir CSS</h2>
             <div class="content">
                 <div class="column">
-                    <h3>O que é?</h3>
-                    <p><strong>CSS (Cascading Style Sheets)</strong> é uma linguagem de estilo usada para descrever a apresentação de um documento HTML. Ele separa o conteúdo da sua aparência visual.</p>
-                    <h3>Anatomia de uma Regra</h3>
-                    <code>seletor {
-    propriedade: valor;
-}</code>
+                    <h3>1. Externo (Recomendado)</h3>
+                    <p>Um arquivo <code>.css</code> separado é linkado no <code>&lt;head&gt;</code>. Permite reutilizar estilos em várias páginas.</p>
+                    <code>&lt;link rel="stylesheet" href="estilos.css"&gt;</code>
                 </div>
-                 <div class="column">
-                    <h3>Como incluir no HTML?</h3>
-                    <ul>
-                       <li><strong>Tag <code>&lt;link&gt;</code> (Externo):</strong> A forma mais comum e recomendada.</li>
-                       <li><strong>Tag <code>&lt;style&gt;</code> (Interno):</strong> Dentro do <code>&lt;head&gt;</code> da página.</li>
-                       <li><strong>Atributo <code>style</code> (Inline):</strong> Diretamente na tag HTML (usar com moderação).</li>
-                    </ul>
+                <div class="column">
+                    <h3>2. Interno</h3>
+                    <p>O código CSS é colocado dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code>. Útil para estilos específicos de uma única página.</p>
+                    <code>&lt;style&gt;
+  body { background-color: #f0f0f0; }
+&lt;/style&gt;</code>
+                </div>
+                <div class="column">
+                    <h3>3. Inline (Evitar)</h3>
+                    <p>O estilo é aplicado diretamente no elemento através do atributo `style`. Dificulta a manutenção.</p>
+                    <code>&lt;p style="color: blue; font-size: 18px;"&gt;...&lt;/p&gt;</code>
                 </div>
             </div>
-            <div class="slide-footer">7 / 14</div>
+            <div class="slide-footer">12 / 21</div>
+        </div>
+        
+        <div class="slide">
+            <h2>CSS: O Modelo de Caixa (Box Model)</h2>
+            <div class="content" style="align-items: center;">
+                <div class="column">
+                    <p>Todo elemento HTML pode ser considerado uma caixa retangular. O Box Model é o conjunto de regras que define como o tamanho e o espaçamento dessa caixa são calculados.</p>
+                    <ul>
+                        <li><strong>Content:</strong> O conteúdo real (texto, imagem).</li>
+                        <li><strong>Padding:</strong> Espaçamento interno, entre o conteúdo e a borda.</li>
+                        <li><strong>Border:</strong> A borda que envolve o padding.</li>
+                        <li><strong>Margin:</strong> Espaçamento externo, fora da borda, que afasta o elemento de outros.</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <img src="https://i.imgur.com/VT0aD1J.png" alt="Diagrama do CSS Box Model mostrando Content, Padding, Border e Margin">
+                </div>
+            </div>
+            <div class="slide-footer">13 / 21</div>
+        </div>
+
+        <div class="slide">
+            <h2>CSS Avançado: Pseudo-classes e Variáveis</h2>
+            <div class="content">
+                <div class="column">
+                    <h3>Pseudo-classes</h3>
+                    <p>São palavras-chave adicionadas a seletores que especificam um estado especial do elemento. Permitem estilizar elementos de forma dinâmica.</p>
+                    <code>/* Estilo quando o mouse está sobre o link */
+a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo quando o campo está focado */
+input:focus {
+  border-color: blue;
+}
+
+/* Estilo para cada linha ímpar de uma lista */
+li:nth-child(odd) {
+  background-color: #eee;
+}</code>
+                </div>
+                <div class="column">
+                    <h3>Variáveis (Custom Properties)</h3>
+                    <p>Permitem armazenar valores reutilizáveis, facilitando a manutenção e a criação de temas.</p>
+                    <code>:root {
+  --cor-primaria: #0056b3;
+  --tamanho-fonte: 16px;
+}
+
+body {
+  font-size: var(--tamanho-fonte);
+}
+
+a {
+  color: var(--cor-primaria);
+}</code>
+                </div>
+            </div>
+            <div class="slide-footer">14 / 21</div>
+        </div>
+
+        <div class="slide">
+            <h2>HTML5: A Era da Multimídia</h2>
+            <div class="column-full">
+                <p>Com o HTML5, incorporar áudio e vídeo se tornou nativo, sem a necessidade de plugins. As tags <code>&lt;audio&gt;</code> e <code>&lt;video&gt;</code> oferecem controle total sobre a mídia.</p>
+                <div class="content">
+                    <div class="column">
+                        <h3>Atributos Comuns</h3>
+                        <ul>
+                            <li><code>controls</code>: Exibe os controles padrão do navegador (play, pause, volume).</li>
+                            <li><code>autoplay</code>: Inicia a reprodução automaticamente (geralmente requer `muted`).</li>
+                            <li><code>muted</code>: Inicia a mídia sem som.</li>
+                            <li><code>loop</code>: Faz a mídia reiniciar ao terminar.</li>
+                            <li><code>poster</code>: (para vídeo) Exibe uma imagem antes do vídeo ser carregado.</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>Uso com a tag `&lt;source&gt;`</h3>
+                        <p>Para maior compatibilidade, você pode fornecer múltiplos formatos de arquivo. O navegador usará o primeiro que conseguir reproduzir.</p>
+                        <code>&lt;video controls poster="capa.jpg"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  Seu navegador não suporta a tag de vídeo.
+&lt;/video&gt;</code>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-footer">15 / 21</div>
         </div>
 
         <div class="slide">
             <h2>JavaScript & DOM: A Interatividade</h2>
-            <div class="content">
-                <div class="column">
-                    <h3>JavaScript</h3>
-                    <p>É a linguagem de programação que permite implementar itens complexos e interativos em páginas web. É o que torna a web dinâmica.</p>
-                    <h3>O que ele pode fazer?</h3>
-                     <ul>
-                        <li>Alterar o HTML e o CSS da página em resposta a ações do usuário.</li>
-                        <li>Criar animações, validar formulários e buscar dados de um servidor (AJAX).</li>
-                        <li>Controlar mídias, desenhar no canvas e muito mais.</li>
-                    </ul>
+            <div class="content" style="align-items: center;">
+                 <div class="column">
+                    <h3>O que eles fazem juntos?</h3>
+                    <p>O <strong>JavaScript</strong> é a linguagem que dá vida à página. Para fazer isso, ele manipula o <strong>DOM (Document Object Model)</strong>.</p>
+                    <p>O DOM é uma representação em árvore de todo o seu código HTML. O JavaScript pode navegar nessa árvore para encontrar, adicionar, remover ou modificar qualquer elemento, tornando a página dinâmica e interativa.</p>
                 </div>
                 <div class="column">
-                    <h3>DOM (Document Object Model)</h3>
-                    <p>Para que o JavaScript possa interagir com a página, o navegador cria uma representação do documento chamada <strong>DOM</strong>.</p>
-                    <p>O DOM é uma estrutura em árvore onde cada nó é um objeto que representa uma parte do documento. O JavaScript pode manipular esses objetos para alterar dinamicamente a página.</p>
+                    <img src="https://i.imgur.com/b59mS4N.png" alt="Diagrama da Árvore DOM, mostrando a hierarquia de um documento HTML">
                 </div>
             </div>
-            <div class="slide-footer">8 / 14</div>
+            <div class="slide-footer">16 / 21</div>
         </div>
         
         <div class="slide">
             <h2>Exemplos Práticos: Introdução</h2>
             <div class="column-full" style="text-align: center;">
                  <p style="font-size: 1.2rem; line-height: 1.6;">
-                    Agora, vamos aplicar os conceitos vistos. Nos próximos slides, construiremos três componentes de interface comuns usando apenas <strong>HTML5 semântico</strong> e <strong>CSS moderno</strong>, focando em boas práticas e design responsivo.
+                    Vamos aplicar os conceitos. Nos próximos slides, construiremos três componentes de interface usando HTML5 semântico e CSS moderno.
                 </p>
-                <h3>Vamos construir:</h3>
-                <ul class="index-list" style="width: 60%; margin: 20px auto; text-align:left;">
+                <h3 style="margin-top:20px;">Vamos construir:</h3>
+                <ul class="no-bullets index-list" style="width: 60%; margin: 20px auto; text-align:left;">
                     <li>1. Um Cartão de Perfil Responsivo.</li>
                     <li>2. Uma Barra de Navegação com Efeito Hover.</li>
                     <li>3. Um Formulário de Contato Interativo.</li>
                 </ul>
             </div>
-            <div class="slide-footer">9 / 14</div>
+            <div class="slide-footer">17 / 21</div>
         </div>
 
         <div class="slide">
@@ -390,7 +543,6 @@
             <div class="content">
                 <div class="column">
                     <h3>HTML Semântico</h3>
-                    <p>Usamos <code>&lt;figure&gt;</code> para a imagem e a legenda, e <code>&lt;section&gt;</code> para o conteúdo principal do cartão.</p>
                     <code>&lt;article class="profile-card"&gt;
   &lt;figure&gt;
     &lt;img src="foto.jpg" alt="Foto de Perfil"&gt;
@@ -403,28 +555,19 @@
                 </div>
                 <div class="column">
                     <h3>CSS Essencial</h3>
-                    <p>Usamos <code>box-shadow</code> para profundidade e <code>border-radius</code> para cantos arredondados.</p>
                     <code>.profile-card {
   width: 300px;
-  background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  overflow: hidden; /* Garante que a imagem não vaze */
+  overflow: hidden;
   transition: transform 0.3s ease;
 }
 .profile-card:hover {
-  transform: translateY(-5px); /* Efeito de elevação */
-}
-.profile-card img {
-  width: 100%;
-  display: block;
-}
-.card-content {
-  padding: 20px;
+  transform: translateY(-5px);
 }</code>
                 </div>
             </div>
-            <div class="slide-footer">10 / 14</div>
+            <div class="slide-footer">18 / 21</div>
         </div>
 
         <div class="slide">
@@ -432,40 +575,28 @@
             <div class="content">
                  <div class="column">
                     <h3>HTML Estruturado</h3>
-                    <p>A tag <code>&lt;nav&gt;</code> indica que este é um bloco de navegação. Usamos uma lista <code>&lt;ul&gt;</code> para os links, uma prática comum e semântica.</p>
                     <code>&lt;nav class="main-nav"&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;a href="#"&gt;Início&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href="#"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;a href="#"&gt;Projetos&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;Contato&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;</code>
                 </div>
                 <div class="column">
                     <h3>CSS com Flexbox</h3>
-                    <p>Flexbox simplifica a criação de layouts. Aqui, ele alinha os itens da lista horizontalmente.</p>
                     <code>.main-nav ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex; /* A mágica do Flexbox */
-  justify-content: center; /* Centraliza os itens */
+  justify-content: center;
   background: #333;
 }
-.main-nav a {
-  display: block;
-  padding: 15px 20px;
-  color: white;
-  text-decoration: none;
-  transition: background-color 0.3s;
-}
 .main-nav a:hover {
-  background-color: #555; /* Efeito hover */
+  background-color: #555;
 }</code>
                 </div>
             </div>
-            <div class="slide-footer">11 / 14</div>
+            <div class="slide-footer">19 / 21</div>
         </div>
         
         <div class="slide">
@@ -473,78 +604,43 @@
             <div class="content">
                  <div class="column">
                     <h3>HTML5 com Novos Inputs</h3>
-                    <p>Usamos <code>&lt;label&gt;</code> para acessibilidade e novos tipos de input do HTML5 como <code>type="email"</code> para validação automática.</p>
                     <code>&lt;form class="contact-form"&gt;
-  &lt;label for="name"&gt;Nome:&lt;/label&gt;
-  &lt;input type="text" id="name" required&gt;
-
   &lt;label for="email"&gt;Email:&lt;/label&gt;
   &lt;input type="email" id="email" required&gt;
 
   &lt;label for="message"&gt;Mensagem:&lt;/label&gt;
-  &lt;textarea id="message" rows="5" required&gt;&lt;/textarea&gt;
+  &lt;textarea id="message" rows="5"&gt;&lt;/textarea&gt;
 
   &lt;button type="submit"&gt;Enviar&lt;/button&gt;
 &lt;/form&gt;</code>
                 </div>
                 <div class="column">
                     <h3>CSS com Foco em UX</h3>
-                    <p>Estilizamos os campos e usamos a pseudo-classe <code>:focus</code> para dar um feedback visual ao usuário quando ele interage com um campo.</p>
-                    <code>.contact-form input, .contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box; /* Garante que o padding não afete a largura */
-}
-.contact-form input:focus, .contact-form textarea:focus {
+                    <code>.contact-form input:focus,
+.contact-form textarea:focus {
   outline: none;
-  border-color: #1a73e8; /* Destaque no foco */
+  border-color: #1a73e8;
   box-shadow: 0 0 5px rgba(26, 115, 232, 0.5);
-}
-.contact-form button {
-  padding: 12px 20px;
-  background-color: #1a73e8;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }</code>
                 </div>
             </div>
-            <div class="slide-footer">12 / 14</div>
+            <div class="slide-footer">20 / 21</div>
         </div>
 
         <div class="slide">
-            <h2>Conclusão e Próximos Passos</h2>
+            <h2>Referências e Próximos Passos</h2>
             <div class="column-full" style="text-align:center;">
-                <p style="font-size: 1.2rem; line-height: 1.6;">
-                    Você viu a base da construção da web: <strong>HTML</strong> para a estrutura, <strong>CSS</strong> para o estilo e <strong>JavaScript</strong> para a interatividade. As tecnologias modernas e a abordagem semântica do HTML5 nos permitem criar interfaces ricas, acessíveis e eficientes.
-                </p>
-                <h3 style="margin-top: 30px;">Continue explorando:</h3>
-                <ul style="list-style: disc; text-align: left; width: 60%; margin: 20px auto;">
-                    <li><strong>Frameworks CSS:</strong> Explore ferramentas como Bootstrap e Tailwind CSS.</li>
-                    <li><strong>Pré-processadores CSS:</strong> Aprenda sobre SASS/SCSS para escrever CSS mais poderoso.</li>
-                    <li><strong>Frameworks JavaScript:</strong> Mergulhe em bibliotecas como React, Vue ou Angular para criar aplicações web complexas.</li>
+                <p>Explore estes recursos para aprofundar seus conhecimentos.</p>
+                <ul class="no-bullets" style="margin-top: 20px; font-size: 1.1rem;">
+                    <li><a href="https://developer.mozilla.org/pt-BR/" target="_blank"><strong>MDN Web Docs:</strong> A documentação mais completa e confiável.</a></li>
+                    <li><a href="https://www.w3schools.com/" target="_blank"><strong>W3Schools:</strong> Ótimo para iniciantes, com tutoriais interativos.</a></li>
+                    <li><a href="https://css-tricks.com/" target="_blank"><strong>CSS-Tricks:</strong> Artigos, guias e truques para todos os níveis de CSS.</a></li>
+                    <li><a href="https://caniuse.com/" target="_blank"><strong>Can I Use...:</strong> Para verificar a compatibilidade de tecnologias nos navegadores.</a></li>
                 </ul>
+                 <h3 style="margin-top: 30px;">Continue aprendendo:</h3>
+                <p>Frameworks CSS (Bootstrap, Tailwind), Pré-processadores (SASS) e Frameworks JavaScript (React, Vue, Angular).</p>
             </div>
-            <div class="slide-footer">13 / 14</div>
-        </div>
-
-        <div class="slide">
-            <h2>Referências</h2>
-            <div class="content" style="flex-direction: column; align-items: center; text-align:center;">
-                <p>Explore estes recursos para aprofundar seus conhecimentos em desenvolvimento web.</p>
-                <ul style="text-align: left; margin-top: 20px; font-size: 1.1rem; list-style:disc;">
-                    <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank"><strong>MDN Web Docs (HTML):</strong></a> A referência mais completa e confiável.</li>
-                    <li><a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank"><strong>MDN Web Docs (CSS):</strong></a> O guia definitivo para todas as propriedades CSS.</li>
-                    <li><a href="https://www.w3schools.com/" target="_blank"><strong>W3Schools:</strong></a> Ótimo para iniciantes, com tutoriais interativos.</li>
-                    <li><a href="https://css-tricks.com/" target="_blank"><strong>CSS-Tricks:</strong></a> Artigos, guias e truques para todos os níveis.</li>
-                    <li><a href="https://unicode-table.com/pt/html-entities/" target="_blank"><strong>Unicode Table:</strong></a> Para usar caracteres especiais em HTML.</li>
-                </ul>
-            </div>
-            <div class="slide-footer">14 / 14</div>
+            <div class="slide-footer">21 / 21</div>
         </div>
 
     </div>
