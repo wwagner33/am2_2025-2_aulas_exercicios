@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cards com Hover</title>
+    <style>
+      /* Estilização geral dos cards */
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease; /* Animação suave */
+      }
+
+      /* Efeito de "botão pressionado" ao passar o mouse */
+      .card:hover {
+        transform: translateY(2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Esconde o checkbox real */
+      #card-toggle {
+        display: none;
+      }
+
+      /* A "MÁGICA" DO CSS: */
+      /* Quando o #card-toggle estiver MARCADO (:checked), */
+      /* encontre o .card-container que é um irmão adjacente (+) */
+      /* e, dentro dele, encontre o .card.disappear */
+      #card-toggle:checked + .card-container .card.disappear {
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none; /* Impede interação com o card invisível */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- O "botão" visível que controla o checkbox -->
+   
+      <button id="card-toggle" class="toggle-button">Fazer Card 2 Sumir/Aparecer</button>
+
+
+    <!-- O checkbox invisível que guarda o estado (marcado/desmarcado) -->
+    <input type="checkbox" id="card-toggle" />
+
+    <!-- O container que agrupa nossos cards -->
+    <div class="card-container">
+      <div class="card">
+        <h3>Card 1</h3>
+        <p>Este é o primeiro card.</p>
+      </div>
+      <div class="card disappear">
+        <h3>Card 2</h3>
+        <p>Eu sou o card que some.</p>
+      </div>
+      <div class="card">
+        <h3>Card 3</h3>
+        <p>Este é o terceiro card.</p>
+      </div>
+    </div>
+  </body>
+</html>
