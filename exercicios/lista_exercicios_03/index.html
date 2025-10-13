@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: HTML5 e CSS - Fundamentos da Web Moderna</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main>
+        <section id="introducao">
+            <h1>Quiz: HTML5 e CSS - Fundamentos da Web Moderna</h1>
+            <p>
+                Este quiz testa seu conhecimento sobre HTML5 e CSS, desde conceitos básicos de estruturação
+                até técnicas avançadas de estilização e boas práticas para a web moderna.
+            </p>
+            <p>
+                Os tópicos abordam desde a estrutura básica do HTML5, tags semânticas, e boas práticas de acessibilidade,
+                até conceitos de CSS como o modelo de caixa, seletores, pseudo-classes e técnicas de layout responsivo.
+            </p>
+            <p>
+                Para testar seu conhecimento, selecione uma das opções abaixo para cada pergunta. Se necessário, você pode
+                consultar o material didático para revisar os conceitos.
+            </p>
+
+            <div class="referencias-container">
+                <h2>📚 Referências para Estudo de HTML5 e CSS</h2>
+
+                <div class="acordeao-item">
+                    <div class="acordeao-cabecalho">
+                        <h2>Documentação Oficial e Guias Gerais</h2>
+                        <span class="acordeao-icone">▼</span>
+                    </div>
+                    <div class="acordeao-conteudo">
+                        <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML" target="_blank">MDN Web Docs - HTML5</a>
+                            <div class="descricao">
+                                Referência completa da MDN para HTML, cobrindo todos os elementos, atributos e conceitos. Essencial para consulta.
+                            </div>
+                        </div>
+                        <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank">MDN Web Docs - CSS</a>
+                            <div class="descricao">
+                                Documentação oficial para CSS, com tutoriais, guias e referência de todas as propriedades.
+                            </div>
+                        </div>
+                         <div class="referencia">
+                            <a href="https://www.w3schools.com/html/" target="_blank">W3Schools - HTML Tutorial</a>
+                            <div class="descricao">
+                                Tutoriais interativos e com exemplos práticos para aprender HTML desde o básico até o avançado.
+                            </div>
+                        </div>
+                        <div class="referencia">
+                            <a href="https://www.w3schools.com/css/" target="_blank">W3Schools - CSS Tutorial</a>
+                            <div class="descricao">
+                                Excelente recurso para aprender CSS de forma prática, com editores online para testar o código.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="acordeao-item">
+                    <div class="acordeao-cabecalho">
+                        <h2>HTML Semântico e Acessibilidade</h2>
+                        <span class="acordeao-icone">▼</span>
+                    </div>
+                    <div class="acordeao-conteudo">
+                        <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Glossary/Semantics#html_sem%C3%A2ntico" target="_blank">MDN - HTML Semântico</a>
+                            <div class="descricao">
+                                Artigo da MDN que explica a importância e o uso correto das tags semânticas do HTML5.
+                            </div>
+                        </div>
+                        <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Web/Accessibility" target="_blank">MDN - Acessibilidade (A11y)</a>
+                            <div class="descricao">
+                                Um guia completo sobre como tornar seu site acessível para todas as pessoas, um tópico fundamental no desenvolvimento web.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="acordeao-item">
+                    <div class="acordeao-cabecalho">
+                        <h2>CSS Box Model, Seletores e Layout</h2>
+                        <span class="acordeao-icone">▼</span>
+                    </div>
+                    <div class="acordeao-conteudo">
+                        <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Learn/CSS/Building_blocks/The_box_model" target="_blank">MDN - O Modelo de Caixa (Box Model)</a>
+                            <div class="descricao">
+                                Explicação detalhada sobre o Box Model, fundamental para entender como os elementos são renderizados e dimensionados.
+                            </div>
+                        </div>
+                        <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS/CSS_Selectors" target="_blank">MDN - Seletores CSS</a>
+                            <div class="descricao">
+                                Referência completa sobre todos os tipos de seletores CSS, desde os básicos até os mais avançados.
+                            </div>
+                        </div>
+                        <div class="referencia">
+                            <a href="https://css-tricks.com/a-complete-guide-to-flexbox/" target="_blank">CSS-Tricks - A Complete Guide to Flexbox</a>
+                            <div class="descricao">
+                                O guia definitivo sobre Flexbox, com explicações visuais claras para todas as propriedades. Um dos recursos mais populares.
+                            </div>
+                        </div>
+                         <div class="referencia">
+                            <a href="https://developer.mozilla.org/pt-BR/docs/Learn/CSS/CSS_layout/Responsive_Design" target="_blank">MDN - Design Responsivo</a>
+                            <div class="descricao">
+                                Aprenda os conceitos fundamentais do design responsivo, incluindo media queries, para criar sites que funcionam em qualquer tela.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="botoes-acao">
+                <button id="btn-iniciar" class="btn btn-success">
+                    Iniciar Novo Quiz
+                </button>
+                <button id="btn-continuar" class="btn btn-primary escondido">
+                    Continuar de Onde Parei
+                </button>
+            </div>
+        </section>
+
+        <section id="quiz-container" class="escondido">
+            <button id="btn-voltar-inicio">← Voltar ao Início</button>
+
+            <div class="quiz-header">
+                <div id="contador-questao"></div>
+                <div id="barra-progresso">
+                    <div id="progresso-atual"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 id="pergunta"></h2>
+                <pre id="codigo" class="escondido"><code></code></pre>
+
+                <div id="opcoes-container"></div>
+
+                <div id="feedback-container">
+                    <div id="resposta-correta"></div>
+                    <div id="justificativa"></div>
+                </div>
+
+                <div id="botoes-navegacao">
+                    <button id="btn-anterior" class="btn-nav" disabled>
+                        <span>←</span> Anterior
+                    </button>
+                    <button id="btn-proximo" class="btn-nav">
+                        Próxima <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="resumo-container" class="escondido">
+                <h3>Resumo do seu desempenho</h3>
+                <div class="estatisticas">
+                    <div class="estatistica-item">
+                        <span class="estatistica-valor" id="total-acertos">0</span>
+                        <span class="estatistica-label">Acertos</span>
+                    </div>
+                    <div class="estatistica-item">
+                        <span class="estatistica-valor" id="total-erros">0</span>
+                        <span class="estatistica-label">Erros</span>
+                    </div>
+                    <div class="estatistica-item">
+                        <span class="estatistica-valor" id="percentual-acerto">0%</span>
+                        <span class="estatistica-label">Taxa de Acerto</span>
+                    </div>
+                    <div class="estatistica-item">
+                        <span class="estatistica-valor" id="progresso-total">0%</span>
+                        <span class="estatistica-label">Progresso Total</span>
+                    </div>
+                </div>
+                <div id="resumo-questoes"></div>
+                <div class="botoes-acao">
+                    <button id="btn-reiniciar" class="btn btn-success">
+                        Reiniciar Quiz
+                    </button>
+                    <button id="btn-baixar-relatorio" class="btn btn-outline">
+                        Baixar Relatório
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="./accordion.js"></script>
+    <script src="./questoes.js"></script>
+    <script src="./quiz.js"></script>
+</body>
+</html>

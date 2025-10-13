@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo 1: Cartão de Perfil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            /* Centraliza o cartão na página */
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+        }
+
+        /* Estilos do Cartão de Perfil */
+        .profile-card {
+            width: 300px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Garante que a imagem não ultrapasse os cantos arredondados */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        /* Efeito de elevação ao passar o mouse */
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* A tag <figure> remove a margem padrão para se ajustar ao card */
+        .profile-card figure {
+            margin: 0;
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: auto;
+            display: block; /* Remove espaço extra abaixo da imagem */
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .card-content p {
+            margin: 0;
+            font-size: 1rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <article class="profile-card">
+        <figure>
+            <img src="https://picsum.photos/300/250" alt="Foto de Perfil do Usuário">
+        </figure>
+        <section class="card-content">
+            <h2>Maria Silva</h2>
+            <p>Desenvolvedora Front-End</p>
+        </section>
+    </article>
+
+</body>
+</html>

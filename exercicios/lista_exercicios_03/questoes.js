@@ -33,7 +33,7 @@ const exercicios = [
     },
     {
         id: 3,
-        pergunta: "Qual atributo é obrigatório na tag &lt;img&gt; para garantir acessibilidade?",
+        pergunta: "Qual atributo é obrigatório na tag <img> para garantir acessibilidade?",
         codigo: null,
         resposta: "alt",
         justificativa: "O atributo 'alt' fornece um texto alternativo para a imagem, essencial para usuários com deficiência visual que utilizam leitores de tela, e também é exibido quando a imagem não pode ser carregada.",
@@ -49,7 +49,7 @@ const exercicios = [
     },
     {
         id: 4,
-        pergunta: "Qual é a diferença entre as tags &lt;section&gt; e &lt;article&gt; no HTML5?",
+        pergunta: "Qual é a diferença entre as tags <section> e <article> no HTML5?",
         codigo: null,
         resposta: "&lt;section&gt; agrupa conteúdo temático, enquanto &lt;article&gt; representa conteúdo independente e autocontido.",
         justificativa: "A tag &lt;section&gt; é usada para agrupar conteúdo tematicamente relacionado, enquanto &lt;article&gt; deve conter conteúdo que faça sentido por si só e possa ser distribuído independentemente do resto do site.",
@@ -321,7 +321,7 @@ const exercicios = [
     },
     {
         id: 21,
-        pergunta: "Qual seletor CSS seleciona todos os elementos &lt;p&gt; que são filhos diretos de um elemento &lt;div&gt;?",
+        pergunta: "Qual seletor CSS seleciona todos os elementos <p>; que são filhos diretos de um elemento <div>?",
         codigo: null,
         resposta: "div > p",
         justificativa: "O seletor de filho direto '>' seleciona elementos que são filhos diretos do elemento especificado. 'div > p' seleciona todos os elementos &lt;p&gt; que são filhos diretos de um &lt;div&gt;.",
@@ -401,7 +401,7 @@ const exercicios = [
     },
     {
         id: 26,
-        pergunta: "Qual tag HTML5 é usada para definir opções em uma lista suspensa (&lt;select&gt;)?",
+        pergunta: "Qual tag HTML5 é usada para definir opções em uma lista suspensa (<select>)?",
         codigo: null,
         resposta: "&lt;option&gt;",
         justificativa: "A tag &lt;option&gt; é usada dentro de um elemento &lt;select&gt; para definir as opções disponíveis na lista suspensa. Cada &lt;option&gt; representa uma escolha que o usuário pode selecionar.",

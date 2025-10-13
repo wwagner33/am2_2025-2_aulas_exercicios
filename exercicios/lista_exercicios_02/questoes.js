@@ -1,5 +1,3 @@
-//Coloque aqui as questões do Quiz
-
 const exercicios = [
   {
     id: 1,
@@ -349,7 +347,7 @@ const exercicios = [
     pergunta:
       "Qual método permite obter o valor do code point Unicode de um caractere em uma string?",
     codigo: "console.log('A'.charCodeAt(0));",
-    resposta: "'.charCodeAt(index)'",
+    resposta: ".charCodeAt(index)",
     justificativa:
       "O método 'charCodeAt(index)' retorna um número inteiro entre 0 e 65535 representando a unidade de código UTF-16 no índice especificado. Para code points maiores, 'codePointAt(index)' é mais indicado.",
     opcoes: [
