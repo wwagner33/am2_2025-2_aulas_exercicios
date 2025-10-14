@@ -44,21 +44,8 @@ Nenhuma dependência ou framework externo é utilizado, o projeto é construído
 
 ## 📚 Tópicos Abordados nos Quizzes
 
-Os quizzes cobrem uma ampla gama de conceitos de JavaScript, incluindo:
+Cada assunto abordado nos exercícios é descrito em sua página introdutória.
 
-### Fundamentos (Quiz 1)
-- Declaração de Variáveis (`let`, `const`, `var`)
-- Tipos de Dados e Operador `typeof`
-- Estruturas de Controle (`if/else`, `switch`)
-- Loops (`for`, `while`, `for...of`)
-- Arrays, Objetos e Funções
-- Escopo e Referências
-
-### Tipos de Dados Avançados (Quiz 2)
-- Precisão de Números (`Number.MAX_SAFE_INTEGER`, `BigInt`)
-- Valores Especiais (`NaN`, `Infinity`, `null`, `undefined`)
-- Manipulação de Strings e Unicode (`codePointAt`)
-- Tipagem Dinâmica e Coerção de Tipos
 
 ## 🏃‍♂️ Como Executar
 
@@ -80,14 +67,8 @@ Como este é um projeto front-end puro, não há necessidade de um servidor ou p
 
 ## 👨‍💻 Autor
 
-- **Prof. Wellington Sarmento (SMD/IUVI/UFC)** - [wwagner33](https://github.com/wwagner33/)
-
-
+**Prof. Wellington Sarmento (SMD/IUVI/UFC)** - [wwagner33](https://github.com/wwagner33/)
 
 *Este projeto foi desenvolvido como parte do material didático da disciplina Autoração Multimídia 2 do bacharelado em Sistemas e Mídias Digitais.*
-*By [CC-NC-ND-4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)*
-<img src="assets/Cc_by-nc-nd_euro_icon.svg"/>
 
-
-
-
+<img src="assets/Cc_by-nc-nd_euro_icon.svg"/>  <small> By [CC-NC-ND-4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)</small>
