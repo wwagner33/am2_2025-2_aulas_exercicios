@@ -82,8 +82,12 @@ Como este é um projeto front-end puro, não há necessidade de um servidor ou p
 
 - **Prof. Wellington Sarmento (SMD/IUVI/UFC)** - [wwagner33](https://github.com/wwagner33/)
 
----
+
 
 *Este projeto foi desenvolvido como parte do material didático da disciplina Autoração Multimídia 2 do bacharelado em Sistemas e Mídias Digitais.*
+*By [CC-NC-ND-4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)*
+<img src="assets/Cc_by-nc-nd_euro_icon.svg"/>
+
+
 
 
