@@ -1,10 +1,7 @@
-# Projeto de Exercícios - AM2 2025/2
-
-Este repositório contém uma série de exercícios práticos e quizzes interativos desenvolvidos para a disciplina de Arquitetura de Software e Métodos Ágeis 2 (AM2) do período 2025/2. O objetivo é fornecer uma ferramenta de aprendizado e autoavaliação sobre conceitos fundamentais e avançados de JavaScript.
-
-## 🚀 Visão Geral
+# Projeto de Slides e Exercícios para Programação Multimídia - Disciplina de Autoração Multimídia II - Semestre 2025/2
 
 O projeto consiste em múltiplos slides para usar em sala de aula e quizzes, cada um focado em um conjunto específico de tópicos relacionados a programação multimídia para Web.
+
 ## ✨ Funcionalidades Principais
 
 - **Quizzes Interativos:** Responda a perguntas de múltipla escolha e receba feedback instantâneo.
@@ -88,4 +85,5 @@ Como este é um projeto front-end puro, não há necessidade de um servidor ou p
 ---
 
 *Este projeto foi desenvolvido como parte do material didático da disciplina Autoração Multimídia 2 do bacharelado em Sistemas e Mídias Digitais.*
+
 
