@@ -4,10 +4,7 @@ Este repositório contém uma série de exercícios práticos e quizzes interati
 
 ## 🚀 Visão Geral
 
-O projeto consiste em múltiplos quizzes, cada um focado em um conjunto específico de tópicos de JavaScript. A interface é limpa, interativa e projetada para reforçar o aprendizado através da prática.
-
- <!-- Sugestão: Substitua por um screenshot real do seu projeto -->
-
+O projeto consiste em múltiplos slides para usar em sala de aula e quizzes, cada um focado em um conjunto específico de tópicos relacionados a programação multimídia para Web.
 ## ✨ Funcionalidades Principais
 
 - **Quizzes Interativos:** Responda a perguntas de múltipla escolha e receba feedback instantâneo.
@@ -86,8 +83,9 @@ Como este é um projeto front-end puro, não há necessidade de um servidor ou p
 
 ## 👨‍💻 Autor
 
-- **Wagner** - wwagner <!-- Sugestão: Substitua pelo seu link do GitHub -->
+- **Prof. Wellington Sarmento (SMD/IUVI/UFC)** - [wwagner33](https://github.com/wwagner33/)
 
 ---
 
-*Este projeto foi desenvolvido como parte do material didático da disciplina AM2.*
+*Este projeto foi desenvolvido como parte do material didático da disciplina Autoração Multimídia 2 do bacharelado em Sistemas e Mídias Digitais.*
+
