@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: HTML5 e CSS para Floricultura</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Estilos da Página do Tutorial --- */
+
+        /* 1. Reset Básico e Padrões do Body */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            background-color: #f7f9fa; /* Fundo suave */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 2. Layout Principal (Cabeçalho, Main, Rodapé) */
+        body > header {
+            background-color: #006400; /* Verde escuro (tema da floricultura) */
+            color: #ffffff;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid #ffc400; /* Amarelo (tema da floricultura) */
+        }
+
+        body > header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        body > header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0.5rem 0 0 0;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        body > footer {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* 3. Estilos de Títulos e Seções */
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #006400;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+             font-size: 1.1rem;
+             margin-bottom: 0.5rem;
+        }
+
+        /* 4. Estilos de Conteúdo */
+        p, li {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        ul, ol {
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: #006400;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 5. Estilos para Blocos de Código (pre, code) */
+        code {
+            font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+            background-color: #f3f4f6;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: #2d2d2d; /* Fundo escuro */
+            color: #f8f8f2; /* Texto claro */
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto; /* Scroll horizontal se o código for longo */
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit; /* Herda a cor do <pre> */
+            font-size: inherit;
+        }
+
+        /* 6. Estilos para Caixas de Destaque */
+        .box {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .box h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        /* "Para saber mais" - Azul */
+        .box-info {
+            background-color: #f0f7ff;
+            border-color: #4a90e2;
+        }
+        
+        .box-info h4 {
+            color: #3a7bc2;
+        }
+
+        /* "Parada obrigatória" - Amarelo */
+        .box-vscode {
+            background-color: #fff9e6;
+            border-color: #ffc400;
+        }
+        
+        .box-vscode h4 {
+            color: #d9a100;
+        }
+        
+        /* 7. Estilos para Listas de Definição (Conceitos) */
+        dl {
+            margin-top: 1rem;
+        }
+        
+        dt {
+            font-weight: bold;
+            font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #005a00;
+            margin-top: 1rem;
+        }
+        
+        dd {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            padding-left: 1rem;
+            border-left: 3px solid #eee;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Guia Prático: Construindo a Vitrine da Floricultura</h1>
+        <p>Um tutorial de HTML5 e CSS para estruturar sua primeira página de e-commerce.</p>
+    </header>
+
+    <main>
+        <article>
+
+            <section id="requisitos">
+                <h2>Parte 1: Requisitos da Interface (HTML/CSS)</h2>
+                <p>Com base na descrição do projeto, e focando apenas na estrutura visual (layout) e sem a interatividade (JavaScript), os requisitos para esta etapa são:</p>
+                <ol>
+                    <li><strong>Definir</strong> a estrutura semântica principal da página (Cabeçalho, Conteúdo Principal, Rodapé).</li>
+                    <li><strong>Configurar</strong> o cabeçalho (<code>&lt;header&gt;</code>) para conter o título da loja (<code>&lt;h1&gt;</code>) e um link (<code>&lt;a&gt;</code>) para a "Home", utilizando um ícone.</li>
+                    <li><strong>Estruturar</strong> a área de conteúdo principal (<code>&lt;main&gt;</code>) para abrigar a listagem de produtos.</li>
+                    <li><strong>Organizar</strong> a exibição dos produtos em um layout de grade (Grid).</li>
+                    <li><strong>Criar</strong> um componente "card" (<code>&lt;div&gt;</code>) para representar visualmente cada produto.</li>
+                    <li><strong>Exibir</strong> a imagem do produto (<code>&lt;img&gt;</code>) dentro de cada card, utilizando a tag <code>&lt;figure&gt;</code> para semântica.</li>
+                    <li><strong>Apresentar</strong> o nome do produto (<code>&lt;h2&gt;</code> ou <code>&lt;h4&gt;</code>).</li>
+                    <li><strong>Descrever</strong> o produto em um parágrafo (<code>&lt;p&gt;</code>).</li>
+                    <li><strong>Mostrar</strong> o preço do produto (<code>&lt;p&gt;</code> ou <code>&lt;h4&gt;</code>).</li>
+                    <li><strong>Incluir</strong> um link (<code>&lt;a&gt;</code>) estilizado como ícone para "Adicionar ao Carrinho".</li>
+                    <li><strong>Configurar</strong> os metadados essenciais da página (<code>&lt;meta&gt;</code>), definindo o <code>charset</code> para "UTF-8" e o <code>lang</code> para "pt-br".</li>
+                    <li><strong>Vincular</strong> (<code>&lt;link&gt;</code>) a folha de estilos CSS externa ao documento HTML.</li>
+                    <li><strong>Importar</strong> a fonte "Roboto" e os ícones "Material Symbols" (ou Fonts) do Google Fonts.</li>
+                    <li><strong>Estilizar</strong> os elementos globais (tamanho da fonte padrão, cores de fundo e de fonte, espaçamento entre linhas).</li>
+                    <li><strong>Aplicar</strong> espaçamentos (<code>padding</code> e <code>margin</code>) adequados, especialmente nas imagens e nos cards.</li>
+                    <li><strong>Definir</strong> um rodapé (<code>&lt;footer&gt;</code>) simples com informações da loja (ex: copyright).</li>
+                </ol>
+            </section>
+
+            <section id="conceitos">
+                <h2>Parte 2: Conceitos Essenciais (HTML5 e CSS)</h2>
+                <p>Vamos revisar as ferramentas que usaremos para construir essa interface.</p>
+
+                <h3>Conceitos de HTML5</h3>
+                <p>O HTML (HyperText Markup Language) é a linguagem de marcação que estrutura o conteúdo da web. O HTML5 introduziu tags "semânticas" que dão significado ao conteúdo.</p>
+                
+                <dl>
+                    <dt>&lt;!DOCTYPE html&gt;</dt>
+                    <dd>Define o documento como HTML5.</dd>
+
+                    <dt>&lt;html lang="pt-br"&gt;</dt>
+                    <dd>Elemento raiz que envolve todo o conteúdo, com o atributo <code>lang</code> definindo o idioma.</dd>
+
+                    <dt>&lt;head&gt;</dt>
+                    <dd>Contém metadados sobre a página (título, links para CSS, metatags).</dd>
+
+                    <dt>&lt;meta charset="UTF-8"&gt;</dt>
+                    <dd>Garante que o navegador exiba corretamente caracteres especiais (acentos, etc.).</dd>
+                    
+                    <dt>&lt;link&gt;</dt>
+                    <dd>Usada para vincular arquivos externos, como nossa folha de estilos (CSS).</dd>
+                    
+                    <dt>&lt;body&gt;</dt>
+                    <dd>Contém todo o conteúdo visível da página.</dd>
+
+                    <dt>&lt;header&gt;</dt>
+                    <dd>Define o cabeçalho da página ou de uma seção (geralmente contém o logo, título principal e navegação).</dd>
+
+                    <dt>&lt;main&gt;</dt>
+                    <dd>Define o conteúdo principal e único da página. (Não deve incluir cabeçalhos, rodapés ou barras laterais repetitivas).</dd>
+
+                    <dt>&lt;footer&gt;</dt>
+                    <dd>Define o rodapé da página ou de uma seção (geralmente contém informações de copyright, links de contato, etc.).</dd>
+
+                    <dt>&lt;div&gt;</dt>
+                    <dd>Um "container" genérico usado para agrupar elementos, muito útil para aplicar estilos CSS (como o nosso "card").</dd>
+
+                    <dt>&lt;h1&gt;, &lt;h2&gt;, &lt;h4&gt;</dt>
+                    <dd>Títulos (Headings). Definem a hierarquia da informação. <code>&lt;h1&gt;</code> é o mais importante.</dd>
+
+                    <dt>&lt;p&gt;</dt>
+                    <dd>Define um parágrafo de texto.</dd>
+
+                    <dt>&lt;a&gt;</dt>
+                    <dd>Âncora (link). Usado para criar hiperlinks. O atributo <code>href</code> define o destino do link.</dd>
+
+                    <dt>&lt;figure&gt;</dt>
+                    <dd>Usado para agrupar conteúdo de mídia (como uma imagem) e, opcionalmente, sua legenda (<code>&lt;figcaption&gt;</code>).</dd>
+                    
+                    <dt>&lt;img&gt;</dt>
+                    <dd>Exibe uma imagem. O atributo <code>src</code> define o caminho (URL) da imagem e o <code>alt</code> fornece um texto alternativo (essencial para acessibilidade).</dd>
+                </dl>
+
+                <div class="box box-info">
+                    <h4>Para saber mais</h4>
+                    <p>A <strong>MDN Web Docs</strong> (Mozilla Developer Network) é a referência mais completa para desenvolvedores web. Você pode consultar o que cada tag HTML faz e ver exemplos.</p>
+                    <ul>
+                        <li><strong>Referência (HTML):</strong> <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element" target="_blank" rel="noopener noreferrer">MDN - Referência de Elementos HTML</a></li>
+                    </ul>
+                </div>
+
+                <h3>Conceitos de CSS</h3>
+                <p>O CSS (Cascading Style Sheets) é a linguagem usada para definir a aparência e o layout dos elementos HTML.</p>
+
+                <dl>
+                    <dt>@import (Google Fonts)</dt>
+                    <dd>Usaremos a regra <code>@import</code> dentro do nosso arquivo CSS para carregar a fonte "Roboto" e os ícones do Google.</dd>
+                    
+                    <dt>Seletores (Ex: .card)</dt>
+                    <dd>Formas de "selecionar" elementos HTML para aplicar estilos. Um seletor de classe, como <code>.card</code>, seleciona todos os elementos com o atributo <code>class="card"</code>.</dd>
+                    
+                    <dt>Box Model (margin/padding)</dt>
+                    <dd><code>margin</code> é o espaçamento <em>fora</em> da borda (entre elementos), e <code>padding</code> é o espaçamento <em>dentro</em> da borda (entre o conteúdo e a borda).</dd>
+                    
+                    <dt>CSS Grid (display: grid)</dt>
+                    <dd>Um sistema de layout bidimensional (linhas e colunas). Usaremos <code>display: grid;</code> no container pai para organizar os cards.</dd>
+                    
+                    <dt>grid-template-columns</dt>
+                    <dd>Define o número e o tamanho das colunas do grid. Usaremos <code>repeat(auto-fit, minmax(250px, 1fr))</code> para criar um grid responsivo.</dd>
+                    
+                    <dt>Propriedades de Fonte</dt>
+                    <dd><code>font-family</code> (tipo da fonte), <code>font-size</code> (tamanho), <code>color</code> (cor do texto) e <code>line-height</code> (espaçamento entre linhas).</dd>
+                </dl>
+
+                <div class="box box-info">
+                    <h4>Para saber mais</h4>
+                    <p>Para aprender CSS Grid de forma visual e interativa, o "Grid Garden" é um excelente recurso. Para referência de propriedades, a W3Schools é rápida e direta.</p>
+                    <ul>
+                        <li><strong>Referência (CSS Grid):</strong> <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreferrer">CSS-Tricks - A Complete Guide to Grid</a></li>
+                        <li><strong>Referência (Propriedades CSS):</strong> <a href="https://www.w3schools.com/cssref/default.asp" target="_blank" rel="noopener noreferrer">W3Schools - CSS Reference</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="tutorial">
+                <h2>Parte 3: Tutorial Prático (HTML + CSS)</h2>
+                <p>Vamos criar a página principal da floricultura, com a listagem de produtos.</p>
+
+                <h3>Passo 1: Estrutura de Arquivos</h3>
+                <p>Crie uma pasta para o projeto (ex: <code>floricultura</code>) e, dentro dela, crie dois arquivos:</p>
+                <ol>
+                    <li><code>index.html</code> (Nosso HTML)</li>
+                    <li><code>style.css</code> (Nosso CSS)</li>
+                </ol>
+
+                <h3>Passo 2: O HTML Base (index.html)</h3>
+                <p>Vamos usar o VSCode para agilizar a criação da estrutura base.</p>
+
+                <div class="box box-vscode">
+                    <h4>Parada obrigatória: VSCode Emmet</h4>
+                    <p>No arquivo <code>index.html</code> vazio, digite <code>!</code> (ponto de exclamação) e pressione a tecla <strong>Tab</strong> ou <strong>Enter</strong>.</p>
+                    <p>O VSCode (usando o recurso "Emmet") criará automaticamente a estrutura HTML básica. Altere o atributo <code>lang</code> de "en" para "pt-br" e o <code>&lt;title&gt;</code> para "Floricultura da Vila".</p>
+                </div>
+                
+                <p>Adicione os links para o CSS e para os Ícones do Google dentro do <code>&lt;head&gt;</code>:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Floricultura da Vila&lt;/title&gt;
+    
+    &lt;!-- 1. Link para nosso CSS --&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    
+    &lt;!-- 2. Link para os Ícones do Google Fonts --&gt;
+    &lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+    &lt;!-- O conteúdo virá aqui --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+                <h3>Passo 3: O CSS Base (style.css)</h3>
+                <p>Agora, vamos ao <code>style.css</code> para importar a fonte Roboto e definir estilos globais.</p>
+<pre><code>/* 1. Importando a Fonte Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Sugestão: Um "Reset" básico de CSS.
+   Faz com que 'padding' e 'border' sejam incluídos 
+   no tamanho total do elemento, facilitando o layout.
+*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Estilos Globais (Body) */
+body {
+    font-family: 'Roboto', sans-serif; /* Fonte Padrão */
+    font-size: 16px; /* Tamanho da fonte padrão */
+    line-height: 1.6; /* Espaçamento entre linhas */
+    background-color: #f9f9f9; /* Cor de fundo suave */
+    color: #333; /* Cor da fonte principal */
+}
+</code></pre>
+
+                <h3>Passo 4: Estrutura Semântica (index.html)</h3>
+                <p>Vamos adicionar o <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code> e <code>&lt;footer&gt;</code> dentro do <code>&lt;body&gt;</code> do <code>index.html</code>.</p>
+                
+                <div class="box box-vscode">
+                    <h4>Parada obrigatória: VSCode Emmet (Tags)</h4>
+                    <p>Dentro do <code>&lt;body&gt;</code>, digite <code>header+main+footer</code> e pressione <strong>Tab</strong>.</p>
+                    <p>O VSCode criará as três tags semânticas de uma vez.</p>
+                </div>
+                
+                <p>Preencha as tags com o conteúdo da loja. O <code>&lt;main&gt;</code> conterá o grid de produtos.</p>
+<pre><code>&lt;!-- ... (head continua o mesmo) ... --&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Floricultura da Vila&lt;/h1&gt;
+        &lt;nav&gt;
+            &lt;!-- O ícone 'home' será um link (A) para a própria página inicial --&gt;
+            &lt;a href="index.html"&gt;
+                &lt;!-- Usando a classe do Google Icons para mostrar o ícone --&gt;
+                &lt;span class="material-icons"&gt;home&lt;/span&gt;
+            &lt;/a&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;h2&gt;Nossos Produtos&lt;/h2&gt;
+        &lt;!-- 1. Este DIV será o nosso "Grid Container" --&gt;
+        &lt;div class="product-container"&gt;
+            
+            &lt;!-- 2. Este é o nosso primeiro "Card" de produto --&gt;
+            &lt;div class="product-card"&gt;
+                &lt;figure&gt;
+                    &lt;!-- Usando um placeholder de imagem. Troque pelo caminho real. --&gt;
+                    &lt;img src="https://via.placeholder.com/300x200.png?text=Buquê+de+Rosas" 
+                         alt="Foto de um buquê de rosas vermelhas"&gt;
+                &lt;/figure&gt;
+                &lt;h4&gt;Buquê de Rosas Vermelhas&lt;/h4&gt;
+                &lt;p&gt;Conjunto de 5 rosas vermelhas adornadas com flores brancas do tipo carmélias.&lt;/p&gt;
+                &lt;p class="price"&gt;R$ 89,90&lt;/p&gt;
+                &lt;a href="#" class="cart-button"&gt;
+                    &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                    Adicionar
+                &lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Adicione mais cards copiando e colando o 'product-card' --&gt;
+            &lt;div class="product-card"&gt;
+                &lt;figure&gt;
+                    &lt;img src="https://via.placeholder.com/300x200.png?text=Orquídea" 
+                         alt="Foto de uma orquídea branca"&gt;
+                &lt;/figure&gt;
+                &lt;h4&gt;Orquídea Phalaenopsis&lt;/h4&gt;
+                &lt;p&gt;Orquídea branca elegante em vaso de cerâmica, ideal para presentes.&lt;/p&gt;
+                &lt;p class="price"&gt;R$ 120,00&lt;/p&gt;
+                &lt;a href="#" class="cart-button"&gt;
+                    &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                    Adicionar
+                &lt;/a&gt;
+            &lt;/div&gt;
+            
+            &lt;div class="product-card"&gt;
+                &lt;figure&gt;
+                    &lt;img src="https://via.placeholder.com/300x200.png?text=Girassol" 
+                         alt="Foto de um girassol"&gt;
+                &lt;/figure&gt;
+                &lt;h4&gt;Vaso de Girassol&lt;/h4&gt;
+                &lt;p&gt;Arranjo com 3 girassóis vibrantes em vaso rústico de madeira.&lt;/p&gt;
+                &lt;p class="price"&gt;R$ 65,50&lt;/p&gt;
+                &lt;a href="#" class="cart-button"&gt;
+                    &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                    Adicionar
+                &lt;/a&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt; &lt;!-- Fim do .product-container --&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2025 Floricultura da Vila. Todos os direitos reservados.&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+                <h3>Passo 5: Estilizando o Layout e os Cards (style.css)</h3>
+                <p>Finalmente, vamos fazer a mágica do CSS Grid e estilizar os cards. Adicione este código ao final do seu <code>style.css</code>:</p>
+<pre><code>
+/* --- Estilos do Layout --- */
+header {
+    background-color: #006400; /* Verde escuro */
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex; /* Usando flexbox para alinhar o título e o ícone */
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Centraliza o conteúdo principal e o rodapé */
+main, footer {
+    max-width: 1200px;
+    margin: 1.5rem auto; /* Centraliza na página */
+    padding: 0 1rem;
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    border-top: 1px solid #ddd;
+    padding-top: 1rem;
+}
+
+main h2 {
+    margin-bottom: 1.5rem;
+    color: #006400;
+}
+
+/* --- O Layout GRID --- */
+.product-container {
+    display: grid;
+    /* Aqui definimos as colunas:
+       'repeat' - repita o padrão.
+       'auto-fit' - crie quantas colunas couberem na tela.
+       'minmax(300px, 1fr)' - cada coluna deve ter no MÍNIMO 300px, 
+       mas pode crescer (1fr) para preencher o espaço igualmente.
+    */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem; /* Espaçamento entre os cards */
+}
+
+
+/* --- Estilos do Card --- */
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Garante que a imagem não "vaze" */
+    display: flex;
+    flex-direction: column; /* Organiza o card internamente */
+}
+
+/* Margin e Padding da Imagem */
+.product-card figure {
+    /* 'margin: 0' já foi feito no reset global (*) */
+}
+
+.product-card img {
+    width: 100%; /* Faz a imagem ocupar 100% do 'figure' */
+    height: 200px; /* Altura fixa para as imagens */
+    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+    display: block; /* Remove espaço extra abaixo da imagem */
+}
+
+/* Padding do conteúdo do card */
+.product-card h4,
+.product-card p,
+.product-card .cart-button {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.product-card h4 {
+    color: #333;
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-card p {
+    font-size: 0.9rem;
+    color: #555;
+    flex-grow: 1; /* Faz a descrição empurrar o preço para baixo */
+    margin-bottom: 1rem;
+}
+
+.product-card .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #006400;
+    margin-bottom: 1rem;
+    flex-grow: 0; /* Reseta o flex-grow */
+}
+
+.cart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffc400; /* Amarelo */
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    padding: 0.75rem;
+    font-weight: bold;
+    margin: 0; /* O botão ocupará a largura toda, sem margin interna */
+    transition: background-color 0.3s ease;
+}
+
+.cart-button .material-icons {
+    margin-right: 0.5rem; /* Espaço entre o ícone e o texto */
+    font-size: 1.2rem;
+}
+
+.cart-button:hover {
+    background-color: #e6b100;
+}
+</code></pre>
+
+                <p style="margin-top: 2rem; font-weight: bold;">Ao final deste tutorial, seus alunos e alunas terão uma página <code>index.html</code> estática, responsiva (graças ao CSS Grid) e estilizada, pronta para as próximas etapas de interatividade com JavaScript.</p>
+            </section>
+
+        </article>
+    </main>
+
+    <footer>
+        <p>Tutorial gerado pela IA do Google.</p>
+    </footer>
+
+</body>
+</html>
