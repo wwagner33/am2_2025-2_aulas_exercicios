@@ -3,618 +3,901 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial: HTML5 e CSS para Floricultura</title>
+    <title>Floricultura da Vila - E-commerce</title>
     
+    <!-- Fontes e Ícones -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <style>
-        /* --- Estilos da Página do Tutorial --- */
-
-        /* 1. Reset Básico e Padrões do Body */
+        /* --- RESET E ESTILOS GLOBAIS --- */
         * {
             box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
-            background-color: #f7f9fa; /* Fundo suave */
-            color: #333;
             margin: 0;
             padding: 0;
         }
-
-        /* 2. Layout Principal (Cabeçalho, Main, Rodapé) */
-        body > header {
-            background-color: #006400; /* Verde escuro (tema da floricultura) */
-            color: #ffffff;
-            padding: 2rem 1rem;
-            text-align: center;
-            border-bottom: 5px solid #ffc400; /* Amarelo (tema da floricultura) */
-        }
-
-        body > header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+        
+        :root {
+            --primary-color: #2e7d32; /* Verde principal */
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary-color: #f8bbd0; /* Rosa claro */
+            --accent-color: #ffd54f; /* Amarelo */
+            --text-dark: #2e2e2e;
+            --text-light: #757575;
+            --background-light: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
         
-        body > header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin: 0.5rem 0 0 0;
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-light);
+            color: var(--text-dark);
         }
-
-        main {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
         }
-
-        body > footer {
-            text-align: center;
-            margin: 2rem 0;
-            font-size: 0.9rem;
-            color: #777;
+        
+        a {
+            text-decoration: none;
+            color: inherit;
         }
-
-        /* 3. Estilos de Títulos e Seções */
-        section {
-            margin-bottom: 2.5rem;
+        
+        button, .btn {
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: var(--transition);
         }
-
-        h2 {
-            font-size: 2rem;
-            color: #006400;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 0.5rem;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
         }
-
-        h3 {
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #ffc107;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* --- HEADER E NAVEGAÇÃO --- */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            color: #333;
-            margin-top: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .logo-icon {
+            color: var(--primary-light);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            transition: var(--transition);
+        }
+        
+        .icon-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            font-size: 0.75rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1487070183337-7f1c5d440d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
         
-        h4 {
-             font-size: 1.1rem;
-             margin-bottom: 0.5rem;
-        }
-
-        /* 4. Estilos de Conteúdo */
-        p, li {
-            font-size: 1rem;
-            color: #444;
-            margin-bottom: 1rem;
-        }
-
-        ul, ol {
-            padding-left: 2rem;
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
         }
         
-        li {
+        /* --- PRODUTOS --- */
+        .products-section {
+            padding: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .section-header p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: var(--white);
+            border: 1px solid #e0e0e0;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
-
-        a {
-            color: #006400;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* 5. Estilos para Blocos de Código (pre, code) */
-        code {
-            font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
-            background-color: #f3f4f6;
-            padding: 0.2em 0.4em;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-
-        pre {
-            background-color: #2d2d2d; /* Fundo escuro */
-            color: #f8f8f2; /* Texto claro */
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto; /* Scroll horizontal se o código for longo */
+        
+        .product-description {
+            color: var(--text-light);
             font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        pre code {
-            background-color: transparent;
-            padding: 0;
-            color: inherit; /* Herda a cor do <pre> */
-            font-size: inherit;
-        }
-
-        /* 6. Estilos para Caixas de Destaque */
-        .box {
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-            border-left: 5px solid;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
         
-        .box h4 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.2rem;
-        }
-
-        /* "Para saber mais" - Azul */
-        .box-info {
-            background-color: #f0f7ff;
-            border-color: #4a90e2;
+        .product-price {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
         
-        .box-info h4 {
-            color: #3a7bc2;
-        }
-
-        /* "Parada obrigatória" - Amarelo */
-        .box-vscode {
-            background-color: #fff9e6;
-            border-color: #ffc400;
-        }
-        
-        .box-vscode h4 {
-            color: #d9a100;
-        }
-        
-        /* 7. Estilos para Listas de Definição (Conceitos) */
-        dl {
-            margin-top: 1rem;
+        .add-to-cart-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
         }
         
-        dt {
-            font-weight: bold;
-            font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
-            font-size: 1.1rem;
-            color: #005a00;
-            margin-top: 1rem;
+        .add-to-cart-btn:hover {
+            background-color: var(--primary-dark);
         }
         
-        dd {
-            margin-left: 1.5rem;
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
             margin-bottom: 0.75rem;
-            padding-left: 1rem;
-            border-left: 3px solid #eee;
         }
-
+        
+        .footer-links a {
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* --- PÁGINA DO CARRINHO --- */
+        .cart-page {
+            padding: 3rem 0;
+        }
+        
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .cart-items {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-details h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 0.25rem;
+        }
+        
+        .cart-summary {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-total {
+            font-weight: 600;
+            font-size: 1.2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* --- MODAL DE PAGAMENTO --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: var(--transition);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-option:hover, .payment-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--background-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+            }
+            
+            .cart-item-actions {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-filters {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
-
+    <!-- Header -->
     <header>
-        <h1>Guia Prático: Construindo a Vitrine da Floricultura</h1>
-        <p>Um tutorial de HTML5 e CSS para estruturar sua primeira página de e-commerce.</p>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span class="material-icons logo-icon">local_florist</span>
+                Floricultura da Vila
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="produtos.html">Produtos</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#" class="icon-btn" id="search-btn">
+                    <span class="material-icons">search</span>
+                </a>
+                <a href="#" class="icon-btn" id="user-btn">
+                    <span class="material-icons">person</span>
+                </a>
+                <a href="carrinho.html" class="icon-btn" id="cart-btn">
+                    <span class="material-icons">shopping_cart</span>
+                    <span class="cart-count">2</span>
+                </a>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <article>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Flores que encantam e emocionam</h1>
+            <p>Descubra nossa seleção exclusiva de arranjos florais para todas as ocasiões especiais da sua vida.</p>
+            <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+        </div>
+    </section>
 
-            <section id="requisitos">
-                <h2>Parte 1: Requisitos da Interface (HTML/CSS)</h2>
-                <p>Com base na descrição do projeto, e focando apenas na estrutura visual (layout) e sem a interatividade (JavaScript), os requisitos para esta etapa são:</p>
-                <ol>
-                    <li><strong>Definir</strong> a estrutura semântica principal da página (Cabeçalho, Conteúdo Principal, Rodapé).</li>
-                    <li><strong>Configurar</strong> o cabeçalho (<code>&lt;header&gt;</code>) para conter o título da loja (<code>&lt;h1&gt;</code>) e um link (<code>&lt;a&gt;</code>) para a "Home", utilizando um ícone.</li>
-                    <li><strong>Estruturar</strong> a área de conteúdo principal (<code>&lt;main&gt;</code>) para abrigar a listagem de produtos.</li>
-                    <li><strong>Organizar</strong> a exibição dos produtos em um layout de grade (Grid).</li>
-                    <li><strong>Criar</strong> um componente "card" (<code>&lt;div&gt;</code>) para representar visualmente cada produto.</li>
-                    <li><strong>Exibir</strong> a imagem do produto (<code>&lt;img&gt;</code>) dentro de cada card, utilizando a tag <code>&lt;figure&gt;</code> para semântica.</li>
-                    <li><strong>Apresentar</strong> o nome do produto (<code>&lt;h2&gt;</code> ou <code>&lt;h4&gt;</code>).</li>
-                    <li><strong>Descrever</strong> o produto em um parágrafo (<code>&lt;p&gt;</code>).</li>
-                    <li><strong>Mostrar</strong> o preço do produto (<code>&lt;p&gt;</code> ou <code>&lt;h4&gt;</code>).</li>
-                    <li><strong>Incluir</strong> um link (<code>&lt;a&gt;</code>) estilizado como ícone para "Adicionar ao Carrinho".</li>
-                    <li><strong>Configurar</strong> os metadados essenciais da página (<code>&lt;meta&gt;</code>), definindo o <code>charset</code> para "UTF-8" e o <code>lang</code> para "pt-br".</li>
-                    <li><strong>Vincular</strong> (<code>&lt;link&gt;</code>) a folha de estilos CSS externa ao documento HTML.</li>
-                    <li><strong>Importar</strong> a fonte "Roboto" e os ícones "Material Symbols" (ou Fonts) do Google Fonts.</li>
-                    <li><strong>Estilizar</strong> os elementos globais (tamanho da fonte padrão, cores de fundo e de fonte, espaçamento entre linhas).</li>
-                    <li><strong>Aplicar</strong> espaçamentos (<code>padding</code> e <code>margin</code>) adequados, especialmente nas imagens e nos cards.</li>
-                    <li><strong>Definir</strong> um rodapé (<code>&lt;footer&gt;</code>) simples com informações da loja (ex: copyright).</li>
-                </ol>
-            </section>
-
-            <section id="conceitos">
-                <h2>Parte 2: Conceitos Essenciais (HTML5 e CSS)</h2>
-                <p>Vamos revisar as ferramentas que usaremos para construir essa interface.</p>
-
-                <h3>Conceitos de HTML5</h3>
-                <p>O HTML (HyperText Markup Language) é a linguagem de marcação que estrutura o conteúdo da web. O HTML5 introduziu tags "semânticas" que dão significado ao conteúdo.</p>
-                
-                <dl>
-                    <dt>&lt;!DOCTYPE html&gt;</dt>
-                    <dd>Define o documento como HTML5.</dd>
-
-                    <dt>&lt;html lang="pt-br"&gt;</dt>
-                    <dd>Elemento raiz que envolve todo o conteúdo, com o atributo <code>lang</code> definindo o idioma.</dd>
-
-                    <dt>&lt;head&gt;</dt>
-                    <dd>Contém metadados sobre a página (título, links para CSS, metatags).</dd>
-
-                    <dt>&lt;meta charset="UTF-8"&gt;</dt>
-                    <dd>Garante que o navegador exiba corretamente caracteres especiais (acentos, etc.).</dd>
-                    
-                    <dt>&lt;link&gt;</dt>
-                    <dd>Usada para vincular arquivos externos, como nossa folha de estilos (CSS).</dd>
-                    
-                    <dt>&lt;body&gt;</dt>
-                    <dd>Contém todo o conteúdo visível da página.</dd>
-
-                    <dt>&lt;header&gt;</dt>
-                    <dd>Define o cabeçalho da página ou de uma seção (geralmente contém o logo, título principal e navegação).</dd>
-
-                    <dt>&lt;main&gt;</dt>
-                    <dd>Define o conteúdo principal e único da página. (Não deve incluir cabeçalhos, rodapés ou barras laterais repetitivas).</dd>
-
-                    <dt>&lt;footer&gt;</dt>
-                    <dd>Define o rodapé da página ou de uma seção (geralmente contém informações de copyright, links de contato, etc.).</dd>
-
-                    <dt>&lt;div&gt;</dt>
-                    <dd>Um "container" genérico usado para agrupar elementos, muito útil para aplicar estilos CSS (como o nosso "card").</dd>
-
-                    <dt>&lt;h1&gt;, &lt;h2&gt;, &lt;h4&gt;</dt>
-                    <dd>Títulos (Headings). Definem a hierarquia da informação. <code>&lt;h1&gt;</code> é o mais importante.</dd>
-
-                    <dt>&lt;p&gt;</dt>
-                    <dd>Define um parágrafo de texto.</dd>
-
-                    <dt>&lt;a&gt;</dt>
-                    <dd>Âncora (link). Usado para criar hiperlinks. O atributo <code>href</code> define o destino do link.</dd>
-
-                    <dt>&lt;figure&gt;</dt>
-                    <dd>Usado para agrupar conteúdo de mídia (como uma imagem) e, opcionalmente, sua legenda (<code>&lt;figcaption&gt;</code>).</dd>
-                    
-                    <dt>&lt;img&gt;</dt>
-                    <dd>Exibe uma imagem. O atributo <code>src</code> define o caminho (URL) da imagem e o <code>alt</code> fornece um texto alternativo (essencial para acessibilidade).</dd>
-                </dl>
-
-                <div class="box box-info">
-                    <h4>Para saber mais</h4>
-                    <p>A <strong>MDN Web Docs</strong> (Mozilla Developer Network) é a referência mais completa para desenvolvedores web. Você pode consultar o que cada tag HTML faz e ver exemplos.</p>
-                    <ul>
-                        <li><strong>Referência (HTML):</strong> <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML/Element" target="_blank" rel="noopener noreferrer">MDN - Referência de Elementos HTML</a></li>
-                    </ul>
-                </div>
-
-                <h3>Conceitos de CSS</h3>
-                <p>O CSS (Cascading Style Sheets) é a linguagem usada para definir a aparência e o layout dos elementos HTML.</p>
-
-                <dl>
-                    <dt>@import (Google Fonts)</dt>
-                    <dd>Usaremos a regra <code>@import</code> dentro do nosso arquivo CSS para carregar a fonte "Roboto" e os ícones do Google.</dd>
-                    
-                    <dt>Seletores (Ex: .card)</dt>
-                    <dd>Formas de "selecionar" elementos HTML para aplicar estilos. Um seletor de classe, como <code>.card</code>, seleciona todos os elementos com o atributo <code>class="card"</code>.</dd>
-                    
-                    <dt>Box Model (margin/padding)</dt>
-                    <dd><code>margin</code> é o espaçamento <em>fora</em> da borda (entre elementos), e <code>padding</code> é o espaçamento <em>dentro</em> da borda (entre o conteúdo e a borda).</dd>
-                    
-                    <dt>CSS Grid (display: grid)</dt>
-                    <dd>Um sistema de layout bidimensional (linhas e colunas). Usaremos <code>display: grid;</code> no container pai para organizar os cards.</dd>
-                    
-                    <dt>grid-template-columns</dt>
-                    <dd>Define o número e o tamanho das colunas do grid. Usaremos <code>repeat(auto-fit, minmax(250px, 1fr))</code> para criar um grid responsivo.</dd>
-                    
-                    <dt>Propriedades de Fonte</dt>
-                    <dd><code>font-family</code> (tipo da fonte), <code>font-size</code> (tamanho), <code>color</code> (cor do texto) e <code>line-height</code> (espaçamento entre linhas).</dd>
-                </dl>
-
-                <div class="box box-info">
-                    <h4>Para saber mais</h4>
-                    <p>Para aprender CSS Grid de forma visual e interativa, o "Grid Garden" é um excelente recurso. Para referência de propriedades, a W3Schools é rápida e direta.</p>
-                    <ul>
-                        <li><strong>Referência (CSS Grid):</strong> <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" rel="noopener noreferrer">CSS-Tricks - A Complete Guide to Grid</a></li>
-                        <li><strong>Referência (Propriedades CSS):</strong> <a href="https://www.w3schools.com/cssref/default.asp" target="_blank" rel="noopener noreferrer">W3Schools - CSS Reference</a></li>
-                    </ul>
-                </div>
-            </section>
+    <!-- Produtos em Destaque -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossos Produtos</h2>
+                <p>Selecione entre nossa variedade de flores frescas e arranjos exclusivos</p>
+            </div>
             
-            <section id="tutorial">
-                <h2>Parte 3: Tutorial Prático (HTML + CSS)</h2>
-                <p>Vamos criar a página principal da floricultura, com a listagem de produtos.</p>
-
-                <h3>Passo 1: Estrutura de Arquivos</h3>
-                <p>Crie uma pasta para o projeto (ex: <code>floricultura</code>) e, dentro dela, crie dois arquivos:</p>
-                <ol>
-                    <li><code>index.html</code> (Nosso HTML)</li>
-                    <li><code>style.css</code> (Nosso CSS)</li>
-                </ol>
-
-                <h3>Passo 2: O HTML Base (index.html)</h3>
-                <p>Vamos usar o VSCode para agilizar a criação da estrutura base.</p>
-
-                <div class="box box-vscode">
-                    <h4>Parada obrigatória: VSCode Emmet</h4>
-                    <p>No arquivo <code>index.html</code> vazio, digite <code>!</code> (ponto de exclamação) e pressione a tecla <strong>Tab</strong> ou <strong>Enter</strong>.</p>
-                    <p>O VSCode (usando o recurso "Emmet") criará automaticamente a estrutura HTML básica. Altere o atributo <code>lang</code> de "en" para "pt-br" e o <code>&lt;title&gt;</code> para "Floricultura da Vila".</p>
+            <div class="product-filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Buquês</button>
+                <button class="filter-btn">Rosas</button>
+                <button class="filter-btn">Orquídeas</button>
+                <button class="filter-btn">Presentes</button>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Produto 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Buquê de Rosas Vermelhas">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Buquê de Rosas Vermelhas</h3>
+                        <p class="product-description">Conjunto de 12 rosas vermelhas adornadas com flores brancas do tipo carmélias e folhagem verde.</p>
+                        <div class="product-price">R$ 129,90</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
                 </div>
                 
-                <p>Adicione os links para o CSS e para os Ícones do Google dentro do <code>&lt;head&gt;</code>:</p>
-
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="pt-br"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Floricultura da Vila&lt;/title&gt;
-    
-    &lt;!-- 1. Link para nosso CSS --&gt;
-    &lt;link rel="stylesheet" href="style.css"&gt;
-    
-    &lt;!-- 2. Link para os Ícones do Google Fonts --&gt;
-    &lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    
-    &lt;!-- O conteúdo virá aqui --&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-                <h3>Passo 3: O CSS Base (style.css)</h3>
-                <p>Agora, vamos ao <code>style.css</code> para importar a fonte Roboto e definir estilos globais.</p>
-<pre><code>/* 1. Importando a Fonte Roboto */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-/* Sugestão: Um "Reset" básico de CSS.
-   Faz com que 'padding' e 'border' sejam incluídos 
-   no tamanho total do elemento, facilitando o layout.
-*/
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-/* 2. Estilos Globais (Body) */
-body {
-    font-family: 'Roboto', sans-serif; /* Fonte Padrão */
-    font-size: 16px; /* Tamanho da fonte padrão */
-    line-height: 1.6; /* Espaçamento entre linhas */
-    background-color: #f9f9f9; /* Cor de fundo suave */
-    color: #333; /* Cor da fonte principal */
-}
-</code></pre>
-
-                <h3>Passo 4: Estrutura Semântica (index.html)</h3>
-                <p>Vamos adicionar o <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code> e <code>&lt;footer&gt;</code> dentro do <code>&lt;body&gt;</code> do <code>index.html</code>.</p>
-                
-                <div class="box box-vscode">
-                    <h4>Parada obrigatória: VSCode Emmet (Tags)</h4>
-                    <p>Dentro do <code>&lt;body&gt;</code>, digite <code>header+main+footer</code> e pressione <strong>Tab</strong>.</p>
-                    <p>O VSCode criará as três tags semânticas de uma vez.</p>
+                <!-- Produto 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542736667-069246bdbc6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Orquídea Phalaenopsis">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Orquídea Phalaenopsis</h3>
+                        <p class="product-description">Orquídea branca elegante em vaso de cerâmica, ideal para presentes e decoração de interiores.</p>
+                        <div class="product-price">R$ 89,90</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
                 </div>
                 
-                <p>Preencha as tags com o conteúdo da loja. O <code>&lt;main&gt;</code> conterá o grid de produtos.</p>
-<pre><code>&lt;!-- ... (head continua o mesmo) ... --&gt;
-&lt;body&gt;
-    &lt;header&gt;
-        &lt;h1&gt;Floricultura da Vila&lt;/h1&gt;
-        &lt;nav&gt;
-            &lt;!-- O ícone 'home' será um link (A) para a própria página inicial --&gt;
-            &lt;a href="index.html"&gt;
-                &lt;!-- Usando a classe do Google Icons para mostrar o ícone --&gt;
-                &lt;span class="material-icons"&gt;home&lt;/span&gt;
-            &lt;/a&gt;
-        &lt;/nav&gt;
-    &lt;/header&gt;
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1597848212624-e6d4bd66d7a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Girassóis">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Buquê de Girassóis</h3>
+                        <p class="product-description">Arranjo vibrante com 5 girassóis frescos, perfeito para trazer alegria e energia ao ambiente.</p>
+                        <div class="product-price">R$ 65,50</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cesta de Flores">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cesta de Flores Mistas</h3>
+                        <p class="product-description">Seleção especial de flores da estação arranjadas em uma linda cesta de vime.</p>
+                        <div class="product-price">R$ 149,90</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    &lt;main&gt;
-        &lt;h2&gt;Nossos Produtos&lt;/h2&gt;
-        &lt;!-- 1. Este DIV será o nosso "Grid Container" --&gt;
-        &lt;div class="product-container"&gt;
-            
-            &lt;!-- 2. Este é o nosso primeiro "Card" de produto --&gt;
-            &lt;div class="product-card"&gt;
-                &lt;figure&gt;
-                    &lt;!-- Usando um placeholder de imagem. Troque pelo caminho real. --&gt;
-                    &lt;img src="https://via.placeholder.com/300x200.png?text=Buquê+de+Rosas" 
-                         alt="Foto de um buquê de rosas vermelhas"&gt;
-                &lt;/figure&gt;
-                &lt;h4&gt;Buquê de Rosas Vermelhas&lt;/h4&gt;
-                &lt;p&gt;Conjunto de 5 rosas vermelhas adornadas com flores brancas do tipo carmélias.&lt;/p&gt;
-                &lt;p class="price"&gt;R$ 89,90&lt;/p&gt;
-                &lt;a href="#" class="cart-button"&gt;
-                    &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
-                    Adicionar
-                &lt;/a&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Adicione mais cards copiando e colando o 'product-card' --&gt;
-            &lt;div class="product-card"&gt;
-                &lt;figure&gt;
-                    &lt;img src="https://via.placeholder.com/300x200.png?text=Orquídea" 
-                         alt="Foto de uma orquídea branca"&gt;
-                &lt;/figure&gt;
-                &lt;h4&gt;Orquídea Phalaenopsis&lt;/h4&gt;
-                &lt;p&gt;Orquídea branca elegante em vaso de cerâmica, ideal para presentes.&lt;/p&gt;
-                &lt;p class="price"&gt;R$ 120,00&lt;/p&gt;
-                &lt;a href="#" class="cart-button"&gt;
-                    &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
-                    Adicionar
-                &lt;/a&gt;
-            &lt;/div&gt;
-            
-            &lt;div class="product-card"&gt;
-                &lt;figure&gt;
-                    &lt;img src="https://via.placeholder.com/300x200.png?text=Girassol" 
-                         alt="Foto de um girassol"&gt;
-                &lt;/figure&gt;
-                &lt;h4&gt;Vaso de Girassol&lt;/h4&gt;
-                &lt;p&gt;Arranjo com 3 girassóis vibrantes em vaso rústico de madeira.&lt;/p&gt;
-                &lt;p class="price"&gt;R$ 65,50&lt;/p&gt;
-                &lt;a href="#" class="cart-button"&gt;
-                    &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
-                    Adicionar
-                &lt;/a&gt;
-            &lt;/div&gt;
-
-        &lt;/div&gt; &lt;!-- Fim do .product-container --&gt;
-    &lt;/main&gt;
-
-    &lt;footer&gt;
-        &lt;p&gt;&amp;copy; 2025 Floricultura da Vila. Todos os direitos reservados.&lt;/p&gt;
-    &lt;/footer&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-
-                <h3>Passo 5: Estilizando o Layout e os Cards (style.css)</h3>
-                <p>Finalmente, vamos fazer a mágica do CSS Grid e estilizar os cards. Adicione este código ao final do seu <code>style.css</code>:</p>
-<pre><code>
-/* --- Estilos do Layout --- */
-header {
-    background-color: #006400; /* Verde escuro */
-    color: #fff;
-    padding: 1rem 2rem;
-    display: flex; /* Usando flexbox para alinhar o título e o ícone */
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 2rem;
-}
-
-header a {
-    color: #fff;
-    text-decoration: none;
-}
-
-/* Centraliza o conteúdo principal e o rodapé */
-main, footer {
-    max-width: 1200px;
-    margin: 1.5rem auto; /* Centraliza na página */
-    padding: 0 1rem;
-}
-
-footer {
-    text-align: center;
-    color: #777;
-    border-top: 1px solid #ddd;
-    padding-top: 1rem;
-}
-
-main h2 {
-    margin-bottom: 1.5rem;
-    color: #006400;
-}
-
-/* --- O Layout GRID --- */
-.product-container {
-    display: grid;
-    /* Aqui definimos as colunas:
-       'repeat' - repita o padrão.
-       'auto-fit' - crie quantas colunas couberem na tela.
-       'minmax(300px, 1fr)' - cada coluna deve ter no MÍNIMO 300px, 
-       mas pode crescer (1fr) para preencher o espaço igualmente.
-    */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem; /* Espaçamento entre os cards */
-}
-
-
-/* --- Estilos do Card --- */
-.product-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    overflow: hidden; /* Garante que a imagem não "vaze" */
-    display: flex;
-    flex-direction: column; /* Organiza o card internamente */
-}
-
-/* Margin e Padding da Imagem */
-.product-card figure {
-    /* 'margin: 0' já foi feito no reset global (*) */
-}
-
-.product-card img {
-    width: 100%; /* Faz a imagem ocupar 100% do 'figure' */
-    height: 200px; /* Altura fixa para as imagens */
-    object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
-    display: block; /* Remove espaço extra abaixo da imagem */
-}
-
-/* Padding do conteúdo do card */
-.product-card h4,
-.product-card p,
-.product-card .cart-button {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-.product-card h4 {
-    color: #333;
-    font-size: 1.25rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.product-card p {
-    font-size: 0.9rem;
-    color: #555;
-    flex-grow: 1; /* Faz a descrição empurrar o preço para baixo */
-    margin-bottom: 1rem;
-}
-
-.product-card .price {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #006400;
-    margin-bottom: 1rem;
-    flex-grow: 0; /* Reseta o flex-grow */
-}
-
-.cart-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffc400; /* Amarelo */
-    color: #333;
-    text-decoration: none;
-    text-align: center;
-    padding: 0.75rem;
-    font-weight: bold;
-    margin: 0; /* O botão ocupará a largura toda, sem margin interna */
-    transition: background-color 0.3s ease;
-}
-
-.cart-button .material-icons {
-    margin-right: 0.5rem; /* Espaço entre o ícone e o texto */
-    font-size: 1.2rem;
-}
-
-.cart-button:hover {
-    background-color: #e6b100;
-}
-</code></pre>
-
-                <p style="margin-top: 2rem; font-weight: bold;">Ao final deste tutorial, seus alunos e alunas terão uma página <code>index.html</code> estática, responsiva (graças ao CSS Grid) e estilizada, pronta para as próximas etapas de interatividade com JavaScript.</p>
-            </section>
-
-        </article>
-    </main>
-
+    <!-- Footer -->
     <footer>
-        <p>Tutorial gerado pela IA do Google.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Floricultura da Vila</h3>
+                    <p>Há mais de 15 anos levando beleza e emoção através de nossas flores. Qualidade e atendimento personalizado são nossa marca.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <span class="material-icons">facebook</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <span class="material-icons">instagram</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <span class="material-icons">pinterest</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="politica.html">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">location_on</span>
+                            Rua das Flores, 123 - Centro
+                        </li>
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">call</span>
+                            (11) 3456-7890
+                        </li>
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">email</span>
+                            contato@floriculturadavila.com
+                        </li>
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">schedule</span>
+                            Seg-Sex: 8h-18h | Sáb: 8h-12h
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Floricultura da Vila. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
 
+    <!-- Modal de Pagamento (exemplo) -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Forma de Pagamento</h3>
+                <button class="close-modal" id="close-payment-modal">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            
+            <div class="payment-options">
+                <div class="payment-option selected">
+                    <div class="payment-icon">
+                        <span class="material-icons">credit_card</span>
+                    </div>
+                    <div>
+                        <h4>Cartão de Crédito</h4>
+                        <p>Parcelamento em até 10x</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <span class="material-icons">account_balance</span>
+                    </div>
+                    <div>
+                        <h4>Transferência Bancária</h4>
+                        <p>5% de desconto</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <span class="material-icons">local_atm</span>
+                    </div>
+                    <div>
+                        <h4>PIX</h4>
+                        <p>10% de desconto</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%;">Confirmar Pagamento</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulação de funcionalidades básicas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtros de produtos
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Modal de pagamento
+            const paymentModal = document.getElementById('payment-modal');
+            const closePaymentModal = document.getElementById('close-payment-modal');
+            
+            closePaymentModal.addEventListener('click', function() {
+                paymentModal.classList.remove('active');
+            });
+            
+            // Seleção de opções de pagamento
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    paymentOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Botão de finalizar compra (exemplo)
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    paymentModal.classList.add('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
