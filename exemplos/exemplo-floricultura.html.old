@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floricultura da Vila - E-commerce</title>
+    
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        /* --- RESET E ESTILOS GLOBAIS --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        :root {
+            --primary-color: #2e7d32; /* Verde principal */
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary-color: #f8bbd0; /* Rosa claro */
+            --accent-color: #ffd54f; /* Amarelo */
+            --text-dark: #2e2e2e;
+            --text-light: #757575;
+            --background-light: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button, .btn {
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #ffc107;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* --- HEADER E NAVEGAÇÃO --- */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .logo-icon {
+            color: var(--primary-light);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            transition: var(--transition);
+        }
+        
+        .icon-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+            font-size: 0.75rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1487070183337-7f1c5d440d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* --- PRODUTOS --- */
+        .products-section {
+            padding: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .section-header p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: var(--white);
+            border: 1px solid #e0e0e0;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+            color: var(--text-dark);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* --- PÁGINA DO CARRINHO --- */
+        .cart-page {
+            padding: 3rem 0;
+        }
+        
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .cart-items {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-details h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--background-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 0.25rem;
+        }
+        
+        .cart-summary {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .summary-total {
+            font-weight: 600;
+            font-size: 1.2rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* --- MODAL DE PAGAMENTO --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--white);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: var(--transition);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .payment-option:hover, .payment-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+        
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--background-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+            }
+            
+            .cart-item-actions {
+                grid-column: 1 / -1;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-filters {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span class="material-icons logo-icon">local_florist</span>
+                Floricultura da Vila
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="produtos.html">Produtos</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-icons">
+                <a href="#" class="icon-btn" id="search-btn">
+                    <span class="material-icons">search</span>
+                </a>
+                <a href="#" class="icon-btn" id="user-btn">
+                    <span class="material-icons">person</span>
+                </a>
+                <a href="carrinho.html" class="icon-btn" id="cart-btn">
+                    <span class="material-icons">shopping_cart</span>
+                    <span class="cart-count">2</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Flores que encantam e emocionam</h1>
+            <p>Descubra nossa seleção exclusiva de arranjos florais para todas as ocasiões especiais da sua vida.</p>
+            <a href="produtos.html" class="btn btn-primary">Ver Produtos</a>
+        </div>
+    </section>
+
+    <!-- Produtos em Destaque -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossos Produtos</h2>
+                <p>Selecione entre nossa variedade de flores frescas e arranjos exclusivos</p>
+            </div>
+            
+            <div class="product-filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Buquês</button>
+                <button class="filter-btn">Rosas</button>
+                <button class="filter-btn">Orquídeas</button>
+                <button class="filter-btn">Presentes</button>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Produto 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Buquê de Rosas Vermelhas">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Buquê de Rosas Vermelhas</h3>
+                        <p class="product-description">Conjunto de 12 rosas vermelhas adornadas com flores brancas do tipo carmélias e folhagem verde.</p>
+                        <div class="product-price">R$ 129,90</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1542736667-069246bdbc6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Orquídea Phalaenopsis">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Orquídea Phalaenopsis</h3>
+                        <p class="product-description">Orquídea branca elegante em vaso de cerâmica, ideal para presentes e decoração de interiores.</p>
+                        <div class="product-price">R$ 89,90</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1597848212624-e6d4bd66d7a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Girassóis">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Buquê de Girassóis</h3>
+                        <p class="product-description">Arranjo vibrante com 5 girassóis frescos, perfeito para trazer alegria e energia ao ambiente.</p>
+                        <div class="product-price">R$ 65,50</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Cesta de Flores">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">Cesta de Flores Mistas</h3>
+                        <p class="product-description">Seleção especial de flores da estação arranjadas em uma linda cesta de vime.</p>
+                        <div class="product-price">R$ 149,90</div>
+                        <a href="carrinho.html" class="add-to-cart-btn">
+                            <span class="material-icons">add_shopping_cart</span>
+                            Adicionar ao Carrinho
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Floricultura da Vila</h3>
+                    <p>Há mais de 15 anos levando beleza e emoção através de nossas flores. Qualidade e atendimento personalizado são nossa marca.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <span class="material-icons">facebook</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <span class="material-icons">instagram</span>
+                        </a>
+                        <a href="#" class="social-link">
+                            <span class="material-icons">pinterest</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="produtos.html">Produtos</a></li>
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                        <li><a href="politica.html">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">location_on</span>
+                            Rua das Flores, 123 - Centro
+                        </li>
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">call</span>
+                            (11) 3456-7890
+                        </li>
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">email</span>
+                            contato@floriculturadavila.com
+                        </li>
+                        <li>
+                            <span class="material-icons" style="vertical-align: middle; margin-right: 5px;">schedule</span>
+                            Seg-Sex: 8h-18h | Sáb: 8h-12h
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Floricultura da Vila. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Pagamento (exemplo) -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Forma de Pagamento</h3>
+                <button class="close-modal" id="close-payment-modal">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            
+            <div class="payment-options">
+                <div class="payment-option selected">
+                    <div class="payment-icon">
+                        <span class="material-icons">credit_card</span>
+                    </div>
+                    <div>
+                        <h4>Cartão de Crédito</h4>
+                        <p>Parcelamento em até 10x</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <span class="material-icons">account_balance</span>
+                    </div>
+                    <div>
+                        <h4>Transferência Bancária</h4>
+                        <p>5% de desconto</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option">
+                    <div class="payment-icon">
+                        <span class="material-icons">local_atm</span>
+                    </div>
+                    <div>
+                        <h4>PIX</h4>
+                        <p>10% de desconto</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%;">Confirmar Pagamento</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulação de funcionalidades básicas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtros de produtos
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Modal de pagamento
+            const paymentModal = document.getElementById('payment-modal');
+            const closePaymentModal = document.getElementById('close-payment-modal');
+            
+            closePaymentModal.addEventListener('click', function() {
+                paymentModal.classList.remove('active');
+            });
+            
+            // Seleção de opções de pagamento
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    paymentOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Botão de finalizar compra (exemplo)
+            const checkoutBtn = document.querySelector('.checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    paymentModal.classList.add('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

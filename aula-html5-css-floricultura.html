@@ -1,930 +1,1726 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial: Protótipo de E-commerce para Floricultura</title>
-    
+
     <!-- Fontes do Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Ícones do Material Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
     <!-- Highlight.js para syntax highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    
+
     <style>
-        /* --- VARIÁVEIS CSS --- */
-        :root {
-            --verde-principal: #2e7d32;
-            --verde-claro: #4caf50;
-            --verde-escuro: #1b5e20;
-            --rosa-claro: #f8bbd0;
-            --amarelo: #ffd54f;
-            --texto-escuro: #2e2e2e;
-            --texto-claro: #757575;
-            --fundo-claro: #f9f9f9;
-            --branco: #ffffff;
-            --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --transicao: all 0.3s ease;
+      /* --- VARIÁVEIS CSS --- */
+      :root {
+        --verde-principal: #2e7d32;
+        --verde-claro: #4caf50;
+        --verde-escuro: #1b5e20;
+        --rosa-claro: #f8bbd0;
+        --amarelo: #ffd54f;
+        --texto-escuro: #2e2e2e;
+        --texto-claro: #757575;
+        --fundo-claro: #f9f9f9;
+        --branco: #ffffff;
+        --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transicao: all 0.3s ease;
+      }
+
+      /* --- ESTILOS GLOBAIS --- */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        background-color: var(--fundo-claro);
+        color: var(--texto-escuro);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        color: var(--verde-principal);
+      }
+
+      h2 {
+        font-size: 2rem;
+        color: var(--verde-principal);
+        border-bottom: 2px solid var(--verde-claro);
+        padding-bottom: 0.5rem;
+        margin-top: 2rem;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--verde-principal);
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      /* --- HEADER DO TUTORIAL --- */
+      .tutorial-header {
+        background-color: var(--verde-principal);
+        color: var(--branco);
+        padding: 2rem 0;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .tutorial-header h1 {
+        color: var(--branco);
+        margin-bottom: 0.5rem;
+      }
+
+      .tutorial-header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      /* --- NAVEGAÇÃO DO TUTORIAL --- */
+      .tutorial-nav {
+        background-color: var(--branco);
+        box-shadow: var(--sombra);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .tutorial-nav ul {
+        display: flex;
+        list-style: none;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 1rem 0;
+      }
+
+      .tutorial-nav li {
+        margin: 0 1rem;
+      }
+
+      .tutorial-nav a {
+        color: var(--texto-escuro);
+        font-weight: 500;
+        padding: 0.5rem 0;
+        position: relative;
+      }
+
+      .tutorial-nav a:hover {
+        color: var(--verde-principal);
+        text-decoration: none;
+      }
+
+      .tutorial-nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--verde-principal);
+        transition: var(--transicao);
+      }
+
+      .tutorial-nav a:hover::after {
+        width: 100%;
+      }
+
+      /* --- CONTEÚDO PRINCIPAL --- */
+      .tutorial-content {
+        background-color: var(--branco);
+        border-radius: 8px;
+        box-shadow: var(--sombra);
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      section {
+        margin-bottom: 3rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      ul,
+      ol {
+        margin-left: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      /* --- CAIXAS DE DESTAQUE --- */
+      .box {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 5px solid;
+      }
+
+      .box-info {
+        background-color: #f0f7ff;
+        border-color: #4a90e2;
+      }
+
+      .box-info h4 {
+        color: #3a7bc2;
+        margin-top: 0;
+      }
+
+      .box-tip {
+        background-color: #f0fff4;
+        border-color: #38a169;
+      }
+
+      .box-tip h4 {
+        color: #2d7d4f;
+        margin-top: 0;
+      }
+
+      .box-warning {
+        background-color: #fff9e6;
+        border-color: #ffc400;
+      }
+
+      .box-warning h4 {
+        color: #d9a100;
+        margin-top: 0;
+      }
+
+      /* --- DEMONSTRAÇÃO DO PROTÓTIPO --- */
+      .prototype-demo {
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        padding: 2rem;
+        margin: 2rem 0;
+        border: 1px solid #e0e0e0;
+      }
+
+      .demo-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* --- CÓDIGO --- */
+      pre {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 1.5rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      code {
+        font-family: "Consolas", "Menlo", "Monaco", "Courier New", monospace;
+      }
+
+      .code-tabs {
+        margin: 2rem 0;
+      }
+
+      .tab-buttons {
+        display: flex;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .tab-button {
+        padding: 0.75rem 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        color: var(--texto-claro);
+        border-bottom: 3px solid transparent;
+        transition: var(--transicao);
+      }
+
+      .tab-button.active {
+        color: var(--verde-principal);
+        border-bottom-color: var(--verde-principal);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* --- BOTÕES --- */
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: var(--verde-principal);
+        color: var(--branco);
+        border: none;
+        border-radius: 4px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transicao);
+        text-align: center;
+      }
+
+      .btn:hover {
+        background-color: var(--verde-escuro);
+        text-decoration: none;
+      }
+
+      .btn-secondary {
+        background-color: var(--amarelo);
+        color: var(--texto-escuro);
+      }
+
+      .btn-secondary:hover {
+        background-color: #ffc107;
+      }
+
+      /* --- FOOTER --- */
+      .tutorial-footer {
+        text-align: center;
+        padding: 2rem 0;
+        color: var(--texto-claro);
+        border-top: 1px solid #e0e0e0;
+        margin-top: 2rem;
+      }
+
+      /* --- RESPONSIVIDADE --- */
+      @media (max-width: 768px) {
+        .tutorial-nav ul {
+          flex-direction: column;
+          align-items: center;
         }
 
-        /* --- ESTILOS GLOBAIS --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            background-color: var(--fundo-claro);
-            color: var(--texto-escuro);
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            color: var(--verde-principal);
-        }
-        
-        h2 {
-            font-size: 2rem;
-            color: var(--verde-principal);
-            border-bottom: 2px solid var(--verde-claro);
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        a {
-            text-decoration: none;
-            color: var(--verde-principal);
-            font-weight: 500;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        /* --- HEADER DO TUTORIAL --- */
-        .tutorial-header {
-            background-color: var(--verde-principal);
-            color: var(--branco);
-            padding: 2rem 0;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .tutorial-header h1 {
-            color: var(--branco);
-            margin-bottom: 0.5rem;
-        }
-        
-        .tutorial-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        /* --- NAVEGAÇÃO DO TUTORIAL --- */
-        .tutorial-nav {
-            background-color: var(--branco);
-            box-shadow: var(--sombra);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .tutorial-nav ul {
-            display: flex;
-            list-style: none;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 1rem 0;
-        }
-        
         .tutorial-nav li {
-            margin: 0 1rem;
+          margin: 0.5rem 0;
         }
-        
-        .tutorial-nav a {
-            color: var(--texto-escuro);
-            font-weight: 500;
-            padding: 0.5rem 0;
-            position: relative;
+
+        h1 {
+          font-size: 2rem;
         }
-        
-        .tutorial-nav a:hover {
-            color: var(--verde-principal);
-            text-decoration: none;
+
+        h2 {
+          font-size: 1.75rem;
         }
-        
-        .tutorial-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--verde-principal);
-            transition: var(--transicao);
-        }
-        
-        .tutorial-nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* --- CONTEÚDO PRINCIPAL --- */
-        .tutorial-content {
-            background-color: var(--branco);
-            border-radius: 8px;
-            box-shadow: var(--sombra);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        section {
-            margin-bottom: 3rem;
-        }
-        
-        p {
-            margin-bottom: 1rem;
-        }
-        
-        ul, ol {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        li {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* --- CAIXAS DE DESTAQUE --- */
-        .box {
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-            border-left: 5px solid;
-        }
-        
-        .box-info {
-            background-color: #f0f7ff;
-            border-color: #4a90e2;
-        }
-        
-        .box-info h4 {
-            color: #3a7bc2;
-            margin-top: 0;
-        }
-        
-        .box-tip {
-            background-color: #f0fff4;
-            border-color: #38a169;
-        }
-        
-        .box-tip h4 {
-            color: #2d7d4f;
-            margin-top: 0;
-        }
-        
-        .box-warning {
-            background-color: #fff9e6;
-            border-color: #ffc400;
-        }
-        
-        .box-warning h4 {
-            color: #d9a100;
-            margin-top: 0;
-        }
-        
-        /* --- DEMONSTRAÇÃO DO PROTÓTIPO --- */
-        .prototype-demo {
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            padding: 2rem;
-            margin: 2rem 0;
-            border: 1px solid #e0e0e0;
-        }
-        
-        .demo-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* --- CÓDIGO --- */
-        pre {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-        
-        code {
-            font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
-        }
-        
-        .code-tabs {
-            margin: 2rem 0;
-        }
-        
-        .tab-buttons {
-            display: flex;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .tab-button {
-            padding: 0.75rem 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            color: var(--texto-claro);
-            border-bottom: 3px solid transparent;
-            transition: var(--transicao);
-        }
-        
-        .tab-button.active {
-            color: var(--verde-principal);
-            border-bottom-color: var(--verde-principal);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        /* --- BOTÕES --- */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--verde-principal);
-            color: var(--branco);
-            border: none;
-            border-radius: 4px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transicao);
-            text-align: center;
-        }
-        
-        .btn:hover {
-            background-color: var(--verde-escuro);
-            text-decoration: none;
-        }
-        
-        .btn-secondary {
-            background-color: var(--amarelo);
-            color: var(--texto-escuro);
-        }
-        
-        .btn-secondary:hover {
-            background-color: #ffc107;
-        }
-        
-        /* --- FOOTER --- */
-        .tutorial-footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--texto-claro);
-            border-top: 1px solid #e0e0e0;
-            margin-top: 2rem;
-        }
-        
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 768px) {
-            .tutorial-nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .tutorial-nav li {
-                margin: 0.5rem 0;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.75rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header do Tutorial -->
     <header class="tutorial-header">
-        <div class="container">
-            <h1>Tutorial: Protótipo de E-commerce para Floricultura</h1>
-            <p>Um guia completo para criar uma aplicação web usando HTML5, CSS e JavaScript</p>
-        </div>
+      <div class="container">
+        <h1>Tutorial: Protótipo de E-commerce para Floricultura</h1>
+        <p>
+          Um guia completo para criar uma aplicação web usando HTML5, CSS e
+          JavaScript
+        </p>
+      </div>
     </header>
-    
+
     <!-- Navegação do Tutorial -->
     <nav class="tutorial-nav">
-        <div class="container">
-            <ul>
-                <li><a href="#cenario">Cenário</a></li>
-                <li><a href="#requisitos">Requisitos</a></li>
-                <li><a href="#planejamento">Planejamento</a></li>
-                <li><a href="#implementacao">Implementação</a></li>
-                <li><a href="#html">HTML</a></li>
-                <li><a href="#css">CSS</a></li>
-                <li><a href="#resultado">Resultado</a></li>
-            </ul>
-        </div>
+      <div class="container">
+        <ul>
+          <li><a href="#cenario">Cenário</a></li>
+          <li><a href="#requisitos">Requisitos</a></li>
+          <li><a href="#planejamento">Planejamento</a></li>
+          <li><a href="#implementacao">Implementação</a></li>
+          <li><a href="#html">HTML</a></li>
+          <li><a href="#css">CSS</a></li>
+          <li><a href="#resultado">Resultado</a></li>
+        </ul>
+      </div>
     </nav>
-    
+
     <!-- Conteúdo Principal -->
     <main class="container tutorial-content">
-        <!-- Seção: Cenário -->
-        <section id="cenario">
-            <h2>Cenário da Entrevista</h2>
-            <p>Esta atividade partiu de um cenário fictício proposto pelo Prof. Wellington Sarmento, simulando uma entrevista de levantamento de requisitos para uma aplicação web de floricultura.</p>
-            
-            <div class="box box-info">
-                <h4>Contexto do Cliente</h4>
-                <p>Durante a entrevista, o cliente descreveu suas necessidades:</p>
-                <ul>
-                    <li>Exibir produtos através de uma aplicação web</li>
-                    <li>Apresentar produtos em cards com: nome, descrição, preço e ícone para adicionar ao carrinho</li>
-                    <li>Permitir navegação intuitiva entre páginas</li>
-                    <li>Oferecer processo de compra com seleção de quantidade, forma de pagamento e endereço</li>
-                    <li>Fornecer feedback claro em caso de problemas</li>
-                    <li>Permitir cancelamento a qualquer momento</li>
-                    <li>Incluir botão "Home" para retornar à página inicial</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Seção: Requisitos -->
-        <section id="requisitos">
-            <h2>Requisitos do Protótipo HTML5/CSS</h2>
-            <p>Para atender às necessidades do cliente, definimos os seguintes requisitos:</p>
-            
-            <ol>
-                <li><strong>Estrutura semântica</strong> usando HTML5</li>
-                <li><strong>Layout responsivo</strong> que funcione em dispositivos móveis e desktop</li>
-                <li><strong>Sistema de navegação</strong> claro e intuitivo</li>
-                <li><strong>Apresentação visual atraente</strong> dos produtos</li>
-                <li><strong>Hierarquia de informação</strong> bem definida</li>
-                <li><strong>Fluxo de compra</strong> simplificado (para protótipo)</li>
-                <li><strong>Feedback visual</strong> para ações do usuário</li>
-                <li><strong>Tipografia</strong> legível e adequada ao tema</li>
-            </ol>
-        </section>
-        
-        <!-- Seção: Planejamento -->
-        <section id="planejamento">
-            <h2>Planejamento do Design</h2>
-            
-            <h3>Tipografia</h3>
-            <ul>
-                <li><strong>Títulos</strong>: "Playfair Display" - elegante e sofisticada</li>
-                <li><strong>Texto corrido</strong>: "Poppins" - legível e moderna</li>
-            </ul>
-            
-            <h3>Navegação</h3>
-            <ul>
-                <li>Header fixo com logo e menu principal</li>
-                <li>Ícones de ação (carrinho, usuário, pesquisa)</li>
-                <li>Breadcrumbs visuais implícitos</li>
-                <li>Footer com informações de contato</li>
-            </ul>
-            
-            <h3>Hierarquia de Informação</h3>
-            <ol>
-                <li>Identidade da marca (header)</li>
-                <li>Destaque principal (hero section)</li>
-                <li>Produtos em grid</li>
-                <li>Informações institucionais (footer)</li>
-            </ol>
-            
-            <h3>Fluxo da Aplicação</h3>
-            <ol>
-                <li>Página inicial → Lista de produtos</li>
-                <li>Produto → Adicionar ao carrinho</li>
-                <li>Carrinho → Finalizar compra (simulado)</li>
-            </ol>
-            
-            <h3>Partes a serem Prototipadas</h3>
-            <ul>
-                <li>Página inicial com lista de produtos</li>
-                <li>Header com navegação</li>
-                <li>Footer institucional</li>
-                <li>Layout do carrinho (visualização básica)</li>
-            </ul>
-            
-            <div class="box box-tip">
-                <h4>Dica de Design</h4>
-                <p>Utilize uma paleta de cores baseada na natureza para transmitir a essência da floricultura. Verdes, rosas suaves e amarelos funcionam bem neste contexto.</p>
-            </div>
-        </section>
-        
-        <!-- Seção: Implementação -->
-        <section id="implementacao">
-            <h2>Implementação do Protótipo</h2>
-            <p>Agora vamos implementar o protótipo seguindo os requisitos e planejamento definidos.</p>
-            
-            <div class="box box-warning">
-                <h4>Atenção</h4>
-                <p>Este é um protótipo estático que não inclui funcionalidades JavaScript avançadas. O foco é na estrutura HTML e estilização CSS.</p>
-            </div>
-            
-            <h3>Estrutura de Arquivos</h3>
-            <p>Crie os seguintes arquivos em uma pasta do projeto:</p>
-            <ul>
-                <li><code>index.html</code> - Página principal</li>
-                <li><code>style.css</code> - Estilos da aplicação</li>
-                <li><code>carrinho.html</code> - Página do carrinho (opcional)</li>
-            </ul>
-        </section>
-        
-        <!-- Seção: HTML -->
-        <section id="html">
-            <h2>Código HTML5</h2>
-            <p>Vamos começar com a estrutura HTML da página principal.</p>
-            
-            <div class="code-tabs">
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="html-completo">HTML Completo</button>
-                    <button class="tab-button" data-tab="html-explicado">HTML Explicado</button>
-                </div>
-                
-                <div class="tab-content active" id="html-completo">
-                    <pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang="pt-br"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Floricultura da Vila - Sua Loja de Flores Online&lt;/title&gt;
-    
-    &lt;!-- Fontes do Google --&gt;
-    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
-    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
-    &lt;link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet"&gt;
-    
-    &lt;!-- Ícones do Material Icons --&gt;
-    &lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"&gt;
-    
-    &lt;link rel="stylesheet" href="style.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;header&gt;
-        &lt;div class="container container-header"&gt;
-            &lt;a href="index.html" class="logo"&gt;
-                &lt;span class="material-icons icone-logo"&gt;local_florist&lt;/span&gt;
-                Floricultura da Vila
-            &lt;/a&gt;
-            
-            &lt;nav&gt;
-                &lt;ul&gt;
-                    &lt;li&gt;&lt;a href="index.html"&gt;Início&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="produtos.html"&gt;Produtos&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="sobre.html"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/nav&gt;
-            
-            &lt;div class="icones-nav"&gt;
-                &lt;a href="#" class="btn-icone" id="btn-pesquisa"&gt;
-                    &lt;span class="material-icons"&gt;search&lt;/span&gt;
-                &lt;/a&gt;
-                &lt;a href="#" class="btn-icone" id="btn-usuario"&gt;
-                    &lt;span class="material-icons"&gt;person&lt;/span&gt;
-                &lt;/a&gt;
-                &lt;a href="carrinho.html" class="btn-icone" id="btn-carrinho"&gt;
-                    &lt;span class="material-icons"&gt;shopping_cart&lt;/span&gt;
-                    &lt;span class="contador-carrinho"&gt;2&lt;/span&gt;
-                &lt;/a&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/header&gt;
+      <!-- Seção: Cenário -->
+      <section id="cenario">
+        <h2>Cenário da Entrevista</h2>
+        <p>
+          Esta atividade partiu de um cenário fictício proposto pelo Prof.
+          Wellington Sarmento, simulando uma entrevista de levantamento de
+          requisitos para uma aplicação web de floricultura.
+        </p>
 
-    &lt;section class="hero"&gt;
-        &lt;div class="container"&gt;
-            &lt;h1&gt;Flores que encantam e emocionam&lt;/h1&gt;
-            &lt;p&gt;Descubra nossa seleção exclusiva de arranjos florais para todas as ocasiões especiais da sua vida.&lt;/p&gt;
-            &lt;a href="produtos.html" class="btn btn-primario"&gt;Ver Produtos&lt;/a&gt;
-        &lt;/div&gt;
-    &lt;/section&gt;
-
-    &lt;section class="secao-produtos"&gt;
-        &lt;div class="container"&gt;
-            &lt;div class="cabecalho-secao"&gt;
-                &lt;h2&gt;Nossos Produtos&lt;/h2&gt;
-                &lt;p&gt;Selecione entre nossa variedade de flores frescas e arranjos exclusivos&lt;/p&gt;
-            &lt;/div&gt;
-            
-            &lt;div class="filtros-produtos"&gt;
-                &lt;button class="btn-filtro ativo"&gt;Todos&lt;/button&gt;
-                &lt;button class="btn-filtro"&gt;Buquês&lt;/button&gt;
-                &lt;button class="btn-filtro"&gt;Rosas&lt;/button&gt;
-                &lt;button class="btn-filtro"&gt;Orquídeas&lt;/button&gt;
-                &lt;button class="btn-filtro"&gt;Presentes&lt;/button&gt;
-            &lt;/div&gt;
-            
-            &lt;div class="grid-produtos"&gt;
-                &lt;!-- Produto 1 --&gt;
-                &lt;div class="card-produto"&gt;
-                    &lt;div class="imagem-produto"&gt;
-                        &lt;img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Buquê de Rosas Vermelhas"&gt;
-                    &lt;/div&gt;
-                    &lt;div class="info-produto"&gt;
-                        &lt;h3 class="nome-produto"&gt;Buquê de Rosas Vermelhas&lt;/h3&gt;
-                        &lt;p class="descricao-produto"&gt;Conjunto de 12 rosas vermelhas adornadas com flores brancas do tipo carmélias e folhagem verde.&lt;/p&gt;
-                        &lt;div class="preco-produto"&gt;R$ 129,90&lt;/div&gt;
-                        &lt;a href="carrinho.html" class="btn-adicionar-carrinho"&gt;
-                            &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
-                            Adicionar ao Carrinho
-                        &lt;/a&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-                
-                &lt;!-- Mais produtos aqui --&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/section&gt;
-
-    &lt;footer&gt;
-        &lt;div class="container"&gt;
-            &lt;div class="conteudo-footer"&gt;
-                &lt;div class="coluna-footer"&gt;
-                    &lt;h3&gt;Floricultura da Vila&lt;/h3&gt;
-                    &lt;p&gt;Há mais de 15 anos levando beleza e emoção através de nossas flores.&lt;/p&gt;
-                    &lt;div class="redes-sociais"&gt;
-                        &lt;!-- Ícones de redes sociais --&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-                
-                &lt;!-- Mais colunas do footer --&gt;
-            &lt;/div&gt;
-            
-            &lt;div class="rodape-inferior"&gt;
-                &lt;p&gt;&amp;copy; 2023 Floricultura da Vila. Todos os direitos reservados.&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/footer&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                </div>
-                
-                <div class="tab-content" id="html-explicado">
-                    <h4>Principais Tags HTML5 Utilizadas</h4>
-                    
-                    <h5>Estrutura Básica</h5>
-                    <ul>
-                        <li><code>&lt;!DOCTYPE html&gt;</code>: Declara que este é um documento HTML5</li>
-                        <li><code>&lt;html lang="pt-br"&gt;</code>: Elemento raiz com atributo de idioma</li>
-                        <li><code>&lt;head&gt;</code>: Contém metadados sobre o documento</li>
-                        <li><code>&lt;body&gt;</code>: Contém todo o conteúdo visível da página</li>
-                    </ul>
-                    
-                    <h5>Metadados</h5>
-                    <ul>
-                        <li><code>&lt;meta charset="UTF-8"&gt;</code>: Define a codificação de caracteres</li>
-                        <li><code>&lt;meta name="viewport"&gt;</code>: Configura a viewport para responsividade</li>
-                        <li><code>&lt;title&gt;</code>: Define o título da página</li>
-                    </ul>
-                    
-                    <h5>Elementos Semânticos</h5>
-                    <ul>
-                        <li><code>&lt;header&gt;</code>: Cabeçalho da página ou seção</li>
-                        <li><code>&lt;nav&gt;</code>: Seção de navegação</li>
-                        <li><code>&lt;section&gt;</code>: Seção temática de conteúdo</li>
-                        <li><code>&lt;footer&gt;</code>: Rodapé da página ou seção</li>
-                    </ul>
-                    
-                    <h5>Conteúdo</h5>
-                    <ul>
-                        <li><code>&lt;h1&gt;</code> a <code>&lt;h3&gt;</code>: Títulos com diferentes níveis de hierarquia</li>
-                        <li><code>&lt;p&gt;</code>: Parágrafo de texto</li>
-                        <li><code>&lt;a href="..."&gt;</code>: Link para outra página ou recurso</li>
-                        <li><code>&lt;img src="..." alt="..."&gt;</code>: Imagem com texto alternativo</li>
-                        <li><code>&lt;ul&gt;</code> e <code>&lt;li&gt;</code>: Lista não ordenada e seus itens</li>
-                        <li><code>&lt;button&gt;</code>: Botão clicável</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção: CSS -->
-        <section id="css">
-            <h2>Estilização com CSS</h2>
-            <p>Agora vamos estilizar nossa aplicação com CSS para criar uma interface atraente e responsiva.</p>
-            
-            <div class="code-tabs">
-                <div class="tab-buttons">
-                    <button class="tab-button active" data-tab="css-completo">CSS Completo</button>
-                    <button class="tab-button" data-tab="css-explicado">CSS Explicado</button>
-                </div>
-                
-                <div class="tab-content active" id="css-completo">
-                    <pre><code class="css">/* --- VARIÁVEIS CSS --- */
-:root {
-    --verde-principal: #2e7d32;
-    --verde-claro: #4caf50;
-    --verde-escuro: #1b5e20;
-    --rosa-claro: #f8bbd0;
-    --amarelo: #ffd54f;
-    --texto-escuro: #2e2e2e;
-    --texto-claro: #757575;
-    --fundo-claro: #f9f9f9;
-    --branco: #ffffff;
-    --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --transicao: all 0.3s ease;
-}
-
-/* --- ESTILOS GLOBAIS --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    background-color: var(--fundo-claro);
-    color: var(--texto-escuro);
-}
-
-h1, h2, h3, h4 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-/* --- HEADER --- */
-header {
-    background-color: var(--branco);
-    box-shadow: var(--sombra);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.container-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--verde-principal);
-}
-
-/* --- HERO SECTION --- */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('https://images.unsplash.com/photo-1487070183337-7f1c5d440d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    color: var(--branco);
-    padding: 5rem 0;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-/* --- SEÇÃO DE PRODUTOS --- */
-.secao-produtos {
-    padding: 4rem 0;
-}
-
-.cabecalho-secao {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.cabecalho-secao h2 {
-    font-size: 2.5rem;
-    color: var(--verde-principal);
-}
-
-.grid-produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-}
-
-.card-produto {
-    background-color: var(--branco);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--sombra);
-    transition: var(--transicao);
-}
-
-.card-produto:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* --- FOOTER --- */
-footer {
-    background-color: var(--verde-escuro);
-    color: var(--branco);
-    padding: 3rem 0 1.5rem;
-}
-
-.conteudo-footer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 768px) {
-    .container-header {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-}</code></pre>
-                </div>
-                
-                <div class="tab-content" id="css-explicado">
-                    <h4>Explicação Detalhada do CSS</h4>
-                    
-                    <h5>Variáveis CSS</h5>
-                    <p>As variáveis CSS (definidas em <code>:root</code>) permitem reutilizar valores em todo o código, facilitando a manutenção e garantindo consistência visual.</p>
-                    
-                    <h5>Box-sizing</h5>
-                    <p>O valor <code>border-box</code> faz com que padding e border sejam incluídos na largura e altura totais dos elementos, facilitando o cálculo de dimensões.</p>
-                    
-                    <h5>Flexbox e Grid</h5>
-                    <ul>
-                        <li><code>display: flex</code>: Cria um container flexível para layouts unidimensionais</li>
-                        <li><code>display: grid</code>: Cria um sistema de layout bidimensional (linhas e colunas)</li>
-                        <li><code>justify-content</code> e <code>align-items</code>: Controlam o alinhamento nos eixos principal e transversal</li>
-                    </ul>
-                    
-                    <h5>Transições</h5>
-                    <p>A propriedade <code>transition</code> cria animações suaves entre estados (como hover), melhorando a experiência do usuário.</p>
-                    
-                    <h5>Media Queries</h5>
-                    <p>As regras <code>@media</code> aplicam estilos específicos baseados no tamanho da tela, garantindo que o layout seja responsivo.</p>
-                    
-                    <h5>Posicionamento</h5>
-                    <ul>
-                        <li><code>position: sticky</code>: Fixa um elemento quando atinge uma determinada posição durante a rolagem</li>
-                        <li><code>position: relative</code> e <code>absolute</code>: Permitem posicionamento preciso de elementos</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção: Resultado -->
-        <section id="resultado">
-            <h2>Resultado Final</h2>
-            <p>Abaixo está uma demonstração do protótipo final que seus alunos criarão seguindo este tutorial:</p>
-            
-            <div class="prototype-demo">
-                <div class="demo-container">
-                    <!-- Aqui seria inserido o protótipo real se estivéssemos em um ambiente com recursos externos -->
-                    <div style="text-align: center; padding: 2rem; background: #f0f0f0; border-radius: 8px;">
-                        <h3>Demonstração do Protótipo</h3>
-                        <p>Esta área conteria o protótipo funcional em um ambiente real.</p>
-                        <p>Para ver o resultado completo, baixe os arquivos e abra <code>index.html</code> em seu navegador.</p>
-                        <button class="btn" id="downloadBtn">Baixar Código Fonte</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="box box-tip">
-                <h4>Próximos Passos</h4>
-                <p>Após concluir este protótipo estático, você pode avançar para:</p>
-                <ul>
-                    <li>Adicionar funcionalidades JavaScript para interatividade</li>
-                    <li>Implementar um carrinho de compras funcional</li>
-                    <li>Criar um sistema de login de usuários</li>
-                    <li>Integrar com uma API de pagamento</li>
-                    <li>Otimizar para SEO e acessibilidade</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Botão de Download -->
-        <div style="text-align: center; margin: 2rem 0;">
-            <button class="btn btn-secondary" id="fullDownloadBtn">Baixar Tutorial Completo</button>
+        <div class="box box-info">
+          <h4>Contexto do Cliente</h4>
+          <p>Durante a entrevista, o cliente descreveu suas necessidades:</p>
+          <ul>
+            <li>Exibir produtos através de uma aplicação web</li>
+            <li>
+              Apresentar produtos em cards com: nome, descrição, preço e ícone
+              para adicionar ao carrinho
+            </li>
+            <li>Permitir navegação intuitiva entre páginas</li>
+            <li>
+              Oferecer processo de compra com seleção de quantidade, forma de
+              pagamento e endereço
+            </li>
+            <li>Fornecer feedback claro em caso de problemas</li>
+            <li>Permitir cancelamento a qualquer momento</li>
+            <li>Incluir botão "Home" para retornar à página inicial</li>
+          </ul>
         </div>
+      </section>
+
+      <!-- Seção: Requisitos -->
+      <section id="requisitos">
+        <h2>Requisitos do Protótipo HTML5/CSS</h2>
+        <p>
+          Para atender às necessidades do cliente, definimos os seguintes
+          requisitos:
+        </p>
+
+        <ol>
+          <li><strong>Estrutura semântica</strong> usando HTML5</li>
+          <li>
+            <strong>Layout responsivo</strong> que funcione em dispositivos
+            móveis e desktop
+          </li>
+          <li><strong>Sistema de navegação</strong> claro e intuitivo</li>
+          <li><strong>Apresentação visual atraente</strong> dos produtos</li>
+          <li><strong>Hierarquia de informação</strong> bem definida</li>
+          <li>
+            <strong>Fluxo de compra</strong> simplificado (para protótipo)
+          </li>
+          <li><strong>Feedback visual</strong> para ações do usuário</li>
+          <li><strong>Tipografia</strong> legível e adequada ao tema</li>
+        </ol>
+      </section>
+
+      <!-- Seção: Planejamento -->
+      <section id="planejamento">
+        <h2>Planejamento do Design</h2>
+
+        <h3>Tipografia</h3>
+        <ul>
+          <li>
+            <strong>Títulos</strong>: "Playfair Display" - elegante e
+            sofisticada
+          </li>
+          <li><strong>Texto corrido</strong>: "Poppins" - legível e moderna</li>
+        </ul>
+
+        <h3>Navegação</h3>
+        <ul>
+          <li>Header fixo com logo e menu principal</li>
+          <li>Ícones de ação (carrinho, usuário, pesquisa)</li>
+          <li>Breadcrumbs visuais implícitos</li>
+          <li>Footer com informações de contato</li>
+        </ul>
+
+        <h3>Hierarquia de Informação</h3>
+        <ol>
+          <li>Identidade da marca (header)</li>
+          <li>Destaque principal (hero section)</li>
+          <li>Produtos em grid</li>
+          <li>Informações institucionais (footer)</li>
+        </ol>
+
+        <h3>Fluxo da Aplicação</h3>
+        <ol>
+          <li>Página inicial → Lista de produtos</li>
+          <li>Produto → Adicionar ao carrinho</li>
+          <li>Carrinho → Finalizar compra (simulado)</li>
+        </ol>
+
+        <h3>Partes a serem Prototipadas</h3>
+        <ul>
+          <li>Página inicial com lista de produtos</li>
+          <li>Header com navegação</li>
+          <li>Footer institucional</li>
+          <li>Layout do carrinho (visualização básica)</li>
+        </ul>
+
+        <div class="box box-tip">
+          <h4>Dica de Design</h4>
+          <p>
+            Utilize uma paleta de cores baseada na natureza para transmitir a
+            essência da floricultura. Verdes, rosas suaves e amarelos funcionam
+            bem neste contexto.
+          </p>
+        </div>
+      </section>
+
+      <!-- Seção: Implementação -->
+      <section id="implementacao">
+        <h2>Implementação do Protótipo</h2>
+        <p>
+          Agora vamos implementar o protótipo seguindo os requisitos e
+          planejamento definidos.
+        </p>
+
+        <div class="box box-warning">
+          <h4>Atenção</h4>
+          <p>
+            Este é um protótipo estático que não inclui funcionalidades
+            JavaScript avançadas. O foco é na estrutura HTML e estilização CSS.
+          </p>
+        </div>
+
+        <h3>Estrutura de Arquivos</h3>
+        <p>Crie os seguintes arquivos em uma pasta do projeto:</p>
+        <ul>
+          <li><code>index.html</code> - Página principal</li>
+          <li><code>style.css</code> - Estilos da aplicação</li>
+          <li><code>carrinho.html</code> - Página do carrinho (opcional)</li>
+        </ul>
+      </section>
+
+      <!-- Seção: HTML -->
+      <section id="html">
+        <h2>Código HTML5</h2>
+        <p>Vamos começar com a estrutura HTML da página principal.</p>
+
+        <div class="code-tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="html-completo">
+              HTML Completo
+            </button>
+            <button class="tab-button" data-tab="html-explicado">
+              HTML Explicado
+            </button>
+          </div>
+
+          <div class="tab-content active" id="html-completo">
+            <pre><code class="html">
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="pt-br"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;Floricultura da Vila - E-commerce&lt;/title&gt;
+                    
+                    &lt;!-- Fontes e Ícones --&gt;
+                    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+                    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+                    &lt;link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"&gt;
+                    &lt;link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"&gt;
+
+                    &lt;link rel="stylesheet" href="./exemplo-floricultura.css"&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;!-- Header --&gt;
+                    &lt;header&gt;
+                        &lt;div class="container header-container"&gt;
+                            &lt;a href="index.html" class="logo"&gt;
+                                &lt;span class="material-icons logo-icon"&gt;local_florist&lt;/span&gt;
+                                Floricultura da Vila
+                            &lt;/a&gt;
+                            
+                            &lt;nav&gt;
+                                &lt;ul&gt;
+                                    &lt;li&gt;&lt;a href="index.html"&gt;Início&lt;/a&gt;&lt;/li&gt;
+                                    &lt;li&gt;&lt;a href="produtos.html"&gt;Produtos&lt;/a&gt;&lt;/li&gt;
+                                    &lt;li&gt;&lt;a href="sobre.html"&gt;Sobre&lt;/a&gt;&lt;/li&gt;
+                                    &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;/nav&gt;
+                            
+                            &lt;div class="nav-icons"&gt;
+                                &lt;a href="#" class="icon-btn" id="search-btn"&gt;
+                                    &lt;span class="material-icons"&gt;search&lt;/span&gt;
+                                &lt;/a&gt;
+                                &lt;a href="#" class="icon-btn" id="user-btn"&gt;
+                                    &lt;span class="material-icons"&gt;person&lt;/span&gt;
+                                &lt;/a&gt;
+                                &lt;a href="carrinho.html" class="icon-btn" id="cart-btn"&gt;
+                                    &lt;span class="material-icons"&gt;shopping_cart&lt;/span&gt;
+                                    &lt;span class="cart-count"&gt;2&lt;/span&gt;
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/header&gt;
+
+                    &lt;!-- Hero Section --&gt;
+                    &lt;section class="hero"&gt;
+                        &lt;div class="container"&gt;
+                            &lt;h1&gt;Flores que encantam e emocionam&lt;/h1&gt;
+                            &lt;p&gt;Descubra nossa seleção exclusiva de arranjos florais para todas as ocasiões especiais da sua vida.&lt;/p&gt;
+                            &lt;a href="produtos.html" class="btn btn-primary"&gt;Ver Produtos&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/section&gt;
+
+                    &lt;!-- Produtos em Destaque --&gt;
+                    &lt;section class="products-section"&gt;
+                        &lt;div class="container"&gt;
+                            &lt;div class="section-header"&gt;
+                                &lt;h2&gt;Nossos Produtos&lt;/h2&gt;
+                                &lt;p&gt;Selecione entre nossa variedade de flores frescas e arranjos exclusivos&lt;/p&gt;
+                            &lt;/div&gt;
+                            
+                            &lt;div class="product-filters"&gt;
+                                &lt;button class="filter-btn active"&gt;Todos&lt;/button&gt;
+                                &lt;button class="filter-btn"&gt;Buquês&lt;/button&gt;
+                                &lt;button class="filter-btn"&gt;Rosas&lt;/button&gt;
+                                &lt;button class="filter-btn"&gt;Orquídeas&lt;/button&gt;
+                                &lt;button class="filter-btn"&gt;Presentes&lt;/button&gt;
+                            &lt;/div&gt;
+                            
+                            &lt;div class="products-grid"&gt;
+                                &lt;!-- Produto 1 --&gt;
+                                &lt;div class="product-card"&gt;
+                                    &lt;div class="product-image"&gt;
+                                        &lt;img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Buquê de Rosas Vermelhas"&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class="product-info"&gt;
+                                        &lt;h3 class="product-name"&gt;Buquê de Rosas Vermelhas&lt;/h3&gt;
+                                        &lt;p class="product-description"&gt;Conjunto de 12 rosas vermelhas adornadas com flores brancas do tipo carmélias e folhagem verde.&lt;/p&gt;
+                                        &lt;div class="product-price"&gt;R$ 129,90&lt;/div&gt;
+                                        &lt;a href="carrinho.html" class="add-to-cart-btn"&gt;
+                                            &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                                            Adicionar ao Carrinho
+                                        &lt;/a&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;!-- Produto 2 --&gt;
+                                &lt;div class="product-card"&gt;
+                                    &lt;div class="product-image"&gt;
+                                        &lt;img src="https://images.unsplash.com/photo-1534885320675-b08aa131cc5e?ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;q=80&amp;w=735" alt="Orquídea Phalaenopsis"&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class="product-info"&gt;
+                                        &lt;h3 class="product-name"&gt;Orquídea Phalaenopsis&lt;/h3&gt;
+                                        &lt;p class="product-description"&gt;Orquídea branca elegante em vaso de cerâmica, ideal para presentes e decoração de interiores.&lt;/p&gt;
+                                        &lt;div class="product-price"&gt;R$ 89,90&lt;/div&gt;
+                                        &lt;a href="carrinho.html" class="add-to-cart-btn"&gt;
+                                            &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                                            Adicionar ao Carrinho
+                                        &lt;/a&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;!-- Produto 3 --&gt;
+                                &lt;div class="product-card"&gt;
+                                    &lt;div class="product-image"&gt;
+                                        &lt;img src="https://media.istockphoto.com/id/1132308456/pt/foto/sunflowers-arrangements.jpg?s=2048x2048&amp;w=is&amp;k=20&amp;c=VbfqSmfH6B_7iqkTvbd4FrQbElFcFDsKGpmd4ouJfnc=" alt="Girassóis"&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class="product-info"&gt;
+                                        &lt;h3 class="product-name"&gt;Buquê de Girassóis&lt;/h3&gt;
+                                        &lt;p class="product-description"&gt;Arranjo vibrante com 5 girassóis frescos, perfeito para trazer alegria e energia ao ambiente.&lt;/p&gt;
+                                        &lt;div class="product-price"&gt;R$ 65,50&lt;/div&gt;
+                                        &lt;a href="carrinho.html" class="add-to-cart-btn"&gt;
+                                            &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                                            Adicionar ao Carrinho
+                                        &lt;/a&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;!-- Produto 4 --&gt;
+                                &lt;div class="product-card"&gt;
+                                    &lt;div class="product-image"&gt;
+                                        &lt;img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Cesta de Flores"&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class="product-info"&gt;
+                                        &lt;h3 class="product-name"&gt;Cesta de Flores Mistas&lt;/h3&gt;
+                                        &lt;p class="product-description"&gt;Seleção especial de flores da estação arranjadas em uma linda cesta de vime.&lt;/p&gt;
+                                        &lt;div class="product-price"&gt;R$ 149,90&lt;/div&gt;
+                                        &lt;a href="carrinho.html" class="add-to-cart-btn"&gt;
+                                            &lt;span class="material-icons"&gt;add_shopping_cart&lt;/span&gt;
+                                            Adicionar ao Carrinho
+                                        &lt;/a&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/section&gt;
+
+                    &lt;!-- Footer --&gt;
+                    &lt;footer&gt;
+                        &lt;div class="container"&gt;
+                            &lt;div class="footer-content"&gt;
+                                &lt;div class="footer-column"&gt;
+                                    &lt;h3&gt;Floricultura da Vila&lt;/h3&gt;
+                                    &lt;p&gt;Há mais de 15 anos levando beleza e emoção através de nossas flores. Qualidade e atendimento personalizado são nossa marca.&lt;/p&gt;
+                                    &lt;div class="social-links"&gt;
+                                        &lt;a href="#" class="social-link"&gt;
+                                            &lt;span class="material-icons"&gt;facebook&lt;/span&gt;
+                                        &lt;/a&gt;
+                                        &lt;a href="#" class="social-link"&gt;
+                                            &lt;span class="material-icons"&gt;instagram&lt;/span&gt;
+                                        &lt;/a&gt;
+                                        &lt;a href="#" class="social-link"&gt;
+                                            &lt;span class="material-icons"&gt;pinterest&lt;/span&gt;
+                                        &lt;/a&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;div class="footer-column"&gt;
+                                    &lt;h3&gt;Links Rápidos&lt;/h3&gt;
+                                    &lt;ul class="footer-links"&gt;
+                                        &lt;li&gt;&lt;a href="index.html"&gt;Início&lt;/a&gt;&lt;/li&gt;
+                                        &lt;li&gt;&lt;a href="produtos.html"&gt;Produtos&lt;/a&gt;&lt;/li&gt;
+                                        &lt;li&gt;&lt;a href="sobre.html"&gt;Sobre Nós&lt;/a&gt;&lt;/li&gt;
+                                        &lt;li&gt;&lt;a href="contato.html"&gt;Contato&lt;/a&gt;&lt;/li&gt;
+                                        &lt;li&gt;&lt;a href="politica.html"&gt;Política de Privacidade&lt;/a&gt;&lt;/li&gt;
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;div class="footer-column"&gt;
+                                    &lt;h3&gt;Contato&lt;/h3&gt;
+                                    &lt;ul class="footer-links"&gt;
+                                        &lt;li&gt;
+                                            &lt;span class="material-icons" style="vertical-align: middle; margin-right: 5px;"&gt;location_on&lt;/span&gt;
+                                            Rua das Flores, 123 - Centro
+                                        &lt;/li&gt;
+                                        &lt;li&gt;
+                                            &lt;span class="material-icons" style="vertical-align: middle; margin-right: 5px;"&gt;call&lt;/span&gt;
+                                            (11) 3456-7890
+                                        &lt;/li&gt;
+                                        &lt;li&gt;
+                                            &lt;span class="material-icons" style="vertical-align: middle; margin-right: 5px;"&gt;email&lt;/span&gt;
+                                            contato@floriculturadavila.com
+                                        &lt;/li&gt;
+                                        &lt;li&gt;
+                                            &lt;span class="material-icons" style="vertical-align: middle; margin-right: 5px;"&gt;schedule&lt;/span&gt;
+                                            Seg-Sex: 8h-18h | Sáb: 8h-12h
+                                        &lt;/li&gt;
+                                    &lt;/ul&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            
+                            &lt;div class="footer-bottom"&gt;
+                                &lt;p&gt;&amp;copy; 2023 Floricultura da Vila. Todos os direitos reservados.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/footer&gt;
+
+                    &lt;!-- Modal de Pagamento (exemplo) --&gt;
+                    &lt;div class="modal-overlay" id="payment-modal"&gt;
+                        &lt;div class="modal"&gt;
+                            &lt;div class="modal-header"&gt;
+                                &lt;h3&gt;Forma de Pagamento&lt;/h3&gt;
+                                &lt;button class="close-modal" id="close-payment-modal"&gt;
+                                    &lt;span class="material-icons"&gt;close&lt;/span&gt;
+                                &lt;/button&gt;
+                            &lt;/div&gt;
+                            
+                            &lt;div class="payment-options"&gt;
+                                &lt;div class="payment-option selected"&gt;
+                                    &lt;div class="payment-icon"&gt;
+                                        &lt;span class="material-icons"&gt;credit_card&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;div&gt;
+                                        &lt;h4&gt;Cartão de Crédito&lt;/h4&gt;
+                                        &lt;p&gt;Parcelamento em até 10x&lt;/p&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;div class="payment-option"&gt;
+                                    &lt;div class="payment-icon"&gt;
+                                        &lt;span class="material-icons"&gt;account_balance&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;div&gt;
+                                        &lt;h4&gt;Transferência Bancária&lt;/h4&gt;
+                                        &lt;p&gt;5% de desconto&lt;/p&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                                
+                                &lt;div class="payment-option"&gt;
+                                    &lt;div class="payment-icon"&gt;
+                                        &lt;span class="material-icons"&gt;local_atm&lt;/span&gt;
+                                    &lt;/div&gt;
+                                    &lt;div&gt;
+                                        &lt;h4&gt;PIX&lt;/h4&gt;
+                                        &lt;p&gt;10% de desconto&lt;/p&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                            
+                            &lt;button class="btn btn-primary" style="width: 100%;"&gt;Confirmar Pagamento&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;script&gt;
+                        // Simulação de funcionalidades básicas
+                        document.addEventListener('DOMContentLoaded', function() {
+                            // Filtros de produtos
+                            const filterBtns = document.querySelectorAll('.filter-btn');
+                            filterBtns.forEach(btn =&gt; {
+                                btn.addEventListener('click', function() {
+                                    filterBtns.forEach(b =&gt; b.classList.remove('active'));
+                                    this.classList.add('active');
+                                });
+                            });
+                            
+                            // Modal de pagamento
+                            const paymentModal = document.getElementById('payment-modal');
+                            const closePaymentModal = document.getElementById('close-payment-modal');
+                            
+                            closePaymentModal.addEventListener('click', function() {
+                                paymentModal.classList.remove('active');
+                            });
+                            
+                            // Seleção de opções de pagamento
+                            const paymentOptions = document.querySelectorAll('.payment-option');
+                            paymentOptions.forEach(option =&gt; {
+                                option.addEventListener('click', function() {
+                                    paymentOptions.forEach(o =&gt; o.classList.remove('selected'));
+                                    this.classList.add('selected');
+                                });
+                            });
+                            
+                            // Botão de finalizar compra (exemplo)
+                            const checkoutBtn = document.querySelector('.checkout-btn');
+                            if (checkoutBtn) {
+                                checkoutBtn.addEventListener('click', function() {
+                                    paymentModal.classList.add('active');
+                                });
+                            }
+                        });
+                    &lt;/script&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+
+                    </code></pre>
+          </div>
+
+          <div class="tab-content" id="html-explicado">
+            <h4>Principais Tags HTML5 Utilizadas</h4>
+
+            <h5>Estrutura Básica</h5>
+            <ul>
+              <li>
+                <code>&lt;!DOCTYPE html&gt;</code>: Declara que este é um
+                documento HTML5
+              </li>
+              <li>
+                <code>&lt;html lang="pt-br"&gt;</code>: Elemento raiz com
+                atributo de idioma
+              </li>
+              <li>
+                <code>&lt;head&gt;</code>: Contém metadados sobre o documento
+              </li>
+              <li>
+                <code>&lt;body&gt;</code>: Contém todo o conteúdo visível da
+                página
+              </li>
+            </ul>
+
+            <h5>Metadados</h5>
+            <ul>
+              <li>
+                <code>&lt;meta charset="UTF-8"&gt;</code>: Define a codificação
+                de caracteres
+              </li>
+              <li>
+                <code>&lt;meta name="viewport"&gt;</code>: Configura a viewport
+                para responsividade
+              </li>
+              <li><code>&lt;title&gt;</code>: Define o título da página</li>
+            </ul>
+
+            <h5>Elementos Semânticos</h5>
+            <ul>
+              <li><code>&lt;header&gt;</code>: Cabeçalho da página ou seção</li>
+              <li><code>&lt;nav&gt;</code>: Seção de navegação</li>
+              <li><code>&lt;section&gt;</code>: Seção temática de conteúdo</li>
+              <li><code>&lt;footer&gt;</code>: Rodapé da página ou seção</li>
+            </ul>
+
+            <h5>Conteúdo</h5>
+            <ul>
+              <li>
+                <code>&lt;h1&gt;</code> a <code>&lt;h3&gt;</code>: Títulos com
+                diferentes níveis de hierarquia
+              </li>
+              <li><code>&lt;p&gt;</code>: Parágrafo de texto</li>
+              <li>
+                <code>&lt;a href="..."&gt;</code>: Link para outra página ou
+                recurso
+              </li>
+              <li>
+                <code>&lt;img src="..." alt="..."&gt;</code>: Imagem com texto
+                alternativo
+              </li>
+              <li>
+                <code>&lt;ul&gt;</code> e <code>&lt;li&gt;</code>: Lista não
+                ordenada e seus itens
+              </li>
+              <li><code>&lt;button&gt;</code>: Botão clicável</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção: CSS -->
+      <section id="css">
+        <h2>Estilização com CSS</h2>
+        <p>
+          Agora vamos estilizar nossa aplicação com CSS para criar uma interface
+          atraente e responsiva.
+        </p>
+
+        <div class="code-tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="css-completo">
+              CSS Completo
+            </button>
+            <button class="tab-button" data-tab="css-explicado">
+              CSS Explicado
+            </button>
+          </div>
+
+          <div class="tab-content active" id="css-completo">
+            <pre><code class="css">
+                                        /* --- RESET E ESTILOS GLOBAIS --- */
+                * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                }
+
+                :root {
+                --primary-color: #2e7d32; /* Verde principal */
+                --primary-light: #4caf50;
+                --primary-dark: #1b5e20;
+                --secondary-color: #f8bbd0; /* Rosa claro */
+                --accent-color: #ffd54f; /* Amarelo */
+                --text-dark: #2e2e2e;
+                --text-light: #757575;
+                --background-light: #f9f9f9;
+                --white: #ffffff;
+                --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                --transition: all 0.3s ease;
+                }
+
+                body {
+                font-family: "Poppins", sans-serif;
+                line-height: 1.6;
+                background-color: var(--background-light);
+                color: var(--text-dark);
+                }
+
+                h1,
+                h2,
+                h3,
+                h4 {
+                font-family: "Playfair Display", serif;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                }
+
+                a {
+                text-decoration: none;
+                color: inherit;
+                }
+
+                button,
+                .btn {
+                cursor: pointer;
+                border: none;
+                border-radius: 4px;
+                padding: 0.75rem 1.5rem;
+                font-family: "Poppins", sans-serif;
+                font-weight: 500;
+                transition: var(--transition);
+                }
+
+                .btn-primary {
+                background-color: var(--primary-color);
+                color: var(--white);
+                }
+
+                .btn-primary:hover {
+                background-color: var(--primary-dark);
+                }
+
+                .btn-secondary {
+                background-color: var(--accent-color);
+                color: var(--text-dark);
+                }
+
+                .btn-secondary:hover {
+                background-color: #ffc107;
+                }
+
+                .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 1rem;
+                }
+
+                /* --- HEADER E NAVEGAÇÃO --- */
+                header {
+                background-color: var(--white);
+                box-shadow: var(--shadow);
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                }
+
+                .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 0;
+                }
+
+                .logo {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-family: "Playfair Display", serif;
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: var(--primary-color);
+                }
+
+                .logo-icon {
+                color: var(--primary-light);
+                }
+
+                nav ul {
+                display: flex;
+                list-style: none;
+                gap: 2rem;
+                }
+
+                nav a {
+                font-weight: 500;
+                position: relative;
+                padding: 0.5rem 0;
+                }
+
+                nav a:hover {
+                color: var(--primary-color);
+                }
+
+                nav a::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--primary-color);
+                transition: var(--transition);
+                }
+
+                nav a:hover::after {
+                width: 100%;
+                }
+
+                .nav-icons {
+                display: flex;
+                gap: 1rem;
+                }
+
+                .icon-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: var(--background-light);
+                transition: var(--transition);
+                }
+
+                .icon-btn:hover {
+                background-color: var(--primary-light);
+                color: var(--white);
+                }
+
+                .cart-count {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                background-color: var(--accent-color);
+                color: var(--text-dark);
+                font-size: 0.75rem;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                }
+
+                /* --- HERO SECTION --- */
+                .hero {
+                background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url("https://images.unsplash.com/photo-1487070183337-7f1c5d440d05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+                background-size: cover;
+                background-position: center;
+                color: var(--white);
+                padding: 5rem 0;
+                text-align: center;
+                }
+
+                .hero h1 {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                }
+
+                .hero p {
+                font-size: 1.2rem;
+                max-width: 600px;
+                margin: 0 auto 2rem;
+                }
+
+                /* --- PRODUTOS --- */
+                .products-section {
+                padding: 4rem 0;
+                }
+
+                .section-header {
+                text-align: center;
+                margin-bottom: 3rem;
+                }
+
+                .section-header h2 {
+                font-size: 2.5rem;
+                color: var(--primary-color);
+                }
+
+                .section-header p {
+                color: var(--text-light);
+                max-width: 600px;
+                margin: 0 auto;
+                }
+
+                .product-filters {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 2rem;
+                flex-wrap: wrap;
+                }
+
+                .filter-btn {
+                background-color: var(--white);
+                border: 1px solid #e0e0e0;
+                padding: 0.5rem 1.5rem;
+                border-radius: 30px;
+                transition: var(--transition);
+                }
+
+                .filter-btn.active,
+                .filter-btn:hover {
+                background-color: var(--primary-color);
+                color: var(--white);
+                border-color: var(--primary-color);
+                }
+
+                .products-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 2rem;
+                }
+
+                .product-card {
+                background-color: var(--white);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: var(--shadow);
+                transition: var(--transition);
+                }
+
+                .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                }
+
+                .product-image {
+                height: 200px;
+                overflow: hidden;
+                }
+
+                .product-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: var(--transition);
+                }
+
+                .product-card:hover .product-image img {
+                transform: scale(1.05);
+                }
+
+                .product-info {
+                padding: 1.5rem;
+                }
+
+                .product-name {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+                }
+
+                .product-description {
+                color: var(--text-light);
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                }
+
+                .product-price {
+                font-weight: 600;
+                font-size: 1.25rem;
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+                }
+
+                .add-to-cart-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                width: 100%;
+                padding: 0.75rem;
+                background-color: var(--primary-color);
+                color: var(--white);
+                border-radius: 4px;
+                transition: var(--transition);
+                }
+
+                .add-to-cart-btn:hover {
+                background-color: var(--primary-dark);
+                }
+
+                /* --- FOOTER --- */
+                footer {
+                background-color: var(--primary-dark);
+                color: var(--white);
+                padding: 3rem 0 1.5rem;
+                }
+
+                .footer-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-bottom: 2rem;
+                }
+
+                .footer-column h3 {
+                font-size: 1.25rem;
+                margin-bottom: 1.5rem;
+                position: relative;
+                }
+
+                .footer-column h3::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 40px;
+                height: 2px;
+                background-color: var(--accent-color);
+                }
+
+                .footer-links {
+                list-style: none;
+                }
+
+                .footer-links li {
+                margin-bottom: 0.75rem;
+                }
+
+                .footer-links a {
+                transition: var(--transition);
+                }
+
+                .footer-links a:hover {
+                color: var(--accent-color);
+                padding-left: 5px;
+                }
+
+                .social-links {
+                display: flex;
+                gap: 1rem;
+                margin-top: 1rem;
+                }
+
+                .social-link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.1);
+                transition: var(--transition);
+                }
+
+                .social-link:hover {
+                background-color: var(--accent-color);
+                color: var(--text-dark);
+                }
+
+                .footer-bottom {
+                text-align: center;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                /* --- PÁGINA DO CARRINHO --- */
+                .cart-page {
+                padding: 3rem 0;
+                }
+
+                .cart-container {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 2rem;
+                }
+
+                .cart-items {
+                background-color: var(--white);
+                border-radius: 8px;
+                padding: 1.5rem;
+                box-shadow: var(--shadow);
+                }
+
+                .cart-item {
+                display: grid;
+                grid-template-columns: 100px 1fr auto;
+                gap: 1rem;
+                padding: 1rem 0;
+                border-bottom: 1px solid #eee;
+                }
+
+                .cart-item:last-child {
+                border-bottom: none;
+                }
+
+                .cart-item-image {
+                width: 100px;
+                height: 100px;
+                border-radius: 4px;
+                overflow: hidden;
+                }
+
+                .cart-item-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                }
+
+                .cart-item-details h4 {
+                margin-bottom: 0.5rem;
+                }
+
+                .cart-item-price {
+                color: var(--primary-color);
+                font-weight: 500;
+                }
+
+                .quantity-controls {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+                }
+
+                .quantity-btn {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: var(--background-light);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                }
+
+                .quantity-input {
+                width: 50px;
+                text-align: center;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                padding: 0.25rem;
+                }
+
+                .cart-summary {
+                background-color: var(--white);
+                border-radius: 8px;
+                padding: 1.5rem;
+                box-shadow: var(--shadow);
+                height: fit-content;
+                }
+
+                .summary-row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+                }
+
+                .summary-total {
+                font-weight: 600;
+                font-size: 1.2rem;
+                border-top: 1px solid #eee;
+                padding-top: 1rem;
+                margin-top: 1rem;
+                }
+
+                /* --- MODAL DE PAGAMENTO --- */
+                .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                }
+
+                .modal-overlay.active {
+                opacity: 1;
+                visibility: visible;
+                }
+
+                .modal {
+                background-color: var(--white);
+                border-radius: 8px;
+                width: 90%;
+                max-width: 500px;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                transform: translateY(-20px);
+                transition: var(--transition);
+                }
+
+                .modal-overlay.active .modal {
+                transform: translateY(0);
+                }
+
+                .modal-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                }
+
+                .close-modal {
+                background: none;
+                font-size: 1.5rem;
+                color: var(--text-light);
+                }
+
+                .payment-options {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-bottom: 1.5rem;
+                }
+
+                .payment-option {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: var(--transition);
+                }
+
+                .payment-option:hover,
+                .payment-option.selected {
+                border-color: var(--primary-color);
+                background-color: rgba(46, 125, 50, 0.05);
+                }
+
+                .payment-icon {
+                width: 40px;
+                height: 40px;
+                background-color: var(--background-light);
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                }
+
+                /* --- RESPONSIVIDADE --- */
+                @media (max-width: 768px) {
+                .header-container {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+
+                nav ul {
+                    gap: 1rem;
+                }
+
+                .hero h1 {
+                    font-size: 2rem;
+                }
+
+                .cart-container {
+                    grid-template-columns: 1fr;
+                }
+
+                .cart-item {
+                    grid-template-columns: 80px 1fr;
+                }
+
+                .cart-item-actions {
+                    grid-column: 1 / -1;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: 1rem;
+                }
+                }
+
+                @media (max-width: 480px) {
+                .products-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .product-filters {
+                    gap: 0.5rem;
+                }
+
+                .filter-btn {
+                    padding: 0.5rem 1rem;
+                    font-size: 0.9rem;
+                }
+                }
+
+                    </code></pre>
+          </div>
+
+          <div class="tab-content" id="css-explicado">
+            <h4>Explicação Detalhada do CSS</h4>
+
+            <h5>Variáveis CSS</h5>
+            <p>
+              As variáveis CSS (definidas em <code>:root</code>) permitem
+              reutilizar valores em todo o código, facilitando a manutenção e
+              garantindo consistência visual.
+            </p>
+
+            <h5>Box-sizing</h5>
+            <p>
+              O valor <code>border-box</code> faz com que padding e border sejam
+              incluídos na largura e altura totais dos elementos, facilitando o
+              cálculo de dimensões.
+            </p>
+
+            <h5>Flexbox e Grid</h5>
+            <ul>
+              <li>
+                <code>display: flex</code>: Cria um container flexível para
+                layouts unidimensionais
+              </li>
+              <li>
+                <code>display: grid</code>: Cria um sistema de layout
+                bidimensional (linhas e colunas)
+              </li>
+              <li>
+                <code>justify-content</code> e <code>align-items</code>:
+                Controlam o alinhamento nos eixos principal e transversal
+              </li>
+            </ul>
+
+            <h5>Transições</h5>
+            <p>
+              A propriedade <code>transition</code> cria animações suaves entre
+              estados (como hover), melhorando a experiência do usuário.
+            </p>
+
+            <h5>Media Queries</h5>
+            <p>
+              As regras <code>@media</code> aplicam estilos específicos baseados
+              no tamanho da tela, garantindo que o layout seja responsivo.
+            </p>
+
+            <h5>Posicionamento</h5>
+            <ul>
+              <li>
+                <code>position: sticky</code>: Fixa um elemento quando atinge
+                uma determinada posição durante a rolagem
+              </li>
+              <li>
+                <code>position: relative</code> e <code>absolute</code>:
+                Permitem posicionamento preciso de elementos
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção: Resultado -->
+      <section id="resultado">
+        <h2>Resultado Final</h2>
+        <p>
+          Abaixo está uma demonstração do protótipo final que seus alunos
+          criarão seguindo este tutorial:
+        </p>
+
+        <div class="prototype-demo">
+          <div class="demo-container">
+            <!-- Aqui seria inserido o protótipo real se estivéssemos em um ambiente com recursos externos -->
+            <div
+              style="
+                text-align: center;
+                padding: 2rem;
+                background: #f0f0f0;
+                border-radius: 8px;
+              "
+            >
+              <h3>Demonstração do Protótipo</h3>
+              <p>
+                Esta área conteria o protótipo funcional em um ambiente real.
+              </p>
+              <p>
+                Para ver o resultado completo, baixe os arquivos e abra
+                <code>index.html</code> em seu navegador.
+              </p>
+              <button class="btn" id="downloadBtn">Baixar Código Fonte</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="box box-tip">
+          <h4>Próximos Passos</h4>
+          <p>Após concluir este protótipo estático, você pode avançar para:</p>
+          <ul>
+            <li>Adicionar funcionalidades JavaScript para interatividade</li>
+            <li>Implementar um carrinho de compras funcional</li>
+            <li>Criar um sistema de login de usuários</li>
+            <li>Integrar com uma API de pagamento</li>
+            <li>Otimizar para SEO e acessibilidade</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Botão de Download -->
+      <div style="text-align: center; margin: 2rem 0">
+        <button class="btn btn-secondary" id="fullDownloadBtn">
+          Baixar Tutorial Completo
+        </button>
+      </div>
     </main>
-    
+
     <!-- Footer do Tutorial -->
     <footer class="tutorial-footer">
-        <div class="container">
-            <p>Tutorial criado para a disciplina de Autoração Multimídia 2- Prof. Wellington Sarmento</p>
-        </div>
+      <div class="container">
+        <p>
+          Tutorial criado para a disciplina de Autoração Multimídia 2- Prof.
+          Wellington Sarmento
+        </p>
+      </div>
     </footer>
-    
+
     <script>
-        // Inicializar highlight.js
-        hljs.highlightAll();
-        
-        // Sistema de abas
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabButtons = document.querySelectorAll('.tab-button');
-            
-            tabButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const tabId = this.getAttribute('data-tab');
-                    
-                    // Remover classe active de todos os botões e conteúdos
-                    document.querySelectorAll('.tab-button').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    document.querySelectorAll('.tab-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-                    
-                    // Adicionar classe active ao botão e conteúdo clicado
-                    this.classList.add('active');
-                    document.getElementById(tabId).classList.add('active');
-                });
+      // Inicializar highlight.js
+      hljs.highlightAll();
+
+      // Sistema de abas
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-button");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const tabId = this.getAttribute("data-tab");
+
+            // Remover classe active de todos os botões e conteúdos
+            document.querySelectorAll(".tab-button").forEach((btn) => {
+              btn.classList.remove("active");
             });
-            
-            // Navegação suave para âncoras
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
+            document.querySelectorAll(".tab-content").forEach((content) => {
+              content.classList.remove("active");
             });
-            
-            // Simular download dos arquivos
-            document.getElementById('downloadBtn').addEventListener('click', function() {
-                alert('Em um ambiente real, isso baixaria os arquivos do protótipo.');
-            });
-            
-            document.getElementById('fullDownloadBtn').addEventListener('click', function() {
-                alert('Em um ambiente real, isso baixaria todos os arquivos do tutorial.');
-            });
+
+            // Adicionar classe active ao botão e conteúdo clicado
+            this.classList.add("active");
+            document.getElementById(tabId).classList.add("active");
+          });
         });
+
+        // Navegação suave para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 100,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Simular download dos arquivos
+        document
+          .getElementById("downloadBtn")
+          .addEventListener("click", function () {
+            alert(
+              "Em um ambiente real, isso baixaria os arquivos do protótipo."
+            );
+          });
+
+        document
+          .getElementById("fullDownloadBtn")
+          .addEventListener("click", function () {
+            alert(
+              "Em um ambiente real, isso baixaria todos os arquivos do tutorial."
+            );
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
