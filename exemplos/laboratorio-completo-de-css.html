@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratório Interativo de CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        h1, h2 {
+            width: 100%;
+            color: #1a1a1a;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        .controls {
+            flex: 1;
+            min-width: 300px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+        }
+        .control-group { margin-bottom: 15px; }
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .control-group label span {
+            font-weight: 400;
+            color: #007bff;
+            background-color: #e6f2ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        input[type="range"], select { width: 100%; }
+        select { padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
+        
+        .playground-wrapper { flex: 2; min-width: 400px; }
+        .main-playground {
+            position: relative; /* FUNDAMENTAL! Âncora para 'absolute' */
+            height: 400px;
+            background-color: #ffffff;
+            border: 3px dashed #b0b0b0;
+            border-radius: 8px;
+            padding: 10px;
+            overflow-y: scroll; /* Para testar 'sticky' */
+        }
+        #target-box {
+            width: 150px;
+            height: 100px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            display: grid;
+            place-items: center; 
+            transition: all 0.1s ease-out;
+            border: 0px solid #e67e22; /* Borda inicial */
+        }
+        .static-box {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: #555;
+        }
+        .scroll-content { height: 600px; opacity: 0.3; }
+        
+        .code-output {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.9em;
+        }
+        .code-output span { color: #9cdcfe; }
+        .code-output .value { color: #ce9178; }
+    </style>
+</head>
+<body>
+
+    <h1>🚀 Laboratório Interativo de CSS</h1>
+
+    <div class="controls">
+        <h2>Painel de Controles</h2>
+
+        <fieldset>
+            <legend><strong>Posicionamento</strong></legend>
+            <div class="control-group">
+                <label for="position">position</label>
+                <select id="position">
+                    <option value="static">static</option>
+                    <option value="relative">relative</option>
+                    <option value="absolute">absolute</option>
+                    <option value="fixed">fixed</option>
+                    <option value="sticky">sticky</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="top">top: <span id="top-value">0px</span></label>
+                <input type="range" id="top" min="-50" max="200" value="0">
+            </div>
+            <div class="control-group">
+                <label for="left">left: <span id="left-value">0px</span></label>
+                <input type="range" id="left" min="-50" max="200" value="0">
+            </div>
+            <div class="control-group">
+                <label for="z-index">z-index: <span id="z-index-value">0</span></label>
+                <input type="range" id="z-index" min="-5" max="10" value="0">
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend><strong>Box Model</strong></legend>
+            <div class="control-group">
+                <label for="padding">padding: <span id="padding-value">0px</span></label>
+                <input type="range" id="padding" min="0" max="50" value="0">
+            </div>
+            <div class="control-group">
+                <label for="margin">margin: <span id="margin-value">0px</span></label>
+                <input type="range" id="margin" min="0" max="50" value="0">
+            </div>
+            <div class="control-group">
+                <label for="border">border-width: <span id="border-value">0px</span></label>
+                <input type="range" id="border" min="0" max="20" value="0">
+            </div>
+        </fieldset>
+        
+        <h2>CSS Aplicado</h2>
+        <code class="code-output" id="code-output">
+            #target-box { ... }
+        </code>
+    </div>
+
+    <div class="playground-wrapper">
+        <h2>Playground</h2>
+        <div class="main-playground" id="playground">
+            <div class="static-box">Bloco Estático 1 (Referência)</div>
+            <div id="target-box">target-box</div>
+            <div class="static-box">Bloco Estático 2 (Referência)</div>
+            <div class="static-box">Bloco Estático 3</div>
+            <div class="scroll-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const targetBox = document.getElementById('target-box');
+        const controls = {
+            position: document.getElementById('position'),
+            top: document.getElementById('top'),
+            left: document.getElementById('left'),
+            zIndex: document.getElementById('z-index'),
+            padding: document.getElementById('padding'),
+            margin: document.getElementById('margin'),
+            border: document.getElementById('border')
+        };
+        const values = {
+            top: document.getElementById('top-value'),
+            left: document.getElementById('left-value'),
+            zIndex: document.getElementById('z-index-value'),
+            padding: document.getElementById('padding-value'),
+            margin: document.getElementById('margin-value'),
+            border: document.getElementById('border-value')
+        };
+        const codeOutput = document.getElementById('code-output');
+        
+        function updateStyles() {
+            const s = {
+                position: controls.position.value,
+                top: controls.top.value + 'px',
+                left: controls.left.value + 'px',
+                zIndex: controls.zIndex.value,
+                padding: controls.padding.value + 'px',
+                margin: controls.margin.value + 'px',
+                border: controls.border.value + 'px solid #e67e22'
+            };
+
+            targetBox.style.position = s.position;
+            targetBox.style.top = s.top;
+            targetBox.style.left = s.left;
+            targetBox.style.zIndex = s.zIndex;
+            targetBox.style.padding = s.padding;
+            targetBox.style.margin = s.margin;
+            targetBox.style.border = s.border;
+
+            values.top.textContent = s.top;
+            values.left.textContent = s.left;
+            values.zIndex.textContent = s.zIndex;
+            values.padding.textContent = s.padding;
+            values.margin.textContent = s.margin;
+            values.border.textContent = controls.border.value + 'px';
+
+            codeOutput.innerHTML = `<span>#target-box</span> {
+  <span>position</span>: <span class="value">${s.position}</span>;
+  <span>top</span>: <span class="value">${s.top}</span>;
+  <span>left</span>: <span class="value">${s.left}</span>;
+  <span>z-index</span>: <span class="value">${s.zIndex}</span>;
+  <span>padding</span>: <span class="value">${s.padding}</span>;
+  <span>margin</span>: <span class="value">${s.margin}</span>;
+  <span>border</span>: <span class="value">${s.border}</span>;
+}`;
+        }
+        Object.values(controls).forEach(input => input.addEventListener('input', updateStyles));
+        updateStyles();
+    </script>
+</body>
+</html>
