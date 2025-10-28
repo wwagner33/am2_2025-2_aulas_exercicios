@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução ao CSS - Autoração Multimídia II</title>
+    
+    <style>
+        /* --- PARTE 1: ESTILOS DA APRESENTAÇÃO (SLIDESHOW) --- */
+        
+        :root {
+            --cor-primaria: #005a9c; /* Azul escuro para slides */
+            --cor-secundaria: #007bff; /* Azul brilhante para interatividade */
+            --cor-texto: #333;
+            --cor-fundo: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 20px 0;
+            line-height: 1.6;
+        }
+
+        .slideshow-container {
+            max-width: 1100px;
+            margin: 20px auto;
+            position: relative;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            overflow: hidden; /* Garante que os slides não "vazem" */
+        }
+
+        .slide {
+            display: none; /* Todos os slides começam escondidos */
+            padding: 40px 60px;
+            min-height: 550px;
+            flex-direction: column;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex; /* O slide ativo é mostrado como flexbox */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* --- Navegação: Setas Laterais --- */
+        .slideshow-nav {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 16px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            user-select: none;
+            z-index: 100;
+        }
+        
+        .slideshow-nav.prev { left: 0; border-radius: 0 5px 5px 0; }
+        .slideshow-nav.next { right: 0; border-radius: 5px 0 0 5px; }
+        .slideshow-nav:hover { background-color: rgba(0, 0, 0, 0.6); }
+        
+        /* --- Navegação: Paginação (Números) --- */
+        .slideshow-pagination {
+            text-align: center;
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #ddd;
+        }
+        
+        .pagination-dot {
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            margin: 0 5px;
+            background-color: #ddd;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+            transition: background-color 0.3s ease;
+        }
+        
+        .pagination-dot.active,
+        .pagination-dot:hover {
+            background-color: var(--cor-secundaria);
+            color: white;
+        }
+        
+        /* --- PARTE 2: ESTILOS DO CONTEÚDO (TIPOGRAFIA, ETC.) --- */
+        
+        .slide h2 {
+            font-size: 2.2rem;
+            color: var(--cor-primaria);
+            border-bottom: 3px solid var(--cor-primaria);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .slide h3 {
+            font-size: 1.6rem;
+            color: #111;
+        }
+        
+        .slide p, .slide li {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .slide ul {
+            padding-left: 30px;
+        }
+        
+        /* Estilo para Blocos de Código */
+        pre {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.95rem;
+        }
+        
+        pre code .comment { color: #6a9955; }
+        pre code .prop { color: #9cdcfe; }
+        pre code .value { color: #ce9178; }
+        pre code .tag { color: #569cd6; }
+        
+        /* Estilo para Tabela (Slide de Unidades) */
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .content-table th, .content-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .content-table th {
+            background-color: #f2f2f2;
+            font-size: 1.1rem;
+        }
+        .content-table td:first-child {
+            font-weight: 600;
+            width: 20%;
+        }
+
+        /* --- Estilo Específico: Slide 1 (Título) --- */
+        .title-slide {
+            background-color: var(--cor-primaria);
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .title-slide h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            padding-bottom: 15px;
+            border-bottom: 4px solid var(--cor-secundaria);
+        }
+        .title-slide h2 {
+            font-size: 2rem;
+            color: white; /* Sobrescreve o h2 padrão */
+            border: none;
+            margin-top: 20px;
+        }
+        .title-slide h3 {
+            font-size: 1.5rem;
+            color: #eee;
+            margin-top: 40px;
+        }
+        
+        
+        /* --- PARTE 3: ESTILOS DO LABORATÓRIO (SLIDE 11) --- */
+        /* Esses estilos são específicos para o lab e não conflitam
+           com o restante da apresentação. */
+        
+        .lab-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            height: 100%; /* Ocupa o slide */
+        }
+        .controls {
+            flex: 1;
+            min-width: 280px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            border: 1px solid #eee;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .control-group { margin-bottom: 12px; }
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .control-group label span {
+            font-weight: 400;
+            color: var(--cor-secundaria);
+            background-color: #e6f2ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        input[type="range"] { width: 100%; cursor: ew-resize; }
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        .playground-wrapper {
+            flex: 2;
+            min-width: 350px;
+        }
+        .main-playground {
+            position: relative; 
+            height: 400px;
+            background-color: #ffffff;
+            border: 3px dashed #b0b0b0;
+            border-radius: 8px;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+        #target-box {
+            width: 150px;
+            height: 100px;
+            background-color: var(--cor-secundaria);
+            color: white;
+            font-weight: bold;
+            display: grid;
+            place-items: center; 
+            transition: all 0.1s ease-out;
+            border: 0px solid #e67e22; /* Borda inicial */
+        }
+        .static-box {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+        }
+        .scroll-content { height: 600px; opacity: 0.3; }
+        .code-output {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 0.85em;
+        }
+        .code-output span { color: #9cdcfe; }
+        .code-output .value { color: #ce9178; }
+        .code-output .comment { color: #6a9955; }
+
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+
+        <div class="slide title-slide">
+            <h1>Introdução ao CSS</h1>
+            <h2>Autoração Multimídia II</h2>
+            <h3>Prof. Wellington Sarmento</h3>
+        </div>
+
+        <div class="slide">
+            <h2>1. Introdução: O que é CSS?</h2>
+            <p>Em termos simples: <strong>O CSS (Cascading Style Sheets) é a linguagem que usamos para "vestir" o HTML.</strong></p>
+            <ul>
+                <li>Pense no <strong>HTML</strong> como o <strong>esqueleto</strong> de uma página web: ele define a estrutura e o conteúdo (parágrafos, títulos, imagens).</li>
+                <li>Pense no <strong>CSS</strong> como a <strong>pele, as roupas e a maquiagem</strong>: ele define a aparência, o layout, as cores, as fontes e as animações.</li>
+            </ul>
+            <h3>O que significa "Cascading"?</h3>
+            <p>O nome "Folhas de Estilo em Cascata" é importante:</p>
+            <ul>
+                <li><strong>Folhas de Estilo:</strong> O código CSS é escrito em "folhas" de regras de estilo.</li>
+                <li><strong>Cascata:</strong> Este é o conceito mais crucial. O navegador decide qual regra de estilo aplicar a um elemento com base em uma ordem de prioridade (a "cascata"). Regras mais específicas (como um ID) geralmente substituem regras mais gerais (como uma tag).</li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>2. Uma Breve História</h2>
+            <p>A necessidade do CSS surgiu da "bagunça" do HTML inicial.</p>
+            <ul>
+                <li><strong>O Problema (Início dos anos 90):</strong> O HTML não foi feito para design. Tags como <code>&lt;font&gt;</code> e <code>&lt;center&gt;</code> misturavam estrutura e estilo, tornando a manutenção um pesadelo.</li>
+                <li><strong>A Proposta (1994):</strong> Håkon Wium Lie propôs a ideia de "Folhas de Estilo" para <strong>separar o conteúdo da apresentação</strong>.</li>
+                <li><strong>CSS 1 (1996):</strong> O W3C publicou a primeira recomendação. Era básica: cobria fontes, cores e margens.</li>
+                <li><strong>CSS 2 (1998):</strong> Introduziu conceitos poderosos como <code>position</code> (absolute, relative, fixed) e <code>z-index</code>.</li>
+                <li><strong>CSS 3 (De 1999 até hoje):</strong> A grande revolução. O CSS foi dividido em <strong>módulos</strong> (Selectors, Colors, Animations, Grid Layout). É por isso que não falamos em "CSS 4". Recursos como Flexbox e Grid são módulos do CSS3.</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>3. O Tijolo Fundamental: O "Box Model"</h2>
+            <p>Para o CSS, <strong>todo elemento HTML é uma caixa retangular</strong>. O "Box Model" (Modelo de Caixa) define como essa caixa é construída, de dentro para fora:</p>
+            <ol>
+                <li><strong>Content (Conteúdo):</strong> A área do seu texto e imagens (definida por <code>width</code> e <code>height</code>).</li>
+                <li><strong>Padding (Preenchimento):</strong> O espaço interno transparente, entre o conteúdo e a borda.</li>
+                <li><strong>Border (Borda):</strong> A linha que fica ao redor do padding.</li>
+                <li><strong>Margin (Margem):</strong> O espaço externo transparente, fora da borda. Ele "empurra" outros elementos.</li>
+            </ol>
+<pre><code><span class="prop">.minha-caixa</span> {
+  <span class="comment">/* 1. Conteúdo */</span>
+  <span class="prop">width</span>: <span class="value">200px</span>; 
+  <span class="prop">height</span>: <span class="value">100px</span>;
+
+  <span class="comment">/* 2. Preenchimento (espaço interno) */</span>
+  <span class="prop">padding</span>: <span class="value">20px</span>; 
+
+  <span class="comment">/* 3. Borda (linha ao redor) */</span>
+  <span class="prop">border</span>: <span class="value">5px solid black</span>; 
+  
+  <span class="comment">/* 4. Margem (espaço externo) */</span>
+  <span class="prop">margin</span>: <span class="value">30px</span>; 
+}</code></pre>
+        </div>
+
+        <div class="slide">
+            <h2>4. Definindo Tamanhos: Unidades de Medida</h2>
+            <p>Como definimos o tamanho das caixas? Usamos unidades de medida.</p>
+            
+            <h3>📏 Unidades Absolutas</h3>
+            <p>São unidades de medida <strong>fixas</strong>. Seus valores não mudam.</p>
+            <ul>
+                <li><strong><code>px</code> (Pixel):</strong> A unidade absoluta mais comum. É um "ponto" na tela. É inflexível e não se adapta bem à acessibilidade ou responsividade.</li>
+                <li><strong>Outras (<code>cm</code>, <code>mm</code>, <code>in</code>, <code>pt</code>):</strong> Raramente usadas, exceto para folhas de estilo de impressão (<code>@media print</code>).</li>
+            </ul>
+
+            <h3>🔄 Unidades Relativas</h3>
+            <p>São unidades <strong>flexíveis</strong> e <strong>dinâmicas</strong>, calculadas com base em outro valor. São a base do design responsivo.</p>
+            <ul>
+                <li><strong><code>%</code> (Porcentagem):</strong> Relativa ao <strong>elemento pai</strong>. Se o pai tem <code>500px</code> de largura, um filho com <code>width: 50%</code> terá <code>250px</code>.</li>
+                <li><strong><code>rem</code> (Root EM):</strong> Relativa ao tamanho da fonte do <strong>elemento raiz</strong> (a tag <code>&lt;html&gt;</code>). Esta é a <strong>melhor unidade moderna</strong> para <code>font-size</code>, <code>margin</code> e <code>padding</code>.</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>4. Unidades Relativas (Continuação)</h2>
+            <ul>
+                <li><strong><code>vh</code> (Viewport Height):</strong> 1% da <strong>altura da janela</strong> do navegador. <code>height: 100vh</code> força um elemento a ter exatamente a altura da tela.</li>
+                <li><strong><code>vw</code> (Viewport Width):</strong> 1% da <strong>largura da janela</strong> do navegador.</li>
+            </ul>
+
+            <h3>Quando usar o quê?</h3>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Unidade</th>
+                        <th>Quando Usar (Regra Geral)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>px</strong></td>
+                        <td>Para bordas finas (<code>border-width: 1px</code>) ou tamanhos fixos que nunca devem mudar.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>rem</strong></td>
+                        <td>A melhor escolha para <code>font-size</code>, <code>margin</code> e <code>padding</code>. Garante acessibilidade.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>%</strong></td>
+                        <td>Ideal para larguras de layout (ex: colunas <code>width: 50%</code>) dentro de um container.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>vh / vw</strong></td>
+                        <td>Para elementos que devem se dimensionar em relação à tela inteira (ex: banners, seções de tela cheia).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="slide">
+            <h2>5. Controlando o Layout: A Propriedade <code>position</code></h2>
+            <p>A propriedade <code>position</code> nos permite quebrar o "fluxo normal" da página e controlar exatamente onde um elemento fica. Ela "desbloqueia" o uso de <code>top</code>, <code>right</code>, <code>bottom</code> e <code>left</code>.</p>
+            
+            <h3><code>static</code> (Padrão)</h3>
+            <p>O elemento segue o fluxo normal. As propriedades <code>top</code>, <code>left</code>, etc., são ignoradas.</p>
+            
+            <h3><code>relative</code></h3>
+            <p>O elemento é posicionado <strong>relativo à sua posição original</strong>.</p>
+            <ul>
+                <li>Ele <strong>ainda ocupa seu espaço original</strong> no fluxo (os outros elementos não se movem para ocupar seu lugar).</li>
+                <li><code>top: 20px;</code> move o elemento 20px <em>para baixo</em> de onde ele estaria.</li>
+                <li><strong>Uso principal:</strong> Servir de "ponto de âncora" para elementos <code>absolute</code>.</li>
+            </ul>
+            
+            <h3><code>absolute</code></h3>
+            <p>O elemento é <strong>removido do fluxo normal</strong> (os outros elementos agem como se ele não existisse).</p>
+            <ul>
+                <li>Ele é posicionado em relação ao <strong>ancestral posicionado mais próximo</strong> (qualquer "pai" ou "avô" que tenha <code>position</code> diferente de <code>static</code>).</li>
+            </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>5. <code>position</code> (Cont.) e <code>z-index</code></h2>
+            
+            <h3><code>fixed</code></h3>
+            <p>O elemento é <strong>removido do fluxo normal</strong>. Ele é posicionado em relação à <strong>janela do navegador (viewport)</strong> e <strong>não se move com a rolagem</strong>. Perfeito para menus fixos.</p>
+            
+            <h3><code>sticky</code></h3>
+            <p>Um híbrido de <code>relative</code> e <code>fixed</code>. O elemento age como <code>relative</code> até que a rolagem o faça atingir um limite (ex: <code>top: 0;</code>), então ele "gruda" e se comporta como <code>fixed</code>.</p>
+
+            <hr style="margin: 20px 0;">
+            
+            <h2>6. Controlando a Profundidade: <code>z-index</code></h2>
+            <p>O <code>z-index</code> controla a <strong>ordem de empilhamento</strong> (qual elemento fica "por cima" de qual).</p>
+            <ul>
+                <li><strong>A Regra de Ouro:</strong> <code>z-index</code> <strong>só funciona</strong> em elementos com <code>position</code> diferente de <code>static</code>.</li>
+                <li>Valores são números inteiros. <strong>Maior número = mais na frente.</strong></li>
+            </ul>
+        </div>
+
+        <div class="slide">
+            <h2>7. Galeria de Exemplos (1/2)</h2>
+            
+            <h3>Exemplo 1: Centralizar com Flexbox</h3>
+            <p>O <code>display: flex</code> é a forma moderna de alinhar itens.</p>
+<pre><code><span class="prop">.container</span> {
+  <span class="prop">display</span>: <span class="value">flex</span>;
+  <span class="prop">justify-content</span>: <span class="value">center</span>; <span class="comment">/* Centraliza horizontalmente */</span>
+  <span class="prop">align-items</span>: <span class="value">center</span>; <span class="comment">/* Centraliza verticalmente */</span>
+  <span class="prop">height</span>: <span class="value">100vh</span>;
+}</code></pre>
+            
+            <h3>Exemplo 2: Layout com CSS Grid</h3>
+            <p>O <code>display: grid</code> permite criar layouts complexos de linhas e colunas.</p>
+<pre><code><span class="prop">.grid-container</span> {
+  <span class="prop">display</span>: <span class="value">grid</span>;
+  <span class="comment">/* "Desenha" o layout com texto */</span>
+  <span class="prop">grid-template-areas</span>:
+    <span class="value">"header header"</span>
+    <span class="value">"nav    main"</span>
+    <span class="value">"footer footer"</span>;
+  <span class="prop">grid-template-columns</span>: <span class="value">1fr 3fr</span>; <span class="comment">/* Coluna 1 = 1 fração, Coluna 2 = 3 frações */</span>
+}</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>7. Galeria de Exemplos (2/2)</h2>
+            
+            <h3>Exemplo 3: Card Responsivo (Mobile-First)</h3>
+<pre><code><span class="prop">.card</span> {
+  <span class="prop">width</span>: <span class="value">90%</span>; <span class="comment">/* Em telas pequenas, ocupa 90% */</span>
+  <span class="prop">max-width</span>: <span class="value">350px</span>; <span class="comment">/* Em telas grandes, não passa de 350px */</span>
+  <span class="prop">margin</span>: <span class="value">20px auto</span>; <span class="comment">/* Centraliza o card */</span>
+  <span class="prop">box-shadow</span>: <span class="value">0 4px 8px rgba(0,0,0,0.1)</span>;
+}</code></pre>
+            
+            <h3>Exemplo 4: Tema Claro / Escuro (Variáveis CSS)</h3>
+<pre><code><span class="comment">/* 1. Define as variáveis padrão (tema claro) */</span>
+<span class="prop">:root</span> {
+  <span class="prop">--bg-color</span>: <span class="value">#ffffff</span>;
+  <span class="prop">--text-color</span>: <span class="value">#333333</span>;
+}
+<span class="comment">/* 2. Sobrescreve se o usuário preferir tema escuro */</span>
+<span class="prop">@media</span> (prefers-color-scheme: dark) {
+  <span class="prop">:root</span> {
+    <span class="prop">--bg-color</span>: <span class="value">#1a1a1a</span>;
+    <span class="prop">--text-color</span>: <span class="value">#f0f0f0</span>;
+  }
+}
+<span class="comment">/* 3. Aplica as variáveis */</span>
+<span class="prop">body</span> {
+  <span class="prop">background-color</span>: <span class="value">var(--bg-color)</span>;
+  <span class="prop">color</span>: <span class="value">var(--text-color)</span>;
+}</code></pre>
+        </div>
+        
+        <div class="slide">
+            <h2>8. Laboratório Interativo: Teste em Tempo Real</h2>
+            <p>Use os controles para modificar o bloco azul (<code>#target-box</code>) e entender como as propriedades funcionam.</p>
+            
+            <div class="lab-container">
+                <div class="controls">
+                    <fieldset>
+                        <legend><strong>Posicionamento</strong></legend>
+                        <div class="control-group">
+                            <label for="position">position</label>
+                            <select id="position">
+                                <option value="static">static</option>
+                                <option value="relative">relative</option>
+                                <option value="absolute">absolute</option>
+                                <option value="fixed">fixed</option>
+                                <option value="sticky">sticky</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="top">top: <span id="top-value">0px</span></label>
+                            <input type="range" id="top" min="-50" max="200" value="0">
+                        </div>
+                        <div class="control-group">
+                            <label for="left">left: <span id="left-value">0px</span></label>
+                            <input type="range" id="left" min="-50" max="200" value="0">
+                        </div>
+                        <div class="control-group">
+                            <label for="z-index">z-index: <span id="z-index-value">0</span></label>
+                            <input type="range" id="z-index" min="-5" max="10" value="0">
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend><strong>Box Model</strong></legend>
+                        <div class="control-group">
+                            <label for="padding">padding: <span id="padding-value">0px</span></label>
+                            <input type="range" id="padding" min="0" max="50" value="0">
+                        </div>
+                        <div class="control-group">
+                            <label for="margin">margin: <span id="margin-value">0px</span></label>
+                            <input type="range" id="margin" min="0" max="50" value="0">
+                        </div>
+                        <div class="control-group">
+                            <label for="border">border-width: <span id="border-value">0px</span></label>
+                            <input type="range" id="border" min="0" max="20" value="0">
+                        </div>
+                    </fieldset>
+                    <code class="code-output" id="code-output">
+                        /* Mexa os controles */
+                    </code>
+                </div>
+                <div class="playground-wrapper">
+                    <div class="main-playground" id="playground">
+                        <div class="static-box">Bloco Estático 1</div>
+                        <div id="target-box">target-box</div>
+                        <div class="static-box">Bloco Estático 2</div>
+                        <div class="static-box">Bloco Estático 3</div>
+                        <div class="scroll-content"></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+        <div class="slide">
+            <h2>9. Próximo Nível e Bibliografia</h2>
+            <p>Os conceitos de Box Model e Position são a base. O próximo passo é dominar os módulos de layout modernos:</p>
+            <ul>
+                <li><strong>Flexbox (Flexible Box Layout):</strong> Para layout em <strong>uma dimensão</strong> (linhas ou colunas).</li>
+                <li><strong>CSS Grid (Grid Layout):</strong> Para layout em <strong>duas dimensões</strong> (linhas e colunas).</li>
+            </ul>
+            
+            <h3>Recursos Recomendados</h3>
+            
+            <h4>Documentação Oficial</h4>
+            <ul>
+                <li><strong>MDN Web Docs (Mozilla):</strong> <a href="https://developer.mozilla.org/pt-BR/docs/Web/CSS" target="_blank">developer.mozilla.org/pt-BR/docs/Web/CSS</a>
+                <br>(A "Bíblia" do desenvolvimento web, com explicações e exemplos para tudo.)</li>
+            </ul>
+
+            <h4>Artigos e Tutoriais</h4>
+            <ul>
+                <li><strong>CSS-Tricks:</strong> <a href="https://css-tricks.com" target="_blank">css-tricks.com</a>
+                <br>(Excelente para guias visuais, como o "A Complete Guide to Flexbox".)</li>
+            </ul>
+            
+            <h4>Jogos para Aprender (Prática!)</h4>
+            <ul>
+                <li><strong>Flexbox Froggy:</strong> <a href="https://flexboxfroggy.com/" target="_blank">flexboxfroggy.com</a></li>
+                <li><strong>Grid Garden:</strong> <a href="https://cssgridgarden.com/" target="_blank">cssgridgarden.com</a></li>
+                <li><strong>CSS Diner:</strong> <a href="https://flukeout.github.io/" target="_blank">flukeout.github.io</a> (Para aprender seletores)</li>
+            </ul>
+        </div>
+        
+        <a class="slideshow-nav prev" id="prev">&#10094;</a>
+        <a class="slideshow-nav next" id="next">&#10095;</a>
+        
+    </div>
+    
+    <div class="slideshow-pagination" id="pagination-nav">
+        </div>
+
+
+    <script>
+        // Espera o DOM (a página) carregar completamente
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* =============================================
+             * PARTE 1: LÓGICA DA APRESENTAÇÃO (SLIDESHOW)
+             * ============================================= */
+
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const paginationNav = document.getElementById('pagination-nav');
+            const totalSlides = slides.length;
+            
+            // Cria os pontos de navegação (números)
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('pagination-dot');
+                dot.textContent = i + 1; // Adiciona o número
+                dot.setAttribute('data-slide', i);
+                paginationNav.appendChild(dot);
+            }
+            
+            const paginationDots = document.querySelectorAll('.pagination-dot');
+
+            // Função principal para mostrar o slide
+            function showSlide(n) {
+                // Garante que 'n' esteja dentro dos limites (0 a totalSlides-1)
+                if (n >= totalSlides) {
+                    currentSlide = 0;
+                } else if (n < 0) {
+                    currentSlide = totalSlides - 1;
+                } else {
+                    currentSlide = n;
+                }
+                
+                // Esconde todos os slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                
+                // Remove a classe 'active' de todos os pontos
+                paginationDots.forEach(dot => dot.classList.remove('active'));
+                
+                // Mostra o slide correto e ativa o ponto correto
+                slides[currentSlide].classList.add('active');
+                paginationDots[currentSlide].classList.add('active');
+            }
+
+            // Event Listeners para as setas
+            document.getElementById('next').addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+            
+            document.getElementById('prev').addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+            
+            // Event Listeners para os pontos de paginação
+            paginationDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    // Pega o número do slide do atributo 'data-slide'
+                    const slideIndex = parseInt(dot.getAttribute('data-slide'));
+                    showSlide(slideIndex);
+                });
+            });
+
+            // Mostra o primeiro slide (slide 0) ao carregar
+            showSlide(0);
+
+
+            /* =============================================
+             * PARTE 2: LÓGICA DO LABORATÓRIO (SLIDE 11)
+             * (Este código é independente e só funciona
+             * quando o Slide 11 está visível)
+             * ============================================= */
+
+            // 1. Seleciona os elementos DO LABORATÓRIO
+            const labTargetBox = document.getElementById('target-box');
+            
+            const labControls = {
+                position: document.getElementById('position'),
+                top: document.getElementById('top'),
+                left: document.getElementById('left'),
+                zIndex: document.getElementById('z-index'),
+                padding: document.getElementById('padding'),
+                margin: document.getElementById('margin'),
+                border: document.getElementById('border')
+            };
+
+            const labValues = {
+                top: document.getElementById('top-value'),
+                left: document.getElementById('left-value'),
+                zIndex: document.getElementById('z-index-value'),
+                padding: document.getElementById('padding-value'),
+                margin: document.getElementById('margin-value'),
+                border: document.getElementById('border-value')
+            };
+
+            const labCodeOutput = document.getElementById('code-output');
+            
+            // 2. Função principal que atualiza o laboratório
+            function updateLabStyles() {
+                // Verifica se os elementos do lab existem (prevenção de erros)
+                if (!labTargetBox) return; 
+
+                // Pega os valores atuais dos controles do lab
+                const s = {
+                    position: labControls.position.value,
+                    top: labControls.top.value + 'px',
+                    left: labControls.left.value + 'px',
+                    zIndex: labControls.zIndex.value,
+                    padding: labControls.padding.value + 'px',
+                    margin: labControls.margin.value + 'px',
+                    border: labControls.border.value + 'px solid #e67e22'
+                };
+
+                // Aplica os estilos CSS ao 'target-box'
+                labTargetBox.style.position = s.position;
+                labTargetBox.style.top = s.top;
+                labTargetBox.style.left = s.left;
+                labTargetBox.style.zIndex = s.zIndex;
+                labTargetBox.style.padding = s.padding;
+                labTargetBox.style.margin = s.margin;
+                labTargetBox.style.border = s.border;
+
+                // Atualiza os textinhos dos 'spans'
+                labValues.top.textContent = s.top;
+                labValues.left.textContent = s.left;
+                labValues.zIndex.textContent = s.zIndex;
+                labValues.padding.textContent = s.padding;
+                labValues.margin.textContent = s.margin;
+                labValues.border.textContent = labControls.border.value + 'px';
+
+                // Atualiza o bloco de código
+                labCodeOutput.innerHTML = `<span>#target-box</span> {
+  <span>position</span>: <span class="value">${s.position}</span>;
+  <span>top</span>: <span class="value">${s.top}</span>;
+  <span>left</span>: <span class="value">${s.left}</span>;
+  <span>z-index</span>: <span class="value">${s.zIndex}</span>;
+  <span class="comment">/* Box Model */</span>
+  <span>padding</span>: <span class="value">${s.padding}</span>;
+  <span>margin</span>: <span class="value">${s.margin}</span>;
+  <span>border</span>: <span class="value">${s.border}</span>;
+}`;
+            }
+
+            // 3. Adiciona os "escutadores de eventos" para o lab
+            Object.values(labControls).forEach(input => {
+                // 'input' é mais responsivo que 'change' para sliders
+                input.addEventListener('input', updateLabStyles);
+            });
+
+            // 4. Chama a função do lab uma vez no início para sincronizar
+            updateLabStyles();
+
+        });
+    </script>
+</body>
+</html>
