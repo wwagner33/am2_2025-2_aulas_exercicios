@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Exercícios 04 - CSS</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main>
+      <section id="introducao">
+        <h1>Quiz: CSS - Fundamentos da Web Moderna</h1>
+        <p>
+          Este quiz testa seu conhecimento sobre CSS (Cascading Style Sheets), a
+          linguagem que usamos para definir a aparência, o layout, as cores e as
+          fontes do HTML.
+        </p>
+        <p>
+          Os tópicos abordam conceitos fundamentais, começando pelo "Box Model"
+          (o modelo de caixa que define margem, borda, preenchimento e
+          conteúdo), o uso de unidades de medida (como <strong>px</strong>,
+          <strong>rem</strong> e <strong>%</strong>), e o controle de layout com
+          a propriedade <strong>position</strong> (relative, absolute, fixed) e
+          <strong>z-index</strong>.
+        </p>
+        <p>
+          O material de estudo também aborda técnicas modernas essenciais como
+          <strong>Flexbox</strong> e <strong>CSS Grid</strong>, cruciais para
+          criar layouts complexos e responsivos.
+        </p>
+        <p>
+          Para testar seu conhecimento, selecione uma das opções abaixo para
+          cada pergunta. Se necessário, você pode consultar o material didático
+          para revisar os conceitos.
+        </p>
+
+        <div class="referencias-container">
+          <h2>📚 Referências para Estudo de CSS (Baseado no Guia)</h2>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h2>Documentação Oficial e Guias</h2>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a
+                  href="https://developer.mozilla.org/pt-BR/docs/Web/CSS"
+                  target="_blank"
+                  >MDN Web Docs (Mozilla Developer Network)</a
+                >
+                <div class="descricao">
+                  É a "Bíblia" do desenvolvimento web. A documentação oficial e
+                  mais completa, com explicações e exemplos para todas as
+                  propriedades.
+                </div>
+              </div>
+              <div class="referencia">
+                <a href="https://css-tricks.com" target="_blank">CSS-Tricks</a>
+                <div class="descricao">
+                  Excelente para artigos práticos, guias visuais (como "A
+                  Complete Guide to Flexbox") e soluções para problemas do dia a
+                  dia.
+                </div>
+              </div>
+              <div class="referencia">
+                <a href="https://www.w3.org/Style/CSS/" target="_blank"
+                  >W3C (World Wide Web Consortium)</a
+                >
+                <div class="descricao">
+                  Esta é a fonte oficial onde as especificações do CSS são
+                  criadas. É uma leitura técnica, mas é a "fonte da verdade".
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acordeao-item">
+            <div class="acordeao-cabecalho">
+              <h2>Jogos para Aprender CSS</h2>
+              <span class="acordeao-icone">▼</span>
+            </div>
+            <div class="acordeao-conteudo">
+              <div class="referencia">
+                <a href="https://flexboxfroggy.com/" target="_blank"
+                  >Flexbox Froggy</a
+                >
+                <div class="descricao">
+                  Um jogo divertido para aprender todos os conceitos de Flexbox.
+                </div>
+              </div>
+              <div class="referencia">
+                <a href="https://cssgridgarden.com/" target="_blank"
+                  >Grid Garden</a
+                >
+                <div class="descricao">
+                  Similar ao Froggy, mas focado em ensinar CSS Grid.
+                </div>
+              </div>
+              <div class="referencia">
+                <a href="https://flukeout.github.io/" target="_blank"
+                  >CSS Diner</a
+                >
+                <div class="descricao">
+                  Um jogo excelente para praticar e aprender Seletores CSS.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="botoes-acao">
+          <button id="btn-iniciar" class="btn btn-success">
+            Iniciar Novo Quiz
+          </button>
+          <button id="btn-continuar" class="btn btn-primary escondido">
+            Continuar de Onde Parei
+          </button>
+        </div>
+      </section>
+
+      <section id="quiz-container" class="escondido">
+        <button id="btn-voltar-inicio">← Voltar ao Início</button>
+
+        <div class="quiz-header">
+          <div id="contador-questao"></div>
+          <div id="barra-progresso">
+            <div id="progresso-atual"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 id="pergunta"></h2>
+          <pre id="codigo" class="escondido"><code></code></pre>
+
+          <div id="opcoes-container"></div>
+
+          <div id="feedback-container">
+            <div id="resposta-correta"></div>
+            <div id="justificativa"></div>
+          </div>
+
+          <div id="botoes-navegacao">
+            <button id="btn-anterior" class="btn-nav" disabled>
+              <span>←</span> Anterior
+            </button>
+            <button id="btn-proximo" class="btn-nav">
+              Próxima <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="resumo-container" class="escondido">
+          <h3>Resumo do seu desempenho</h3>
+          <div class="estatisticas">
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="total-acertos">0</span>
+              <span class="estatistica-label">Acertos</span>
+            </div>
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="total-erros">0</span>
+              <span class="estatistica-label">Erros</span>
+            </div>
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="percentual-acerto">0%</span>
+              <span class="estatistica-label">Taxa de Acerto</span>
+            </div>
+            <div class="estatistica-item">
+              <span class="estatistica-valor" id="progresso-total">0%</span>
+              <span class="estatistica-label">Progresso Total</span>
+            </div>
+          </div>
+          <div id="resumo-questoes"></div>
+          <div class="botoes-acao">
+            <button id="btn-reiniciar" class="btn btn-success">
+              Reiniciar Quiz
+            </button>
+            <button id="btn-baixar-relatorio" class="btn btn-outline">
+              Baixar Relatório
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./accordion.js"></script>
+    <script src="./questoes.js"></script>
+    <script src="./quiz.js"></script>
+  </body>
+</html>
