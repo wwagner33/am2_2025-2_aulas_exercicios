@@ -34,7 +34,7 @@ am2_2025-2_aulas_exercicios/
 └── README.md                  # Este arquivo
 ```
 
-Acesso a este material, online: (https://am2-2025-2-aulas-exercicios.vercel.app/)[https://am2-2025-2-aulas-exercicios.vercel.app/]
+Acesso a este material, online: [https://am2-2025-2-aulas-exercicios.vercel.app/](https://am2-2025-2-aulas-exercicios.vercel.app/)
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -75,3 +75,4 @@ Como este é um projeto front-end puro, não há necessidade de um servidor ou p
 
 
 <img src="assets/Cc_by-nc-nd_euro_icon.svg"/>  <small> By [CC-NC-ND-4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)</small>
+
